@@ -1,143 +1,126 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { User } from "../context/AuthContext";
 
-interface RegisterFormProps {
-  onToggleMode: () => void
-}
+export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
+  const [name, setName] = useState("");
+  const [studentId, setStudentId] = useState("");
+  const [department, setDepartment] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState<"student" | "supervisor">("student");
 
-function RegisterForm({ onToggleMode }: RegisterFormProps) {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [role, setRole] = useState<"student" | "supervisor">("student")
-  const [studentId, setStudentId] = useState("")
-  const [department, setDepartment] = useState("")
-  const [error, setError] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setError("")
-    setIsLoading(true)
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
 
-    setTimeout(() => {
-      if (!name || !email || !password) setError("Please fill in all required fields")
-      else if (role === "student" && !studentId) setError("Student ID is required for students")
-      else {
-        console.log("Register:", { name, email, password, role, studentId, department })
-        navigate("/dashboard") // بعد التسجيل بنجاح
-      }
-      setIsLoading(false)
-    }, 1000)
-  }
+    const newUser: User & { studentId?: string; department?: string; password?: string } = {
+      id: Date.now().toString(),
+      name,
+      email,
+      password,
+      role,
+      studentId,
+      department,
+    };
+
+    localStorage.setItem("user", JSON.stringify(newUser));
+    login(newUser);
+
+    if (role === "student") {
+      navigate("/dashboard/student");
+    } else {
+      navigate("/dashboard/supervisor");
+    }
+  };
 
   return (
-    <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-6">
-      <h2 className="text-center text-2xl font-bold">Create Account</h2>
-      <p className="text-center text-gray-500 mb-6">
-        Join the Graduation Project Management System
+    <form
+      onSubmit={handleRegister}
+      className="bg-gray-50 shadow-xl rounded-2xl p-8 w-full max-w-md mx-auto"
+    >
+      <h2 className="text-3xl font-bold mb-2 text-center text-teal-700">Create Account</h2>
+      <p className="text-gray-500 text-center mb-6">
+      Join the Graduation Project Management System
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium">Full Name</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your full name"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Create a password"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="role" className="block text-sm font-medium">Role</label>
-          <select
-            id="role"
-            value={role}
-            onChange={(e) => setRole(e.target.value as "student" | "supervisor")}
-            className="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="student">Student</option>
-            <option value="supervisor">Supervisor</option>
-          </select>
-        </div>
-
+      <div className="space-y-3">
+        <input
+          type="text"
+          placeholder="Full Name"
+          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+    <input
+          type="email"
+          placeholder="Email"
+          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <select
+          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500"
+          value={role}
+          onChange={(e) => setRole(e.target.value as "student" | "supervisor")}
+        >
+          <option value="student">Student</option>
+          <option value="supervisor">Supervisor</option>
+        </select>
         {role === "student" && (
-          <div>
-            <label htmlFor="studentId" className="block text-sm font-medium">Student ID</label>
+          <>
             <input
-              id="studentId"
               type="text"
+              placeholder="Student ID"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500"
               value={studentId}
               onChange={(e) => setStudentId(e.target.value)}
-              className="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your student ID"
               required
             />
-          </div>
+            <input
+              type="text"
+              placeholder="Department (Optional)"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500"
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+            />
+          </>
         )}
 
-        <div>
-          <label htmlFor="department" className="block text-sm font-medium">Department (Optional)</label>
-          <input
-            id="department"
-            type="text"
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
-            className="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your department"
-          />
-        </div>
+    
 
-        {error && <div className="bg-red-100 text-red-600 p-2 rounded-lg text-sm">{error}</div>}
 
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
-        >
-          {isLoading ? "Creating account..." : "Create Account"}
-        </button>
-      </form>
-
-      <div className="mt-6 text-center text-sm text-gray-600">
-        Already have an account?{" "}
-        <button onClick={onToggleMode} className="text-blue-600 hover:underline font-medium">
-          Sign in
-        </button>
       </div>
-    </div>
-  )
-}
 
-export default RegisterForm
+      <button
+        type="submit"
+        className="mt-6 w-full bg-teal-700 text-white p-3 rounded-xl font-semibold hover:bg-teal-800 transition shadow-md hover:shadow-lg"
+      >
+        Create Account
+      </button>
+
+      <p className="mt-4 text-center text-sm">
+        Already have an account?{" "}
+        <span
+          className="text-blue-600 cursor-pointer font-medium hover:underline"
+          onClick={onSwitch}
+        >
+          Sign in
+        </span>
+      </p>
+    </form>
+  );
+}

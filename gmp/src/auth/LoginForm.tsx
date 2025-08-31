@@ -1,100 +1,88 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-interface LoginFormProps {
-  onToggleMode: () => void
-}
+export default function LoginForm({ onSwitch }: { onSwitch: () => void }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-function LoginForm({ onToggleMode }: LoginFormProps) {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [role, setRole] = useState<"student" | "supervisor">("student")
-  const [error, setError] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setError("")
-    setIsLoading(true)
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
 
-    setTimeout(() => {
-      if (!email || !password) {
-        setError("Please fill in all fields")
+    const storedUser = localStorage.getItem("user");
+    if (!storedUser) {
+      setError("No account found. Please register first.");
+      return;
+    }
+
+    const parsedUser = JSON.parse(storedUser);
+
+    if (parsedUser.email === email && parsedUser.password === password) {
+      login(parsedUser);
+      if (parsedUser.role === "student") {
+        navigate("/dashboard/student");
       } else {
-        // console.log("Login:", { email, password, role })
-        navigate("/dashboard")
+        navigate("/dashboard/supervisor");
       }
-      setIsLoading(false)
-    }, 1000)
-  }
+    } else {
+      setError("Invalid email or password");
+    }
+  };
 
   return (
-    <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
-      <h2 className="text-center text-2xl font-bold text-gray-900">Welcome</h2>
-      <p className="text-center text-gray-500 mb-6">
-        Sign in to your Graduation Project Management account
+    <form
+      onSubmit={handleLogin}
+      className="bg-gray-50 shadow-xl rounded-2xl p-8 w-full max-w-md mx-auto"
+    >
+      <h2 className="text-3xl font-bold mb-2 text-center text-teal-700">Welcome </h2>
+      <p className="text-gray-500 text-center mb-6">
+      Sign in to your Graduation Project Management Account
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
+      {error && (
+        <p className="text-red-500 text-center mb-4 font-medium">{error}</p>
+      )}
 
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700"
-            placeholder="Enter your password"
-            required
-          />
-        </div>
+      <div className="space-y-3">
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-        <div>
-          <label htmlFor="role" className="block text-sm font-medium text-gray-700">Role</label>
-          <select
-            id="role"
-            value={role}
-            onChange={(e) => setRole(e.target.value as "student" | "supervisor")}
-            className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700"
-          >
-            <option value="student">Student</option>
-            <option value="supervisor">Supervisor</option>
-          </select>
-        </div>
-
-        {error && <div className="bg-red-100 text-red-700 p-2 rounded-md text-sm">{error}</div>}
-
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-md transition"
-        >
-          {isLoading ? "Signing in..." : "Sign In"}
-        </button>
-      </form>
-
-      <div className="mt-6 text-center text-sm text-gray-600">
-        Don’t have an account?{" "}
-        <button onClick={onToggleMode} className="text-blue-700 hover:underline font-medium">
-          Sign up
-        </button>
+        <input
+          type="password"
+          placeholder="Password"
+          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
       </div>
-    </div>
-  )
-}
 
-export default LoginForm
+      <button
+        type="submit"
+        className="mt-6 w-full bg-teal-700 text-white p-3 rounded-xl font-semibold hover:bg-teal-800 transition shadow-md hover:shadow-lg"
+      >
+        Login
+      </button>
+
+      <p className="mt-4 text-center text-sm">
+        Don’t have an account?{" "}
+        <span
+          className="text-blue-600 cursor-pointer font-medium hover:underline"
+          onClick={onSwitch}
+        >
+          Register
+        </span>
+      </p>
+    </form>
+  );
+}
