@@ -1,3 +1,12 @@
+// ================================
+// KanbanBoard.tsx
+// Ready-to-use React Kanban Board component
+// - All data is stored locally in component state (no backend)
+// - Features: Add, Edit, Delete tasks
+// - Supports Drag & Drop between columns
+// - Fully functional and self-contained
+// ================================
+
 import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
