@@ -42,7 +42,9 @@ export function KanbanBoard() {
   const [newTask, setNewTask] = useState<{ [key: string]: string }>({})
   const [editingTask, setEditingTask] = useState<{ id: string; title: string } | null>(null)
 
-  // Add a new task to a column
+  // ================================
+  // Add a new task
+  // ================================
   const addTask = (colId: string) => {
     if (!newTask[colId]) return
     setColumns(columns.map(col =>
@@ -53,7 +55,9 @@ export function KanbanBoard() {
     setNewTask({ ...newTask, [colId]: "" })
   }
 
-  // Delete a task from a column
+  // ================================
+  // Delete a task
+  // ================================
   const deleteTask = (colId: string, taskId: string) => {
     setColumns(columns.map(col =>
       col.id === colId
@@ -62,7 +66,9 @@ export function KanbanBoard() {
     ))
   }
 
-  // Save edits after modifying a task title
+  // ================================
+  // Save edited task
+  // ================================
   const saveEdit = (colId: string) => {
     if (!editingTask) return
     setColumns(columns.map(col =>
@@ -78,13 +84,15 @@ export function KanbanBoard() {
     setEditingTask(null)
   }
 
-  // Handle drag and drop logic
+  // ================================
+  // Handle drag & drop
+  // ================================
   const handleDragEnd = (result: DropResult) => {
     const { source, destination } = result
-    if (!destination) return // If dropped outside any column
+    if (!destination) return
 
     if (source.droppableId === destination.droppableId) {
-      // Case 1: Reordering inside the same column
+      // Reorder inside the same column
       const column = columns.find(c => c.id === source.droppableId)!
       const newTasks = Array.from(column.tasks)
       const [moved] = newTasks.splice(source.index, 1)
@@ -92,7 +100,7 @@ export function KanbanBoard() {
 
       setColumns(columns.map(c => c.id === column.id ? { ...c, tasks: newTasks } : c))
     } else {
-      // Case 2: Moving task between different columns
+      // Move task between different columns
       const sourceCol = columns.find(c => c.id === source.droppableId)!
       const destCol = columns.find(c => c.id === destination.droppableId)!
       const sourceTasks = Array.from(sourceCol.tasks)
@@ -112,6 +120,10 @@ export function KanbanBoard() {
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        {/* ================================
+            Render each column (Droppable)
+        ================================ */}
         {columns.map((col) => (
           <Droppable key={col.id} droppableId={col.id}>
             {(provided) => (
@@ -122,46 +134,60 @@ export function KanbanBoard() {
               >
                 <h2 className="font-semibold mb-3">{col.title}</h2>
 
-                {/* Render tasks as draggable items */}
+                {/* ================================
+                    Render tasks as draggable items
+                ================================ */}
                 {col.tasks.map((task, index) => (
-                  <Draggable key={task.id} draggableId={task.id} index={index}>
-                    {(provided, snapshot) => (
-                      <Card
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        className={`p-3 mb-2 border flex justify-between items-center cursor-grab ${
-                          snapshot.isDragging ? "bg-teal-100" : "bg-white"
-                        }`}
-                      >
-                        {editingTask?.id === task.id ? (
-                          <div className="flex w-full gap-2">
-                            <Input
-                              value={editingTask.title}
-                              onChange={(e) => setEditingTask({ ...editingTask, title: e.target.value })}
-                            />
-                            <Button size="sm" onClick={() => saveEdit(col.id)}>Save</Button>
-                          </div>
-                        ) : (
-                          <>
-                            <span>{task.title}</span>
-                            <div className="flex gap-2">
-                              <Button size="icon" variant="ghost" onClick={() => setEditingTask(task)}>
-                                <Pencil className="h-4 w-4" />
-                              </Button>
-                              <Button size="icon" variant="ghost" onClick={() => deleteTask(col.id, task.id)}>
-                                <Trash2 className="h-4 w-4 text-red-500" />
-                              </Button>
-                            </div>
-                          </>
-                        )}
-                      </Card>
-                    )}
-                  </Draggable>
+                  <>
+                    {/*
+                      Draggable task item:
+                      - Each task is wrapped in <Draggable> to enable drag & drop.
+                      - provided props/ref are required for DnD functionality.
+                      - snapshot.isDragging is used to change style while dragging.
+                      - Card contains task title + edit/delete actions.
+                    */}
+                    <Draggable key={task.id} draggableId={task.id} index={index}>
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className={`mb-2 ${snapshot.isDragging ? "opacity-70" : ""}`}
+                        >
+                          <Card className="p-3 border flex justify-between items-center bg-white">
+                            {editingTask?.id === task.id ? (
+                              <div className="flex w-full gap-2">
+                                <Input
+                                  value={editingTask.title}
+                                  onChange={(e) => setEditingTask({ ...editingTask, title: e.target.value })}
+                                />
+                                <Button size="sm" onClick={() => saveEdit(col.id)}>Save</Button>
+                              </div>
+                            ) : (
+                              <>
+                                <span>{task.title}</span>
+                                <div className="flex gap-2">
+                                  <Button size="icon" variant="ghost" onClick={() => setEditingTask(task)}>
+                                    <Pencil className="h-4 w-4" />
+                                  </Button>
+                                  <Button size="icon" variant="ghost" onClick={() => deleteTask(col.id, task.id)}>
+                                    <Trash2 className="h-4 w-4 text-red-500" />
+                                  </Button>
+                                </div>
+                              </>
+                            )}
+                          </Card>
+                        </div>
+                      )}
+                    </Draggable>
+                  </>
                 ))}
+
                 {provided.placeholder}
 
-                {/* Input to add new task */}
+                {/* ================================
+                    Input to add new task
+                ================================ */}
                 <div className="mt-3 flex gap-2">
                   <Input
                     placeholder="New task..."
