@@ -16,6 +16,7 @@ type Column = {
 }
 
 
+// --- Commit 2: Add multiple columns ---
 const initialData: Column[] = [
   {
     id: "todo",
@@ -25,7 +26,22 @@ const initialData: Column[] = [
       { id: "2", title: "Collect references" },
     ],
   },
+  {
+    id: "in-progress",
+    title: "In Progress",
+    tasks: [
+      { id: "3", title: "Design database schema" },
+    ],
+  },
+  {
+    id: "done",
+    title: "Done",
+    tasks: [
+      { id: "4", title: "Select project topic" },
+    ],
+  },
 ]
+
 
 export function KanbanBoard() {
   const [columns, setColumns] = useState<Column[]>(initialData)
