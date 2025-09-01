@@ -1,0 +1,47 @@
+
+import { useState } from "react"
+import { Card } from "@/components/ui/card"
+
+
+type Task = {
+  id: string
+  title: string
+}
+
+
+type Column = {
+  id: string
+  title: string
+  tasks: Task[]
+}
+
+
+const initialData: Column[] = [
+  {
+    id: "todo",
+    title: "To Do",
+    tasks: [
+      { id: "1", title: "Write proposal" },
+      { id: "2", title: "Collect references" },
+    ],
+  },
+]
+
+export function KanbanBoard() {
+  const [columns, setColumns] = useState<Column[]>(initialData)
+
+  return (
+    <div className="grid grid-cols-1 gap-4">
+      {columns.map((col) => (
+        <div key={col.id} className="bg-gray-50 rounded-lg p-4 shadow-sm">
+          <h2 className="font-semibold mb-3">{col.title}</h2>
+          {col.tasks.map((task) => (
+            <Card key={task.id} className="p-3 mb-2 border">
+              {task.title}
+            </Card>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
