@@ -47,7 +47,10 @@ export function KanbanBoard() {
   const [columns, setColumns] = useState<Column[]>(initialData)
 
   return (
-    <div className="grid grid-cols-1 gap-4">
+// --- Commit 3: Add styling to board and cards ---
+// Update wrapper to show 3 columns on larger screens
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+
       {columns.map((col) => (
         <div key={col.id} className="bg-gray-50 rounded-lg p-4 shadow-sm">
           <h2 className="font-semibold mb-3">{col.title}</h2>
