@@ -1,4 +1,4 @@
-import {  useNavigate } from "react-router-dom";
+import {  NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function StudentDashboard() {
@@ -10,7 +10,7 @@ export default function StudentDashboard() {
 
   return (
     <div className="h-screen flex flex-col bg-gray-100">
-    {/* Header */}
+
     <header className="h-20 bg-gray-200 shadow flex items-center justify-between px-6">
       {/* Left */}
       <div>
@@ -35,6 +35,65 @@ export default function StudentDashboard() {
         </button>
       </div>
     </header>
+    <div className="flex flex-1">
+        
+        <aside className="w-64 bg-white shadow-md p-4">
+          <nav className="space-y-2">
+            <NavLink
+              to="/dashboard/student"
+              end
+              className={({ isActive }) =>
+                `block p-2 rounded font-medium transition ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : "hover:bg-pink-600 hover:text-white text-gray-700"
+                }`
+              }
+            >
+              📊 Dashboard
+            </NavLink>
+
+            <NavLink
+              to="/dashboard/student/projects"
+              className={({ isActive }) =>
+                `block p-2 rounded font-medium transition ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : "hover:bg-pink-600 hover:text-white text-gray-700"
+                }`
+              }
+            >
+              📁 Projects
+            </NavLink>
+
+            <NavLink
+              to="/dashboard/student/reports"
+              className={({ isActive }) =>
+                `block p-2 rounded font-medium transition ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : "hover:bg-pink-600 hover:text-white text-gray-700"
+                }`
+              }
+            >
+              📑 Reports
+            </NavLink>
+
+            <NavLink
+              to="/dashboard/student/feedback"
+              className={({ isActive }) =>
+                `block p-2 rounded font-medium transition ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : "hover:bg-pink-600 hover:text-white text-gray-700"
+                }`
+              }
+            >
+              💬 Feedback
+            </NavLink>
+          </nav>
+        </aside>
+    </div>
     </div>
   )
 }
