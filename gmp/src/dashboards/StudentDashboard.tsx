@@ -1,4 +1,4 @@
-import {  NavLink, useNavigate } from "react-router-dom";
+import {  NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function StudentDashboard() {
@@ -93,6 +93,10 @@ export default function StudentDashboard() {
             </NavLink>
           </nav>
         </aside>
+            {/* Content */}
+      <main className="flex-1 p-6 overflow-y-auto bg-white">
+          <Outlet />
+        </main>
     </div>
     </div>
   )
