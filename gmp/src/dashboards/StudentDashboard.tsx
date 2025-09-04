@@ -29,7 +29,7 @@ export default function StudentDashboard() {
         </span>
         <button
           onClick={handleLogout}
-          className="bg-red-500 text-white px-3 py-1 rounded hover:bg-pink-600"
+          className="bg-pink-500 text-white px-3 py-1 rounded hover:bg-pink-300"
         >
           Sign Out
         </button>

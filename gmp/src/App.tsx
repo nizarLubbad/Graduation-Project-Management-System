@@ -44,7 +44,7 @@ function App() {
       
     
 
-      {/* مسار المشرف */}
+
       <Route
         path="/dashboard/supervisor"
         element={
