@@ -6,6 +6,8 @@ import SupervisorDashboard from "./dashboards/SupervisorDashboard";
 
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { KanbanBoard } from "./Component/KanbanBoard";
+import ProjectHistory from "./Component/ProjectHistory";
+
 
 function App() {
   return (
@@ -40,7 +42,11 @@ function App() {
         <Route path="projects" element={<h2 className="text-2xl font-semibold">📁 Projects Page</h2>} />
         <Route path="reports" element={<h2 className="text-2xl font-semibold">📑 Reports Page</h2>} />
         <Route path="feedback" element={<h2 className="text-2xl font-semibold">Feedback Page</h2>} />
+
+        <Route path='projectHistory' element={<ProjectHistory/>} />
+
       </Route>
+
       
     
 

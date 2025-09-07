@@ -22,14 +22,15 @@ export default function StudentDashboard() {
         </p>
       </div>
 
-      {/* Right */}
+    
       <div className="flex items-center gap-4">
-        <span className="text-gray-700 font-medium">
-          {user?.role === "student" ? "Student" : "Supervisor"}
-        </span>
+      <span className="bg-gray-300 text-gray-800 px-2 py-0.5 rounded">
+  {user?.role === "student" ? "Student" : "Supervisor"}
+</span>
+ 
         <button
           onClick={handleLogout}
-          className="bg-pink-500 text-white px-3 py-1 rounded hover:bg-pink-300"
+          className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-300 hover:text-black"
         >
           Sign Out
         </button>
@@ -37,62 +38,76 @@ export default function StudentDashboard() {
     </header>
     <div className="flex flex-1">
         
-        <aside className="w-64 bg-white shadow-md p-4">
-          <nav className="space-y-2">
-            <NavLink
-              to="/dashboard/student"
-              end
-              className={({ isActive }) =>
-                `block p-2 rounded font-medium transition ${
-                  isActive
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-pink-600 hover:text-white text-gray-700"
-                }`
-              }
-            >
-              📊 Dashboard
-            </NavLink>
+    <aside className="w-64 bg-white shadow-md p-4">
+  <nav className="space-y-2">
+    <NavLink
+      to="/dashboard/student"
+      end
+      className={({ isActive }) =>
+        `block p-2 rounded font-medium transition ${
+          isActive
+            ? "bg-black text-white" 
+            : "text-gray-700 hover:bg-gray-200 hover:text-black" 
+        }`
+      }
+    >
+      📊 Dashboard
+    </NavLink>
 
-            <NavLink
-              to="/dashboard/student/projects"
-              className={({ isActive }) =>
-                `block p-2 rounded font-medium transition ${
-                  isActive
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-pink-600 hover:text-white text-gray-700"
-                }`
-              }
-            >
-              📁 Projects
-            </NavLink>
+    <NavLink
+      to="/dashboard/student/projects"
+      className={({ isActive }) =>
+        `block p-2 rounded font-medium transition ${
+          isActive
+            ? "bg-black text-white"
+            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+        }`
+      }
+    >
+      📁 Projects
+    </NavLink>
 
-            <NavLink
-              to="/dashboard/student/reports"
-              className={({ isActive }) =>
-                `block p-2 rounded font-medium transition ${
-                  isActive
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-pink-600 hover:text-white text-gray-700"
-                }`
-              }
-            >
-              📑 Reports
-            </NavLink>
+    <NavLink
+      to="/dashboard/student/reports"
+      className={({ isActive }) =>
+        `block p-2 rounded font-medium transition ${
+          isActive
+            ? "bg-black text-white"
+            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+        }`
+      }
+    >
+      📑 Reports
+    </NavLink>
 
-            <NavLink
-              to="/dashboard/student/feedback"
-              className={({ isActive }) =>
-                `block p-2 rounded font-medium transition ${
-                  isActive
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-pink-600 hover:text-white text-gray-700"
-                }`
-              }
-            >
-              💬 Feedback
-            </NavLink>
-          </nav>
-        </aside>
+    <NavLink
+      to="/dashboard/student/feedback"
+      className={({ isActive }) =>
+        `block p-2 rounded font-medium transition ${
+          isActive
+            ? "bg-black text-white"
+            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+        }`
+      }
+    >
+      💬 Feedback
+    </NavLink>
+
+    <NavLink
+      to="/dashboard/student/projectHistory"
+      className={({ isActive }) =>
+        `block p-2 rounded font-medium transition ${
+          isActive
+            ? "bg-black text-white"
+            : "text-gray-700 hover:bg-gray-200 hover:text-black"
+        }`
+      }
+    >
+      📜 Project History
+    </NavLink>
+  </nav>
+</aside>
+
             {/* Content */}
       <main className="flex-1 p-6 overflow-y-auto bg-white">
           <Outlet />
