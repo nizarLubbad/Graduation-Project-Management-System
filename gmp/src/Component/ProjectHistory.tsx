@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { Input } from "@/components/ui/input";
 
 interface Project {
   id: number;
@@ -65,15 +66,53 @@ const projects: Project[] = [
 ];
 
 export default function ProjectHistory() {
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  // فلترة المشاريع
+  const filteredProjects = projects.filter((p) => {
+    const matchesSearch =
+      p.title.toLowerCase().includes(search.toLowerCase()) ||
+      p.description.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory = filter === "All" || p.category === filter;
+
+    return matchesSearch && matchesCategory;
+  });
+
+  const categories = ["All", "Computer Science", "Engineering", "Digital Arts"];
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Project History</h1>
+      <h1 className="text-2xl font-bold mb-2">Project History</h1>
+      <p className="text-gray-500 mb-4">
+        Explore inspiring graduation projects from previous students
+      </p>
 
+      {/* البحث والفلاتر */}
+      <div className="flex gap-2 mb-6 flex-wrap">
+        <Input
+          placeholder="Search projects..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-64"
+        />
+        {categories.map((c) => (
+          <Button
+            key={c}
+            variant={filter === c ? "default" : "outline"}
+            onClick={() => setFilter(c)}
+          >
+            {c}
+          </Button>
+        ))}
+      </div>
+
+      
       {/* Grid of Projects */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
+        {filteredProjects.map((project) => (
     <Card
     key={project.id}
     className="shadow-md rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
