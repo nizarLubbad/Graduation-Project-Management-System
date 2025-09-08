@@ -5,6 +5,7 @@
 // - Features: Add, Edit, Delete tasks
 // - Supports Drag & Drop between columns
 // - Fully functional and self-contained
+// - Responsive across all screen sizes
 // ================================
 
 import { useState } from "react"
@@ -128,7 +129,14 @@ export function KanbanBoard() {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* ================================
+          Responsive Grid Layout
+          - 1 column on mobile
+          - 2 columns on tablets
+          - 3 columns on desktops
+          - 4 columns on extra-large screens
+      ================================ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
 
         {/* ================================
             Render each column (Droppable)
@@ -139,57 +147,48 @@ export function KanbanBoard() {
               <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className="bg-gray-50 rounded-lg p-4 shadow-sm min-h-[300px]"
+                className="bg-gray-50 rounded-lg p-4 shadow-sm min-h-[300px] flex flex-col"
               >
-                <h2 className="font-semibold mb-3">{col.title}</h2>
+                <h2 className="font-semibold mb-3 text-center">{col.title}</h2>
 
                 {/* ================================
                     Render tasks as draggable items
                 ================================ */}
                 {col.tasks.map((task, index) => (
-                  <>
-                    {/*
-                      Draggable task item:
-                      - Each task is wrapped in <Draggable> to enable drag & drop.
-                      - provided props/ref are required for DnD functionality.
-                      - snapshot.isDragging is used to change style while dragging.
-                      - Card contains task title + edit/delete actions.
-                    */}
-                    <Draggable key={task.id} draggableId={task.id} index={index}>
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className={`mb-2 ${snapshot.isDragging ? "opacity-70" : ""}`}
-                        >
-                          <Card className="p-3 border flex justify-between items-center bg-white">
-                            {editingTask?.id === task.id ? (
-                              <div className="flex w-full gap-2">
-                                <Input
-                                  value={editingTask.title}
-                                  onChange={(e) => setEditingTask({ ...editingTask, title: e.target.value })}
-                                />
-                                <Button size="sm" onClick={() => saveEdit(col.id)}>Save</Button>
+                  <Draggable key={task.id} draggableId={task.id} index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className={`mb-2 ${snapshot.isDragging ? "opacity-70" : ""}`}
+                      >
+                        <Card className="p-3 border flex justify-between items-center bg-white rounded-md">
+                          {editingTask?.id === task.id ? (
+                            <div className="flex w-full gap-2">
+                              <Input
+                                value={editingTask.title}
+                                onChange={(e) => setEditingTask({ ...editingTask, title: e.target.value })}
+                              />
+                              <Button size="sm" onClick={() => saveEdit(col.id)}>Save</Button>
+                            </div>
+                          ) : (
+                            <>
+                              <span className="text-sm sm:text-base">{task.title}</span>
+                              <div className="flex gap-2">
+                                <Button size="icon" variant="ghost" onClick={() => setEditingTask(task)}>
+                                  <Pencil className="h-4 w-4" />
+                                </Button>
+                                <Button size="icon" variant="ghost" onClick={() => deleteTask(col.id, task.id)}>
+                                  <Trash2 className="h-4 w-4 text-red-500" />
+                                </Button>
                               </div>
-                            ) : (
-                              <>
-                                <span>{task.title}</span>
-                                <div className="flex gap-2">
-                                  <Button size="icon" variant="ghost" onClick={() => setEditingTask(task)}>
-                                    <Pencil className="h-4 w-4" />
-                                  </Button>
-                                  <Button size="icon" variant="ghost" onClick={() => deleteTask(col.id, task.id)}>
-                                    <Trash2 className="h-4 w-4 text-red-500" />
-                                  </Button>
-                                </div>
-                              </>
-                            )}
-                          </Card>
-                        </div>
-                      )}
-                    </Draggable>
-                  </>
+                            </>
+                          )}
+                        </Card>
+                      </div>
+                    )}
+                  </Draggable>
                 ))}
 
                 {provided.placeholder}

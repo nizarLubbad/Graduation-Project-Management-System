@@ -10,6 +10,7 @@ export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState<"student" | "supervisor">("student");
+  const [error, setError] = useState(""); 
 
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -17,6 +18,17 @@ export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
 
+   
+    const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
+
+   
+    const existingUser = storedUsers.find((u: User) => u.email === email);
+    if (existingUser) {
+      setError("This email is already registered.");
+      return;
+    }
+
+   
     const newUser: User & { studentId?: string; department?: string; password?: string } = {
       id: Date.now().toString(),
       name,
@@ -27,7 +39,10 @@ export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
       department,
     };
 
-    localStorage.setItem("user", JSON.stringify(newUser));
+   
+    const updatedUsers = [...storedUsers, newUser];
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+
     login(newUser);
 
     if (role === "student") {
@@ -44,8 +59,11 @@ export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
     >
       <h2 className="text-3xl font-bold mb-2 text-center text-teal-700">Create Account</h2>
       <p className="text-gray-500 text-center mb-6">
-      Join the Graduation Project Management System
+        Join the Graduation Project Management System
       </p>
+
+     
+      {error && <p className="text-red-500 text-center mb-4 font-medium">{error}</p>}
 
       <div className="space-y-3">
         <input
@@ -56,7 +74,7 @@ export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
           onChange={(e) => setName(e.target.value)}
           required
         />
-    <input
+        <input
           type="email"
           placeholder="Email"
           className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-500"
@@ -99,10 +117,6 @@ export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
             />
           </>
         )}
-
-    
-
-
       </div>
 
       <button

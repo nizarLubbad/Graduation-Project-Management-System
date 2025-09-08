@@ -84,9 +84,9 @@ export default function ProjectHistory() {
   const categories = ["All", "Computer Science", "Engineering", "Digital Arts"];
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-2">Project History</h1>
-      <p className="text-gray-500 mb-4">
+    <div className="p-4 sm:p-6">
+      <h1 className="text-xl sm:text-2xl font-bold mb-2">Project History</h1>
+      <p className="text-gray-500 mb-4 text-sm sm:text-base">
         Explore inspiring graduation projects from previous students
       </p>
 
@@ -96,34 +96,32 @@ export default function ProjectHistory() {
           placeholder="Search projects..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-64"
+          className="w-full sm:w-64"
         />
         {categories.map((c) => (
           <Button
             key={c}
             variant={filter === c ? "default" : "outline"}
             onClick={() => setFilter(c)}
+            className="text-sm"
           >
             {c}
           </Button>
         ))}
       </div>
 
-      
       {/* Grid of Projects */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredProjects.map((project) => (
-    <Card
-    key={project.id}
-    className="shadow-md rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
-  >
-  
-        
+          <Card
+            key={project.id}
+            className="shadow-md rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+          >
             <div className="relative">
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-40 object-cover rounded-t-2xl"
+                className="w-full h-40 sm:h-48 object-cover rounded-t-2xl"
               />
               <span className="absolute top-2 right-2 bg-white text-gray-800 px-2 py-1 rounded text-xs font-semibold shadow">
                 {project.year}
@@ -132,10 +130,12 @@ export default function ProjectHistory() {
 
             <CardContent className="p-4">
               <div className="flex justify-between items-center mb-2">
-                <h2 className="text-lg font-semibold">{project.title}</h2>
-                <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">{project.grade}</span>
+                <h2 className="text-base sm:text-lg font-semibold">{project.title}</h2>
+                <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                  {project.grade}
+                </span>
               </div>
-              <p className="text-gray-600 text-sm mb-2">{project.description}</p>
+              <p className="text-gray-600 text-sm mb-2 line-clamp-2">{project.description}</p>
               <p className="text-sm text-gray-500">👤 {project.student}</p>
               <div className="flex gap-2 mt-2 flex-wrap">
                 {project.tags.map((tag, id) => (
@@ -149,9 +149,9 @@ export default function ProjectHistory() {
               </div>
 
               <Button
-  className="w-full mt-4 bg-black-200 text-gray-800 hover:bg-gray-300 transition-colors duration-200"
-  onClick={() => setSelectedProject(project)}
->
+                className="w-full mt-4 bg-gray-200 text-gray-800 hover:bg-gray-300 transition-colors duration-200 text-sm sm:text-base"
+                onClick={() => setSelectedProject(project)}
+              >
                 View Details
               </Button>
             </CardContent>
@@ -161,74 +161,73 @@ export default function ProjectHistory() {
 
       {/* Dialog for Project Details */}
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-  <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
-    {selectedProject && (
-      <>
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold">
-            {selectedProject.title}
-          </DialogTitle>
-        </DialogHeader>
+        <DialogContent className="w-[95vw] sm:max-w-3xl max-h-[80vh] overflow-y-auto">
+          {selectedProject && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-lg sm:text-xl font-bold">
+                  {selectedProject.title}
+                </DialogTitle>
+              </DialogHeader>
 
-        <img
-          src={selectedProject.image}
-          alt={selectedProject.title}
-          className="w-full h-60 object-cover rounded-lg mb-4"
-        />
+              <img
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                className="w-full h-40 sm:h-60 object-cover rounded-lg mb-4"
+              />
 
-        {/* Project Details + Abstract */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          {/* Left column: Project Details */}
-          <div>
-            <h3 className="font-semibold mb-2">Project Details</h3>
-            <p><strong>Author:</strong> {selectedProject.student}</p>
-            <p><strong>Supervisor:</strong> {selectedProject.supervisor}</p>
-            <p><strong>Category:</strong> {selectedProject.category}</p>
-            <p><strong>Year:</strong> {selectedProject.year}</p>
-            <p><strong>Grade:</strong> {selectedProject.grade}</p>
-          </div>
+              {/* Project Details + Abstract */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                {/* Left column: Project Details */}
+                <div>
+                  <h3 className="font-semibold mb-2">Project Details</h3>
+                  <p><strong>Author:</strong> {selectedProject.student}</p>
+                  <p><strong>Supervisor:</strong> {selectedProject.supervisor}</p>
+                  <p><strong>Category:</strong> {selectedProject.category}</p>
+                  <p><strong>Year:</strong> {selectedProject.year}</p>
+                  <p><strong>Grade:</strong> {selectedProject.grade}</p>
+                </div>
 
-          {/* Right column: Abstract */}
-          <div>
-            <h3 className="font-semibold mb-2">Abstract</h3>
-            <p className="text-gray-600">{selectedProject.abstract}</p>
-          </div>
-        </div>
+                {/* Right column: Abstract */}
+                <div>
+                  <h3 className="font-semibold mb-2">Abstract</h3>
+                  <p className="text-gray-600 text-sm">{selectedProject.abstract}</p>
+                </div>
+              </div>
 
-        {/* Technologies */}
-        <div className="mb-4">
-          <h3 className="font-semibold mb-2">Technologies Used</h3>
-          <div className="flex gap-2 flex-wrap">
-            {selectedProject.technologies.map((tech, idx) => (
-              <span
-                key={idx}
-                className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
+              {/* Technologies */}
+              <div className="mb-4">
+                <h3 className="font-semibold mb-2">Technologies Used</h3>
+                <div className="flex gap-2 flex-wrap">
+                  {selectedProject.technologies.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-        {/* Tags */}
-        <div>
-          <h3 className="font-semibold mb-2">Tags</h3>
-          <div className="flex gap-2 flex-wrap">
-            {selectedProject.tags.map((tag, idx) => (
-              <span
-                key={idx}
-                className="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </>
-    )}
-  </DialogContent>
-</Dialog>
-
+              {/* Tags */}
+              <div>
+                <h3 className="font-semibold mb-2">Tags</h3>
+                <div className="flex gap-2 flex-wrap">
+                  {selectedProject.tags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
