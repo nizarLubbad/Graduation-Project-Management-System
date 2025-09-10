@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GMPS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+20edaedb5b1798add640174592ff780bed2a4fd3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9635276f4c0591f18bce25a8e3ee5dc5c12b056d")]
 [assembly: System.Reflection.AssemblyProductAttribute("GMPS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GMPS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
