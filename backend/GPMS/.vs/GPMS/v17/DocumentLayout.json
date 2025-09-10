@@ -38,18 +38,17 @@
               "RelativeToolTip": "Data\\AppDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T09:32:15.175Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T09:32:15.175Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GPMS",
+              "Title": "GPMS.csproj",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\GPMS.csproj",
               "RelativeDocumentMoniker": "GPMS.csproj",
-              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\GPMS.csproj",
-              "RelativeToolTip": "GPMS.csproj",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAUwBQAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\GPMS.csproj*",
+              "RelativeToolTip": "GPMS.csproj*",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAUwBgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2025-09-10T09:31:22.926Z",
               "EditorCaption": ""
@@ -64,8 +63,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T09:30:59.649Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T09:30:59.649Z"
             },
             {
               "$type": "Document",
@@ -77,8 +75,7 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-09-10T09:30:04.086Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T09:30:04.086Z"
             },
             {
               "$type": "Bookmark",
