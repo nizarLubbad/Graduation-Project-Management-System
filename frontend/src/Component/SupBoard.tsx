@@ -1,4 +1,4 @@
-
+import React from 'react'
 
 export default function SupBoard() {
   return (
@@ -7,3 +7,4 @@ export default function SupBoard() {
     </div>
   )
 }
+
