@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace V1MP.Models
+namespace GPMS.Models
 {
     public class Done
     {

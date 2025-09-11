@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace V1MP.Models
+namespace GPMS.Models
 {
     public class Team
     {
@@ -30,7 +30,9 @@ namespace V1MP.Models
         public Doing Doing { get; set; }
         public Done Done { get; set; }
 
-
+        [ForeignKey("Student")]
+        public long StudentId { get; set; }
+        public Student Student { get; set; }
         //public ICollection<Student> Students { get; set; }
     }
 }
