@@ -47,9 +47,26 @@ export default function SupBoard() {
   }
 
   return (
-    <div>
-      
-    </div>
+    <div className="p-4 sm:p-6 md:p-8 space-y-6">
+    <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Supervised Projects</h1>
+
+    {/* Grid responsive لكل الشاشات */}
+    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      {projects.map(project => (
+        <li
+          key={project.id}
+          className="p-4 bg-white rounded-xl shadow hover:shadow-lg transition cursor-pointer flex flex-col justify-between"
+          onClick={() => navigate(`/dashboard/supervisor/supervised-projects/${project.id}/Kanban`)}
+        >
+          <div>
+            <p className="font-semibold text-lg mb-1 text-gray-800 truncate">{project.title}</p>
+            <p className="text-sm text-gray-500 truncate">Team: {project.teamName}</p>
+            <p className="text-sm text-gray-500 truncate">Members: {project.members.join(", ")}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
   )
 }
 
