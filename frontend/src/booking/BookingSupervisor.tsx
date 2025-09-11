@@ -1,6 +1,5 @@
-import React from 'react'
 
-export default function BookingSupervisor() {import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -91,11 +90,57 @@ export default function BookingSupervisor() {
       title: "Supervisor Booked!",
       text: `You booked ${selectedSupervisor.name} successfully.`,
     }).then(() => navigate("/dashboard/student"));
-  };    
+  };
+
+  // ================================
+  // UI Rendering
+  // ================================
+  if (!team) return <p className="text-center mt-10">Loading your team...</p>;
+
   return (
-    <div>
-      
+    <div className="p-6 max-w-3xl mx-auto bg-white shadow-lg rounded-xl">
+      <h2 className="text-2xl font-bold text-teal-700 mb-4">Book a Supervisor</h2>
+      <p className="mb-4"><strong>Team Name:</strong> {team.teamName}</p>
+
+      {/* Project title input */}
+      <input
+        type="text"
+        placeholder="Project Title"
+        value={projectTitle}
+        onChange={(e) => setProjectTitle(e.target.value)}
+        className="w-full p-2 border rounded mb-2"
+      />
+
+      {/* Project description textarea */}
+      <textarea
+        placeholder="Project Description"
+        value={projectDescription}
+        onChange={(e) => setProjectDescription(e.target.value)}
+        className="w-full p-2 border rounded mb-4"
+      />
+
+      {/* Supervisor selection */}
+      <h3 className="text-lg font-semibold mb-4">Select Supervisor</h3>
+      <select
+        value={selectedSupervisor?.id || ""}
+        onChange={(e) =>
+          setSelectedSupervisor(supervisors.find((s) => s.id === e.target.value) || null)
+        }
+        className="w-full p-2 border rounded mb-4"
+      >
+        <option value="">Select a supervisor</option>
+        {supervisors.map((s) => (
+          <option key={s.id} value={s.id}>{s.name}</option>
+        ))}
+      </select>
+
+      {/* Confirm button */}
+      <button
+        onClick={handleSubmit}
+        className="w-full bg-teal-600 text-white px-4 py-2 rounded"
+      >
+        Confirm Booking
+      </button>
     </div>
-  )
-}
+  );
 }
