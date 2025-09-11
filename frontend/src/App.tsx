@@ -10,20 +10,18 @@ import StudentRouter from "./booking/StudentRouter";
 import CreateTeam from "./booking/CreateTeam";
 import BookingSupervisor from "./booking/BookingSupervisor";
 import { useAuth } from "./context/AuthContext";
- import SupervisorProjectKanban from "./Component/SupervisorProjectKanban"; // نضيف هذا لعرض Kanban للمشرف
+import SupervisorProjectKanban from "./Component/SupervisorProjectKanban";
 
 function App() {
-  const { user } = useAuth(); 
+  const { user } = useAuth();
 
   return (
     <Routes>
+      {/* Auth */}
       <Route path="/" element={<AuthPage />} />
 
-      {/* توجيه الطالب حسب الحالة */}
-      <Route
-        path="/student-router"
-        element={<StudentRouter>Default Content</StudentRouter>}
-      />
+      {/* Student Routing */}
+      <Route path="/student-router" element={<StudentRouter>Default Content</StudentRouter>} />
       <Route
         path="/create-team"
         element={
@@ -41,7 +39,7 @@ function App() {
         }
       />
 
-      {/* Dashboard الطلاب */}
+      {/* Student Dashboard */}
       <Route
         path="/dashboard/student"
         element={
@@ -56,7 +54,9 @@ function App() {
             user?.team?.id ? (
               <KanbanBoard teamId={user.team.id} />
             ) : (
-              <p className="p-4">⚠️ Create a team first</p>
+              <p className="p-4 text-center text-red-500">
+                ⚠️ You need to create a team first
+              </p>
             )
           }
         />
@@ -66,7 +66,7 @@ function App() {
         <Route path="projectHistory" element={<ProjectHistory />} />
       </Route>
 
-      {/* Dashboard المشرفين */}
+      {/* Supervisor Dashboard */}
       <Route
         path="/dashboard/supervisor"
         element={
@@ -78,7 +78,10 @@ function App() {
         <Route index element={<Supboard />} />
         <Route path="reviews" element={<h2 className="text-2xl font-semibold">📝 Reviews Page</h2>} />
         <Route path="supervised-projects" element={<h2 className="text-2xl font-semibold">📁 Supervised Projects Page</h2>} />
+
+        {/* Kanban for Supervisor Project */}
         <Route path="supervised-projects/:teamId/Kanban" element={<SupervisorProjectKanban />} />
+
         <Route path="reports" element={<h2 className="text-2xl font-semibold">📑 Reports Page</h2>} />
         <Route path="feedback" element={<h2 className="text-2xl font-semibold">💬 Feedback Page</h2>} />
       </Route>
