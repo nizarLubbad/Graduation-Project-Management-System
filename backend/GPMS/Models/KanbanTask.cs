@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GPMS_MALAK.Models
+namespace GPMS.Models
 {
     public class KanbanTask
     {
-        [Key]
+        [Key] 
         public int Id { get; set; }
 
         [Required, MaxLength(100)]

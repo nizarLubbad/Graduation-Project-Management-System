@@ -1,10 +1,11 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
-using V1MP.Interfaces;
-using V1MP.Data;
+using GPMS.Interfaces;
 
-namespace V1MP.Repositories
+using GPMS.Models;
+
+namespace GPMS.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
@@ -16,14 +17,16 @@ namespace V1MP.Repositories
             _context = context;
             _dbSet = _context.Set<T>();
         }
-
+      
         public virtual async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
 
         public virtual async Task<T?> GetByIdAsync(object id) => await _dbSet.FindAsync(id);
+        
 
         public virtual async Task<T> AddAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            await _dbSet.AddAsync(entity); // Stunet s = new Student({id = 5 ; name = ahmad });
+
             await _context.SaveChangesAsync();
             return entity;
         }
