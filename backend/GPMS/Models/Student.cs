@@ -1,23 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GPMS_MALAK.Models
+namespace GPMS.Models
 {
     public class Student
     {
-        [Key]
-        public long Id { get; set; }
+        
+        public long StudentId { get; set; }
 
         [Required, MaxLength(50)]
         public required string Name { get; set; }
 
-        [Required, EmailAddress, MaxLength(100)]
+        [Required, Column(TypeName = "varchar(100)")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public required string Email { get; set; }
 
         [Required, Column(TypeName = "varchar(100)")]
-        public required string Password { get; set; }
+        public required string PasswordHash { get; set; }
 
-        public ICollection<StudentTask> StudentTasks { get; set; } = new List<StudentTask>();
+        public ICollection<StudentTask> StudentTask { get; set; } = new List<StudentTask>();
+        public Team Team { get; set; }
     }
 
 }

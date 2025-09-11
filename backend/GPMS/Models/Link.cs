@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GPMS_MALAK.Models
+namespace GPMS.Models
 {
     public class Link
     {

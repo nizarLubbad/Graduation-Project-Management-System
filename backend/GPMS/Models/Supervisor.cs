@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace V1MP.Models
+namespace GPMS.Models
 {
     public class Supervisor
     {
@@ -22,6 +22,7 @@ namespace V1MP.Models
         //public string SubmitStudent { get; set; }
 
         // One-to-Many with Teams
-        public ICollection<Team> Teams { get; set; }
+        public ICollection<Team> Teams { get; set; } = new List<Team>();
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace V1MP.Models
+namespace GPMS.Models
 {
     public class Project
     {
@@ -10,6 +10,7 @@ namespace V1MP.Models
         [Required]
         [Column(TypeName = "VARCHAR(100)")]
         public string ProjectTitle { get; set; }
+        public int ProjectId { get; set; }
 
         [Column(TypeName = "VARCHAR(100)")]
         public string Description { get; set; }
