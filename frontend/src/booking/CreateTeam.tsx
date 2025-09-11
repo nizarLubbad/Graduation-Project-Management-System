@@ -81,7 +81,7 @@ export default function CreateTeam() {
       </div>
       <div className="mb-4 space-y-2">
         {students.map((s) => (
-          <label key={s.id} className="flex items-center space-x-2">
+          <label key={s.id} className="flex items-center space-x-3">
             <input type="checkbox" checked={selectedMembers.includes(s.studentId!)} onChange={() => s.studentId && toggleMember(s.studentId)} />
             <span>{s.name} ({s.studentId})</span>
           </label>
