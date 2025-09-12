@@ -6,7 +6,7 @@ namespace GPMS.Models
     public class Project
     {
 
-
+        [Key]
         [Required]
         [Column(TypeName = "VARCHAR(100)")]
         public string ProjectTitle { get; set; }
@@ -18,7 +18,9 @@ namespace GPMS.Models
         public bool projectStatus { get; set; } = false;
         public DateTime CreatedDate { get; set; }
 
-        // One-to-One with Team
+        // One-to-One with Project
+        [ForeignKey("Team")]
+        public long TeamId { get; set; }
         public Team Team { get; set; }
     }
 }

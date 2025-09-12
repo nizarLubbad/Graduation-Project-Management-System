@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GPMS.Models
 {
-    public class StudentTask    
+    public class StudentTask
 
     {
         [Key, Column(Order = 0)]

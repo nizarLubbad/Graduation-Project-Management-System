@@ -1,15 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GPMS.Models
 {
     public class Student
     {
-        
+
         public long StudentId { get; set; }
 
-        [Required, MaxLength(50)]
+        [Required]
+        [Column(TypeName = "varchar(100)")]
         public required string Name { get; set; }
+
+        public bool status { get; set; } = false;
 
         [Required, Column(TypeName = "varchar(100)")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
@@ -19,6 +23,8 @@ namespace GPMS.Models
         public required string PasswordHash { get; set; }
 
         public ICollection<StudentTask> StudentTask { get; set; } = new List<StudentTask>();
+        [ForeignKey("Team")]
+        public long? TeamId { get; set; }
         public Team Team { get; set; }
     }
 
