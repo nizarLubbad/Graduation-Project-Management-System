@@ -1,3 +1,4 @@
+using GPMS.Middlewares;
 using GPMS.Models;
 using GPMS.Services;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,13 @@ builder.Services.AddDbContext<AppDbContext>((sp, options) =>
 });
 //end 
 var app = builder.Build();
+
+// Logging and Exception Handling Middlewares
+app.UseMiddleware<LoggingMiddleware>();           
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+// End Logging and Exception Handling Middlewares
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
