@@ -29,24 +29,25 @@ namespace GPMS_MALAK.Models
             modelBuilder.Entity<StudentTask>()
                 .HasKey(st => new { st.StudentId, st.TaskId });
 
+            //one to many relationship (student -> tasks)
             modelBuilder.Entity<StudentTask>()
                 .HasOne(st => st.Student)
                 .WithMany(s => s.StudentTasks)
                 .HasForeignKey(st => st.StudentId)
                 .OnDelete(DeleteBehavior.Cascade);
-
+            //one to many relationship (task -> StudentTask)
             modelBuilder.Entity<StudentTask>()
                 .HasOne(st => st.Task)
                 .WithMany(t => t.StudentTasks)
                 .HasForeignKey(st => st.TaskId)
                 .OnDelete(DeleteBehavior.Cascade);
-
+            //one to many relationship (task -> links)
             modelBuilder.Entity<Link>()
                 .HasOne(l => l.KanbanTask)
                 .WithMany(t => t.Links)
                 .HasForeignKey(l => l.TaskId)
                 .OnDelete(DeleteBehavior.Cascade);
-
+            //one to many relationship (task -> feedback)
             modelBuilder.Entity<Feedback>()
                 .HasOne(f => f.KanbanTask)
                 .WithMany(t => t.Feedbacks)

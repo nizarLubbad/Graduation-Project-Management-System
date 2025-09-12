@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< Updated upstream
     "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\GPMS.csproj": {}
   },
   "projects": {
@@ -12,6 +13,19 @@
         "projectPath": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\GPMS.csproj",
         "packagesPath": "C:\\Users\\X1 Zano\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\obj\\",
+=======
+    "C:\\Users\\X1 Zano\\Desktop\\backend\\GPMS\\GPMS.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\X1 Zano\\Desktop\\backend\\GPMS\\GPMS.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\X1 Zano\\Desktop\\backend\\GPMS\\GPMS.csproj",
+        "projectName": "GPMS",
+        "projectPath": "C:\\Users\\X1 Zano\\Desktop\\backend\\GPMS\\GPMS.csproj",
+        "packagesPath": "C:\\Users\\X1 Zano\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\X1 Zano\\Desktop\\backend\\GPMS\\obj\\",
+>>>>>>> Stashed changes
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
