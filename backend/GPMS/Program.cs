@@ -1,4 +1,5 @@
 using GPMS.Models;
+using GPMS.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +10,17 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// make the connection string singleton
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string not found.");
+builder.Services.AddSingleton(new ConnectionStringProvider(connectionString));
+
+builder.Services.AddDbContext<AppDbContext>((sp, options) =>
+{
+    var connProvider = sp.GetRequiredService<ConnectionStringProvider>();
+    options.UseSqlServer(connProvider.ConnectionString);
+});
+//end 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
