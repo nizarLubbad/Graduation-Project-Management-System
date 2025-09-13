@@ -16,6 +16,7 @@ namespace GPMS.Models
         public string Description { get; set; }
 
         public bool projectStatus { get; set; } = false;
+        
         public DateTime CreatedDate { get; set; }
 
         // One-to-One with Project
