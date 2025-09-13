@@ -37,10 +37,15 @@ namespace GPMS.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<long?>("SupervisorId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("TaskId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SupervisorId");
 
                     b.HasIndex("TaskId");
 
@@ -61,11 +66,11 @@ namespace GPMS.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("varchar(100)");
 
-                    b.Property<bool?>("IsCompleted")
-                        .HasColumnType("bit");
-
                     b.Property<int>("Priority")
                         .HasColumnType("int");
+
+                    b.Property<long>("SupervisorId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("TeamId")
                         .HasColumnType("bigint");
@@ -80,6 +85,8 @@ namespace GPMS.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.HasKey("TaskId");
+
+                    b.HasIndex("SupervisorId");
 
                     b.HasIndex("TeamId");
 
@@ -237,7 +244,7 @@ namespace GPMS.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("SupervisorId")
+                    b.Property<long?>("SupervisorId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("TeamName")
@@ -248,27 +255,45 @@ namespace GPMS.Migrations
 
                     b.HasIndex("SupervisorId");
 
+                    b.HasIndex("TeamName")
+                        .IsUnique();
+
                     b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("GPMS.Models.Feedback", b =>
                 {
+                    b.HasOne("GPMS.Models.Supervisor", "Supervisor")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("SupervisorId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("GPMS.Models.KanbanTask", "KanbanTask")
                         .WithMany("Feedbacks")
                         .HasForeignKey("TaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("KanbanTask");
+
+                    b.Navigation("Supervisor");
                 });
 
             modelBuilder.Entity("GPMS.Models.KanbanTask", b =>
                 {
+                    b.HasOne("GPMS.Models.Supervisor", "Supervisor")
+                        .WithMany()
+                        .HasForeignKey("SupervisorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("GPMS.Models.Team", "Team")
                         .WithMany("KanbanTasks")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Supervisor");
 
                     b.Navigation("Team");
                 });
@@ -310,13 +335,13 @@ namespace GPMS.Migrations
                     b.HasOne("GPMS.Models.Student", "Student")
                         .WithMany("StudentTask")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("GPMS.Models.KanbanTask", "Task")
                         .WithMany("StudentTasks")
                         .HasForeignKey("TaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Student");
@@ -329,8 +354,7 @@ namespace GPMS.Migrations
                     b.HasOne("GPMS.Models.Supervisor", "Supervisor")
                         .WithMany("Teams")
                         .HasForeignKey("SupervisorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Supervisor");
                 });
@@ -351,6 +375,8 @@ namespace GPMS.Migrations
 
             modelBuilder.Entity("GPMS.Models.Supervisor", b =>
                 {
+                    b.Navigation("Feedbacks");
+
                     b.Navigation("Teams");
                 });
 
@@ -358,8 +384,7 @@ namespace GPMS.Migrations
                 {
                     b.Navigation("KanbanTasks");
 
-                    b.Navigation("Project")
-                        .IsRequired();
+                    b.Navigation("Project");
 
                     b.Navigation("Students");
                 });

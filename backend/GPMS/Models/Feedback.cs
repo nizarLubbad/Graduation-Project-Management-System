@@ -13,8 +13,14 @@ namespace GPMS.Models
 
         public DateTime Date { get; set; } = DateTime.Now;
 
+
         [ForeignKey("KanbanTask")]
         public int TaskId { get; set; }
-        public required KanbanTask KanbanTask { get; set; }
+        public KanbanTask KanbanTask { get; set; }
+
+
+        [ForeignKey("Supervisor")]
+        public long? SupervisorId { get; set; } // Foreign key to Supervisor
+        public Supervisor? Supervisor { get; set; }
     }
 }

@@ -33,7 +33,10 @@ namespace GPMS.Models
                 .Property(p => p.ProjectId)
                 .ValueGeneratedOnAdd();
 
-
+            // make TeamName unique
+            modelBuilder.Entity<Team>()
+                .HasIndex(t => t.TeamName)
+                .IsUnique();
 
             // 1. Team -> KanbanTasks (One-to-Many)
             modelBuilder.Entity<Team>()
@@ -61,7 +64,14 @@ namespace GPMS.Models
                 .HasMany(s => s.Teams)
                 .WithOne(t => t.Supervisor)
                 .HasForeignKey(t => t.SupervisorId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
+            // 5. Supervisor -> Feedback (One-to-Many)
+            modelBuilder.Entity<Supervisor>()
+                .HasMany(s => s.Feedbacks)
+                .WithOne(t => t.Supervisor)
+                .HasForeignKey(t => t.SupervisorId)
+                .OnDelete(DeleteBehavior.SetNull);
+
 
 
             // Student configuration
@@ -85,13 +95,13 @@ namespace GPMS.Models
                 .HasOne(st => st.Student)
                 .WithMany(s => s.StudentTask)
                 .HasForeignKey(st => st.StudentId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<StudentTask>()
                 .HasOne(st => st.Task)
                 .WithMany(t => t.StudentTasks)
                 .HasForeignKey(st => st.TaskId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Cascade delete configurations 
             modelBuilder.Entity<KanbanTask>()
@@ -104,7 +114,7 @@ namespace GPMS.Models
                 .HasMany(t => t.Feedbacks)
                 .WithOne(f => f.KanbanTask)
                 .HasForeignKey(f => f.TaskId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

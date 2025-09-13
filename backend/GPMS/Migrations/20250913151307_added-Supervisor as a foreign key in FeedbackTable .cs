@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GPMS.Migrations
 {
     /// <inheritdoc />
-    public partial class Ugpms : Migration
+    public partial class addedSupervisorasaforeignkeyinFeedbackTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,7 @@ namespace GPMS.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TeamName = table.Column<string>(type: "VARCHAR(100)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SupervisorId = table.Column<long>(type: "bigint", nullable: false)
+                    SupervisorId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,7 +44,7 @@ namespace GPMS.Migrations
                         column: x => x.SupervisorId,
                         principalTable: "Supervisors",
                         principalColumn: "SupervisorId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,12 +103,18 @@ namespace GPMS.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Priority = table.Column<int>(type: "int", nullable: false),
                     status = table.Column<string>(type: "varchar(100)", nullable: false),
-                    IsCompleted = table.Column<bool>(type: "bit", nullable: true),
-                    TeamId = table.Column<long>(type: "bigint", nullable: false)
+                    TeamId = table.Column<long>(type: "bigint", nullable: false),
+                    SupervisorId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tasks", x => x.TaskId);
+                    table.ForeignKey(
+                        name: "FK_Tasks_Supervisors_SupervisorId",
+                        column: x => x.SupervisorId,
+                        principalTable: "Supervisors",
+                        principalColumn: "SupervisorId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Tasks_Teams_TeamId",
                         column: x => x.TeamId,
@@ -125,17 +131,24 @@ namespace GPMS.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TaskId = table.Column<int>(type: "int", nullable: false)
+                    TaskId = table.Column<int>(type: "int", nullable: false),
+                    SupervisorId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Feedbacks", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Feedbacks_Supervisors_SupervisorId",
+                        column: x => x.SupervisorId,
+                        principalTable: "Supervisors",
+                        principalColumn: "SupervisorId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
                         name: "FK_Feedbacks_Tasks_TaskId",
                         column: x => x.TaskId,
                         principalTable: "Tasks",
                         principalColumn: "TaskId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,14 +188,19 @@ namespace GPMS.Migrations
                         column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "StudentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_StudentTasks_Tasks_TaskId",
                         column: x => x.TaskId,
                         principalTable: "Tasks",
                         principalColumn: "TaskId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedbacks_SupervisorId",
+                table: "Feedbacks",
+                column: "SupervisorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_TaskId",
@@ -223,6 +241,11 @@ namespace GPMS.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tasks_SupervisorId",
+                table: "Tasks",
+                column: "SupervisorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tasks_TeamId",
                 table: "Tasks",
                 column: "TeamId");
@@ -231,6 +254,12 @@ namespace GPMS.Migrations
                 name: "IX_Teams_SupervisorId",
                 table: "Teams",
                 column: "SupervisorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_TeamName",
+                table: "Teams",
+                column: "TeamName",
+                unique: true);
         }
 
         /// <inheritdoc />

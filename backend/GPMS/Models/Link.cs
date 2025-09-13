@@ -8,7 +8,8 @@ namespace GPMS.Models
         [Key]
         public int Id { get; set; }
 
-        [Required, MaxLength(200)]
+        [Required]
+        [Column(TypeName = "varchar(100)")]
         public required string Url { get; set; }
 
         [ForeignKey("KanbanTask")]

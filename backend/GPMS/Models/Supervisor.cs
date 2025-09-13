@@ -23,6 +23,7 @@ namespace GPMS.Models
 
         // One-to-Many with Teams
         public ICollection<Team> Teams { get; set; } = new List<Team>();
+        public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
 
     }
 }
