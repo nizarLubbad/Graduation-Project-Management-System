@@ -16,12 +16,12 @@ namespace GPMS.Models
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
 
-        public Project Project { get; set; }
+        public Project? Project { get; set; }
 
         // Many-to-One with Supervisor
         [ForeignKey("Supervisor")]
-        public long SupervisorId { get; set; }
-        public Supervisor Supervisor { get; set; }
+        public long? SupervisorId { get; set; }
+        public Supervisor? Supervisor { get; set; }
 
         // One-to-Many with KanbanTask
         public ICollection<KanbanTask> KanbanTasks { get; set; } = new List<KanbanTask>();

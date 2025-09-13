@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// make the connection string singleton
+//make the connection string singleton
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string not found.");
 builder.Services.AddSingleton(new ConnectionStringProvider(connectionString));
@@ -21,7 +21,7 @@ builder.Services.AddDbContext<AppDbContext>((sp, options) =>
     var connProvider = sp.GetRequiredService<ConnectionStringProvider>();
     options.UseSqlServer(connProvider.ConnectionString);
 });
-//end 
+//end
 var app = builder.Build();
 
 // Logging and Exception Handling Middlewares

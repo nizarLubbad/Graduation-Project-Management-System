@@ -23,10 +23,14 @@ namespace GPMS.Models
         [Column(TypeName = "varchar(100)")]
         public string status { get; set; } = "To Do"; // Possible values: "To Do", "In Progress", "Done"
 
-        public bool? IsCompleted { get; set; } = false;
+        //public bool? IsCompleted { get; set; } = false;
+
         [ForeignKey("Team")]
         public long TeamId { get; set; } // Foreign key to  Team
         public Team Team { get; set; }
+        [ForeignKey("Supervisor")]
+        public long SupervisorId { get; set; } // Foreign key to Supervisor
+        public Supervisor Supervisor { get; set; }
         public ICollection<StudentTask> StudentTasks { get; set; } = new List<StudentTask>();
         public ICollection<Link> Links { get; set; } = new List<Link>();
         public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();

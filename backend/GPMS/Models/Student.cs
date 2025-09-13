@@ -26,6 +26,8 @@ namespace GPMS.Models
         [ForeignKey("Team")]
         public long? TeamId { get; set; }
         public Team Team { get; set; }
+        public ICollection<Reply> Replys { get; set; } = new List<Reply>();
+
     }
 
 }
