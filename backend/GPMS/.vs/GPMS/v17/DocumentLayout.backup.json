@@ -3,16 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913153552_added Reply Table with constraints and make it not null.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20250913153552_added Reply Table with constraints and make it not null.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\services\\connectionstringprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:services\\connectionstringprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\migrations\\20250913151307_added-supervisor as a foreign key in feedbacktable .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:migrations\\20250913151307_added-supervisor as a foreign key in feedbacktable .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\migrations\\20250913153335_added reply table with constraints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:migrations\\20250913153335_added reply table with constraints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\migrations\\20250913153552_added reply table with constraints and make it not null.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:migrations\\20250913153552_added reply table with constraints and make it not null.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\models\\reply.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:models\\reply.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913153335_added Reply Table with constraints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20250913153335_added Reply Table with constraints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\models\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\models\\supervisor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:models\\supervisor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -219,20 +235,12 @@
       "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ikanbantaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\services\\connectionstringprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:services\\connectionstringprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\services\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:services\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\ibaserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ibaserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\gpms.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -277,10 +285,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\dtos\\supervisor\\supervisordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:dtos\\supervisor\\supervisordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\desktop\\graduation-project-management-system\\backend\\gpms\\migrations\\20250913151307_added-supervisor as a foreign key in feedbacktable .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:migrations\\20250913151307_added-supervisor as a foreign key in feedbacktable .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -290,50 +294,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20250913153552_added Reply Table with constraints and make it not null.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913153552_added Reply Table with constraints and make it not null.cs",
-              "RelativeDocumentMoniker": "Migrations\\20250913153552_added Reply Table with constraints and make it not null.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913153552_added Reply Table with constraints and make it not null.cs",
-              "RelativeToolTip": "Migrations\\20250913153552_added Reply Table with constraints and make it not null.cs",
+              "DocumentIndex": 3,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "Controllers\\WeatherForecastController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T15:35:52.98Z",
+              "WhenOpened": "2025-09-13T15:43:14.561Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "20250913151307_added-Supervisor as a foreign key in FeedbackTable .cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913151307_added-Supervisor as a foreign key in FeedbackTable .cs",
+              "RelativeDocumentMoniker": "Migrations\\20250913151307_added-Supervisor as a foreign key in FeedbackTable .cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913151307_added-Supervisor as a foreign key in FeedbackTable .cs",
+              "RelativeToolTip": "Migrations\\20250913151307_added-Supervisor as a foreign key in FeedbackTable .cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T15:13:07.278Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "20250913153335_added Reply Table with constraints.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913153335_added Reply Table with constraints.cs",
-              "RelativeDocumentMoniker": "Migrations\\20250913153335_added Reply Table with constraints.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913153335_added Reply Table with constraints.cs",
-              "RelativeToolTip": "Migrations\\20250913153335_added Reply Table with constraints.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAgAAAAAAAAAA==",
+              "Title": "ConnectionStringProvider.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\ConnectionStringProvider.cs",
+              "RelativeDocumentMoniker": "Services\\ConnectionStringProvider.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\ConnectionStringProvider.cs",
+              "RelativeToolTip": "Services\\ConnectionStringProvider.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T15:33:36.049Z",
+              "WhenOpened": "2025-09-12T16:01:23.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAgAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T17:59:32.807Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Reply.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Reply.cs",
-              "RelativeDocumentMoniker": "Models\\Reply.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Reply.cs",
-              "RelativeToolTip": "Models\\Reply.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAABcAAAAsAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T15:24:35.479Z",
+              "WhenOpened": "2025-09-12T15:01:36.23Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "Feedback.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Feedback.cs",
               "RelativeDocumentMoniker": "Models\\Feedback.cs",
@@ -341,12 +371,55 @@
               "RelativeToolTip": "Models\\Feedback.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T14:58:19.433Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T14:58:19.433Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
+              "Title": "Reply.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Reply.cs",
+              "RelativeDocumentMoniker": "Models\\Reply.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Reply.cs",
+              "RelativeToolTip": "Models\\Reply.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAABcAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T15:24:35.479Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "20250913153335_added Reply Table with constraints.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913153335_added Reply Table with constraints.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250913153335_added Reply Table with constraints.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913153335_added Reply Table with constraints.cs",
+              "RelativeToolTip": "Migrations\\20250913153335_added Reply Table with constraints.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAABEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T15:33:36.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "20250913153552_added Reply Table with constraints and make it not null.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913153552_added Reply Table with constraints and make it not null.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250913153552_added Reply Table with constraints and make it not null.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913153552_added Reply Table with constraints and make it not null.cs",
+              "RelativeToolTip": "Migrations\\20250913153552_added Reply Table with constraints and make it not null.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T15:35:52.98Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "Supervisor.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Supervisor.cs",
               "RelativeDocumentMoniker": "Models\\Supervisor.cs",
@@ -354,12 +427,11 @@
               "RelativeToolTip": "Models\\Supervisor.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAuwBoAAABLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T14:57:59.691Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T14:57:59.691Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "Link.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Link.cs",
               "RelativeDocumentMoniker": "Models\\Link.cs",
@@ -367,12 +439,11 @@
               "RelativeToolTip": "Models\\Link.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T14:57:22.408Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T14:57:22.408Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "KanbanTask.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\KanbanTask.cs",
               "RelativeDocumentMoniker": "Models\\KanbanTask.cs",
@@ -380,12 +451,11 @@
               "RelativeToolTip": "Models\\KanbanTask.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T17:51:33.234Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T17:51:33.234Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "Student.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Student.cs",
               "RelativeDocumentMoniker": "Models\\Student.cs",
@@ -393,25 +463,11 @@
               "RelativeToolTip": "Models\\Student.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T18:08:25.944Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T18:08:25.944Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Data\\AppDbContext.cs",
-              "ViewState": "AgIAAHQAAAAAAAAAAAAAAIcAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T17:59:32.807Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "20250913151145_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913151145_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "RelativeDocumentMoniker": "Migrations\\20250913151145_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
@@ -423,27 +479,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
-              "Title": "20250913151307_added-Supervisor as a foreign key in FeedbackTable .cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913151307_added-Supervisor as a foreign key in FeedbackTable .cs",
-              "RelativeDocumentMoniker": "Migrations\\20250913151307_added-Supervisor as a foreign key in FeedbackTable .cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913151307_added-Supervisor as a foreign key in FeedbackTable .cs",
-              "RelativeToolTip": "Migrations\\20250913151307_added-Supervisor as a foreign key in FeedbackTable .cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T15:13:07.278Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "20250913150545_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913150545_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "RelativeDocumentMoniker": "Migrations\\20250913150545_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
@@ -455,7 +491,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "20250913150338_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913150338_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "RelativeDocumentMoniker": "Migrations\\20250913150338_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
@@ -467,7 +503,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "20250913150032_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913150032_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "RelativeDocumentMoniker": "Migrations\\20250913150032_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
@@ -479,7 +515,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "20250913145837_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913145837_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "RelativeDocumentMoniker": "Migrations\\20250913145837_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
@@ -491,7 +527,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "20250913145139_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913145139_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "RelativeDocumentMoniker": "Migrations\\20250913145139_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
@@ -503,7 +539,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "20250913144800_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913144800_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
               "RelativeDocumentMoniker": "Migrations\\20250913144800_added-Supervisor as a foreign key in FeedbackTable and set nullable to supervisor id .cs",
@@ -515,7 +551,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "Team.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Team.cs",
               "RelativeDocumentMoniker": "Models\\Team.cs",
@@ -527,7 +563,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "20250913144540_added-Supervisor as a foreign key in FeedbackTable.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Migrations\\20250913144540_added-Supervisor as a foreign key in FeedbackTable.cs",
               "RelativeDocumentMoniker": "Migrations\\20250913144540_added-Supervisor as a foreign key in FeedbackTable.cs",
@@ -539,7 +575,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "LinkService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\LinkService.cs",
               "RelativeDocumentMoniker": "Services\\LinkService.cs",
@@ -551,7 +587,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 23,
               "Title": "KanbanTaskRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\KanbanTaskRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\KanbanTaskRepository.cs",
@@ -563,7 +599,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 24,
               "Title": "Doing.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Doing.cs",
               "RelativeDocumentMoniker": "Models\\Doing.cs",
@@ -575,7 +611,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 25,
               "Title": "Done.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Done.cs",
               "RelativeDocumentMoniker": "Models\\Done.cs",
@@ -587,7 +623,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "StudentTaskService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\StudentTaskService.cs",
               "RelativeDocumentMoniker": "Services\\StudentTaskService.cs",
@@ -599,7 +635,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 28,
               "Title": "KanbanTaskService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\KanbanTaskService.cs",
               "RelativeDocumentMoniker": "Services\\KanbanTaskService.cs",
@@ -611,7 +647,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "FeedbackService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\FeedbackService.cs",
               "RelativeDocumentMoniker": "Services\\FeedbackService.cs",
@@ -623,7 +659,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 29,
               "Title": "ProjectService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\ProjectService.cs",
               "RelativeDocumentMoniker": "Services\\ProjectService.cs",
@@ -635,7 +671,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 30,
               "Title": "SupervisorService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\SupervisorService.cs",
               "RelativeDocumentMoniker": "Services\\SupervisorService.cs",
@@ -647,7 +683,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 31,
               "Title": "TeamService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\TeamService.cs",
               "RelativeDocumentMoniker": "Services\\TeamService.cs",
@@ -659,7 +695,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 32,
               "Title": "ISupervisorService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\ISupervisorService.cs",
               "RelativeDocumentMoniker": "Interfaces\\ISupervisorService.cs",
@@ -671,7 +707,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 33,
               "Title": "IStudentTaskService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IStudentTaskService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IStudentTaskService.cs",
@@ -683,7 +719,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 34,
               "Title": "ILinkServicecs.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\ILinkServicecs.cs",
               "RelativeDocumentMoniker": "Interfaces\\ILinkServicecs.cs",
@@ -695,7 +731,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 35,
               "Title": "IFeedbackService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IFeedbackService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IFeedbackService.cs",
@@ -707,7 +743,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 39,
               "Title": "ProjectRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\ProjectRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\ProjectRepository.cs",
@@ -719,7 +755,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 38,
               "Title": "StudentRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\StudentRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\StudentRepository.cs",
@@ -731,7 +767,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 37,
               "Title": "SupervisorRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\SupervisorRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\SupervisorRepository.cs",
@@ -743,7 +779,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 36,
               "Title": "TeamRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\TeamRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\TeamRepository.cs",
@@ -755,7 +791,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 40,
               "Title": "BaseRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\BaseRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\BaseRepository.cs",
@@ -767,7 +803,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 41,
               "Title": "IProjectRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IProjectRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IProjectRepository.cs",
@@ -779,7 +815,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 42,
               "Title": "IKanbanTaskService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IKanbanTaskService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IKanbanTaskService.cs",
@@ -791,7 +827,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 43,
               "Title": "ITeamRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\ITeamRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\ITeamRepository.cs",
@@ -803,7 +839,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 44,
               "Title": "ITeamService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\ITeamService.cs",
               "RelativeDocumentMoniker": "Interfaces\\ITeamService.cs",
@@ -815,7 +851,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 45,
               "Title": "IStudentRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IStudentRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IStudentRepository.cs",
@@ -827,7 +863,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 46,
               "Title": "IStudentService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IStudentService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IStudentService.cs",
@@ -839,7 +875,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 47,
               "Title": "ISupervisorRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\ISupervisorRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\ISupervisorRepository.cs",
@@ -851,7 +887,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 48,
               "Title": "IProjectService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IProjectService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IProjectService.cs",
@@ -863,7 +899,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 52,
               "Title": "UpdateTaskStatusDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\KanbanTask\\UpdateTaskStatusDto.cs",
               "RelativeDocumentMoniker": "DTOS\\KanbanTask\\UpdateTaskStatusDto.cs",
@@ -875,7 +911,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 51,
               "Title": "UpdateProjectStatusDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Project\\UpdateProjectStatusDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Project\\UpdateProjectStatusDto.cs",
@@ -887,7 +923,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 50,
               "Title": "UpdateStudentStatusDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Student\\UpdateStudentStatusDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Student\\UpdateStudentStatusDto.cs",
@@ -899,7 +935,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 53,
               "Title": "CreateTaskDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\KanbanTask\\CreateTaskDto.cs",
               "RelativeDocumentMoniker": "DTOS\\KanbanTask\\CreateTaskDto.cs",
@@ -911,7 +947,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 49,
               "Title": "KanbanTaskDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\KanbanTask\\KanbanTaskDto.cs",
               "RelativeDocumentMoniker": "DTOS\\KanbanTask\\KanbanTaskDto.cs",
@@ -923,7 +959,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 56,
               "Title": "FeedbackDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Feedback\\FeedbackDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Feedback\\FeedbackDto.cs",
@@ -935,7 +971,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 57,
               "Title": "IKanbanTaskRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IKanbanTaskRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IKanbanTaskRepository.cs",
@@ -947,7 +983,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 54,
               "Title": "ProjectDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Project\\ProjectDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Project\\ProjectDto.cs",
@@ -959,7 +995,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 55,
               "Title": "CreateProjectDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Project\\CreateProjectDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Project\\CreateProjectDto.cs",
@@ -971,19 +1007,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
-              "Title": "ConnectionStringProvider.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\ConnectionStringProvider.cs",
-              "RelativeDocumentMoniker": "Services\\ConnectionStringProvider.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\ConnectionStringProvider.cs",
-              "RelativeToolTip": "Services\\ConnectionStringProvider.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T16:01:23.57Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 58,
               "Title": "StudentService.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\StudentService.cs",
               "RelativeDocumentMoniker": "Services\\StudentService.cs",
@@ -995,7 +1019,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 59,
               "Title": "IBaseRepository.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IBaseRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IBaseRepository.cs",
@@ -1007,7 +1031,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 60,
               "Title": "GPMS.csproj",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\GPMS.csproj",
               "RelativeDocumentMoniker": "GPMS.csproj",
@@ -1019,19 +1043,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAADwvyAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T15:01:36.23Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 61,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -1043,7 +1055,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 62,
               "Title": "StudentTask.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\StudentTask.cs",
               "RelativeDocumentMoniker": "Models\\StudentTask.cs",
@@ -1055,7 +1067,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 63,
               "Title": "Enums.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Enums.cs",
               "RelativeDocumentMoniker": "Models\\Enums.cs",
@@ -1067,7 +1079,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 64,
               "Title": "Todo.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Todo.cs",
               "RelativeDocumentMoniker": "Models\\Todo.cs",
@@ -1079,7 +1091,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 67,
               "Title": "TaskDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Task\\TaskDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Task\\TaskDto.cs",
@@ -1091,7 +1103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 66,
               "Title": "CreateTeamDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Team\\CreateTeamDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Team\\CreateTeamDto.cs",
@@ -1103,7 +1115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 65,
               "Title": "TeamDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Team\\TeamDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Team\\TeamDto.cs",
@@ -1115,7 +1127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 68,
               "Title": "CreateTaskDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Task\\CreateTaskDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Task\\CreateTaskDto.cs",
@@ -1127,7 +1139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 69,
               "Title": "CreateSupervisorDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Supervisor\\CreateSupervisorDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Supervisor\\CreateSupervisorDto.cs",
@@ -1139,7 +1151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 70,
               "Title": "SupervisorDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Supervisor\\SupervisorDto.cs",
               "RelativeDocumentMoniker": "DTOS\\Supervisor\\SupervisorDto.cs",
