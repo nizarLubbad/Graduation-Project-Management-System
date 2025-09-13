@@ -4,5 +4,6 @@ namespace GPMS.Interfaces
 {
     public interface IStudentRepository : IBaseRepository<Student>
     {
+
     }
 }

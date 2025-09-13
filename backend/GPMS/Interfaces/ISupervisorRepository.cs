@@ -4,5 +4,6 @@ namespace GPMS.Interfaces
 {
     public interface ISupervisorRepository : IBaseRepository<Supervisor>
     {
+        
     }
 }

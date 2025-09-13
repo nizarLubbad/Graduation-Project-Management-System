@@ -1,12 +1,15 @@
-﻿using GPMS.Models;
-namespace GPMS.Services.Interfaces
+﻿using GPMS.Interfaces;
+using GPMS.Models;
+namespace GPMS.Services
 {
-    public interface IStudentService
+    public interface IStudentService : IBaseRepository<Student> 
     {
-        Task<IEnumerable<Student>> GetAllStudentsAsync();
-        Task<Student?> GetStudentByIdAsync(long id);
-        Task<Student> CreateStudentAsync(Student student);
-        Task<Student> UpdateStudentAsync(Student student);
-        Task<bool> DeleteStudentAsync(long id);
+        //Task<IEnumerable<Student>> GetAllAsync();
+        //Task<Student?> GetByIdAsync(long id);
+        //Task<Student> CreateAsync(Student student);
+        //Task<Student> UpdateAsync(Student student);
+        //Task<bool> DeleteAsync(long id);
+
+
     }
 }
