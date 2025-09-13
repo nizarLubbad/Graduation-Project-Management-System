@@ -6,15 +6,15 @@ namespace GPMS.Repositories
 {
     public class ProjectRepository : BaseRepository<Project>, IProjectRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _contextR;
         public ProjectRepository(AppDbContext context) : base(context)
         {
-            _context = context;
+            _contextR = context;
         }
 
         public async Task<bool?> GetProjectStatusAsync(string projectTitle)
         {
-            var project = await _context.Projects
+            var project = await _contextR.Projects
                               .AsNoTracking()
                               .FirstOrDefaultAsync(p => p.ProjectTitle == projectTitle);
 
@@ -23,13 +23,27 @@ namespace GPMS.Repositories
 
         public async Task<string> GetProjectTitleAsync(int projectId)
         {
-            var project = await _context.Projects
+            var project = await _contextR.Projects
                                         .AsNoTracking()
                                         .FirstOrDefaultAsync(p => p.ProjectId == projectId);
 
             return project.ProjectTitle;
         }
 
+        public async Task<bool?> UpdateProjectStatusAsync(string projectTitle)
+        {
+            var project = await _contextR.Projects
+                                  .FirstOrDefaultAsync(p => p.ProjectTitle == projectTitle);
 
+            if (project == null)
+                return null; 
+
+            project.projectStatus = true;
+
+            
+            await _contextR.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

@@ -5,10 +5,10 @@ namespace GPMS.Repositories
 {
     public class SupervisorRepository : BaseRepository<Supervisor>, ISupervisorRepository
     {
-        private  readonly AppDbContext _context;
+        private  readonly AppDbContext _contextR;
         public SupervisorRepository(AppDbContext context) : base(context)
         {
-            _context = context;
+            _contextR = context;
         }
 
 
