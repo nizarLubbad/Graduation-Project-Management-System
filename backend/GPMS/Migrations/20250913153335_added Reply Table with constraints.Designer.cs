@@ -4,6 +4,7 @@ using GPMS.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GPMS.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250913153335_added Reply Table with constraints")]
+    partial class addedReplyTablewithconstraints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,10 +168,10 @@ namespace GPMS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("StudentId")
+                    b.Property<long?>("StudentId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("SupervisorId")
+                    b.Property<long?>("SupervisorId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -365,14 +368,12 @@ namespace GPMS.Migrations
                     b.HasOne("GPMS.Models.Student", "Student")
                         .WithMany("Replys")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("GPMS.Models.Supervisor", "Supervisor")
                         .WithMany("Replys")
                         .HasForeignKey("SupervisorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Feedback");
 

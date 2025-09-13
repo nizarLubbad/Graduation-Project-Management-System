@@ -14,6 +14,7 @@ namespace GPMS.Models
         public DbSet<Team> Teams { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Supervisor> Supervisors { get; set; }
+        public DbSet<Reply> Replys { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -115,6 +116,30 @@ namespace GPMS.Models
                 .WithOne(f => f.KanbanTask)
                 .HasForeignKey(f => f.TaskId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // one - many between Reply and Supervisor
+            modelBuilder.Entity<Supervisor>()
+                .HasMany(s => s.Replys)
+                .WithOne(r => r.Supervisor)
+                .HasForeignKey(r => r.SupervisorId)
+                .OnDelete(DeleteBehavior.Cascade);
+            // one - many between Reply and Feedback
+            modelBuilder.Entity<Feedback>()
+                .HasMany(f => f.Replys)
+                .WithOne(r => r.Feedback)
+                .HasForeignKey(r => r.FeedbackId)
+                .OnDelete(DeleteBehavior.Cascade);
+            //one - many between Reply and
+            modelBuilder.Entity<Student>()
+             .HasMany(f => f.Replys)
+             .WithOne(r => r.Student)
+             .HasForeignKey(r => r.StudentId)
+             .OnDelete(DeleteBehavior.Cascade);
+
         }
+
+
+
+
     }
 }

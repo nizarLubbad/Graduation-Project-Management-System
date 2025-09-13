@@ -22,5 +22,8 @@ namespace GPMS.Models
         [ForeignKey("Supervisor")]
         public long? SupervisorId { get; set; } // Foreign key to Supervisor
         public Supervisor? Supervisor { get; set; }
+        public ICollection<Reply> Replys { get; set; } = new List<Reply>();
+
+
     }
 }
