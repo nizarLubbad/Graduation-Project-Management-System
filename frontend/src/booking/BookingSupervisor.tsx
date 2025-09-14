@@ -14,6 +14,7 @@ export default function BookingSupervisor() {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
 
+  // Type guard to ensure user is supervisor
   function isSupervisor(u: User): u is Supervisor {
     return u.role === "supervisor";
   }
@@ -74,52 +75,42 @@ export default function BookingSupervisor() {
   if (!team) return <p className="text-center mt-10">Loading your team...</p>;
 
   return (
-    <div className="p-4 sm:p-6 lg:p-10 max-w-full sm:max-w-2xl lg:max-w-4xl mx-auto bg-white shadow-lg rounded-xl">
-      <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-teal-700 mb-4 text-center">
-        Book a Supervisor
-      </h2>
+    <div className="p-6 max-w-3xl mx-auto bg-white shadow-lg rounded-xl">
+      <h2 className="text-2xl font-bold text-teal-700 mb-4">Book a Supervisor</h2>
+      <p className="mb-4"><strong>Team Name:</strong> {team.teamName}</p>
 
-      <p className="mb-4 text-sm sm:text-base lg:text-lg">
-        <strong>Team Name:</strong> {team.teamName}
-      </p>
+      <input
+        type="text"
+        placeholder="Project Title"
+        value={projectTitle}
+        onChange={(e) => setProjectTitle(e.target.value)}
+        className="w-full p-2 border rounded mb-2"
+      />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        {/* Project title */}
-        <input
-          type="text"
-          placeholder="Project Title"
-          value={projectTitle}
-          onChange={(e) => setProjectTitle(e.target.value)}
-          className="w-full p-2 border rounded"
-        />
-
-        {/* Supervisor select */}
-        <select
-          value={selectedSupervisor?.id || ""}
-          onChange={(e) =>
-            setSelectedSupervisor(supervisors.find((s) => s.id === e.target.value) || null)
-          }
-          className="w-full p-2 border rounded"
-        >
-          <option value="">Select a supervisor</option>
-          {supervisors.map((s) => (
-            <option key={s.id} value={s.id}>{s.name}</option>
-          ))}
-        </select>
-      </div>
-
-      {/* Project description */}
       <textarea
         placeholder="Project Description"
         value={projectDescription}
         onChange={(e) => setProjectDescription(e.target.value)}
-        className="w-full p-2 border rounded mb-6 min-h-[120px]"
+        className="w-full p-2 border rounded mb-4"
       />
 
-      {/* Confirm button */}
+      <h3 className="text-lg font-semibold mb-4">Select Supervisor</h3>
+      <select
+        value={selectedSupervisor?.id || ""}
+        onChange={(e) =>
+          setSelectedSupervisor(supervisors.find((s) => s.id === e.target.value) || null)
+        }
+        className="w-full p-2 border rounded mb-4"
+      >
+        <option value="">Select a supervisor</option>
+        {supervisors.map((s) => (
+          <option key={s.id} value={s.id}>{s.name}</option>
+        ))}
+      </select>
+
       <button
         onClick={handleSubmit}
-        className="w-full sm:w-auto bg-teal-600 hover:bg-teal-700 transition text-white px-6 py-2 rounded block mx-auto"
+        className="w-full bg-teal-600 text-white px-4 py-2 rounded"
       >
         Confirm Booking
       </button>

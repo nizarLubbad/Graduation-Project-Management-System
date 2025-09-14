@@ -31,6 +31,7 @@ export default function CreateTeam() {
   const handleConfirm = () => {
     if (!teamName || !user || !user.studentId) return;
 
+    // Create the team
     const newTeam: Team = {
       teamId: user.studentId,
       leaderId: user.studentId,
@@ -38,6 +39,7 @@ export default function CreateTeam() {
       members: [user.studentId, ...selectedMembers],
     };
 
+    // Update students
     const storedUsers: User[] = JSON.parse(localStorage.getItem("users") || "[]");
     const updatedUsers = storedUsers.map(u => {
       if (u.studentId && newTeam.members.includes(u.studentId)) {
@@ -47,76 +49,45 @@ export default function CreateTeam() {
     });
     localStorage.setItem("users", JSON.stringify(updatedUsers));
 
+    // Save the team
     const storedTeams: Team[] = JSON.parse(localStorage.getItem("teams") || "[]");
     localStorage.setItem("teams", JSON.stringify([...storedTeams, newTeam]));
 
-    login({ ...user, status: true, team: { id: newTeam.teamId, name: newTeam.teamName } });
+    // Update current user context
+    login({ ...user, status: true, team: { id: newTeam.teamId, name: newTeam.teamName,members:newTeam.members } });
 
+    // Show alert and navigate to booking supervisor
     Swal.fire({
       icon: "success",
       title: "Team Created!",
       text: `You have created your team: ${newTeam.teamName}`,
       confirmButtonText: "Choose a Supervisor"
     }).then(() => {
-      navigate("/booking-supervisor");
+      navigate("/booking-supervisor"); // Direct the student to choose a supervisor
     });
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-3xl mx-auto bg-white shadow-lg rounded-xl">
-      <h2 className="text-xl sm:text-2xl font-bold text-teal-700 mb-4 text-center">Create Team</h2>
-
-      {/* إدخال اسم الفريق */}
-      <input
-        type="text"
-        placeholder="Team Name"
-        value={teamName}
-        onChange={(e) => setTeamName(e.target.value)}
-        className="w-full p-2 border rounded mb-4 text-sm sm:text-base"
-      />
-
-      {/* الأعضاء المحددين */}
-      <h3 className="text-base sm:text-lg font-semibold mb-2">Selected Members ({selectedMembers.length})</h3>
+    <div className="p-6 max-w-2xl mx-auto bg-white shadow-lg rounded-xl">
+      <h2 className="text-2xl font-bold text-teal-700 mb-4">Create Team</h2>
+      <input type="text" placeholder="Team Name" value={teamName} onChange={(e) => setTeamName(e.target.value)} className="w-full p-2 border rounded mb-4" />
+      <h3 className="text-lg font-semibold mb-2">Select Team Members ({selectedMembers.length})</h3>
       <div className="flex flex-wrap gap-2 mb-4">
         {selectedMembers.map((id) => {
           const student = students.find((s) => s.studentId === id);
           if (!student) return null;
-          return (
-            <span
-              key={id}
-              className="px-2 py-1 bg-teal-200 text-teal-800 rounded-full text-xs sm:text-sm"
-            >
-              {student.name}
-            </span>
-          );
+          return <span key={id} className="px-2 py-1 bg-teal-200 text-teal-800 rounded-full text-sm">{student.name}</span>;
         })}
       </div>
-
-      {/* قائمة الطلاب */}
-      <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="mb-4 space-y-2">
         {students.map((s) => (
-          <label
-            key={s.id}
-            className="flex items-center space-x-2 p-2 border rounded hover:bg-gray-50 cursor-pointer"
-          >
-            <input
-              type="checkbox"
-              checked={selectedMembers.includes(s.studentId!)}
-              onChange={() => s.studentId && toggleMember(s.studentId)}
-              className="h-4 w-4"
-            />
-            <span className="text-sm sm:text-base">{s.name} ({s.studentId})</span>
+          <label key={s.id} className="flex items-center space-x-2">
+            <input type="checkbox" checked={selectedMembers.includes(s.studentId!)} onChange={() => s.studentId && toggleMember(s.studentId)} />
+            <span>{s.name} ({s.studentId})</span>
           </label>
         ))}
       </div>
-
-      {/* زر التأكيد */}
-      <button
-        onClick={handleConfirm}
-        className="bg-teal-600 hover:bg-teal-700 transition text-white px-4 py-2 rounded w-full text-sm sm:text-base"
-      >
-        Confirm
-      </button>
+      <button onClick={handleConfirm} className="bg-teal-600 text-white px-4 py-2 rounded w-full">Confirm</button>
     </div>
   );
 }
