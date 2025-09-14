@@ -32,8 +32,9 @@ export default function SupBoard() {
     setProjects(myProjects);
   }, []);
 
-  if (projects.length === 0) return <p className="p-6 text-gray-600">لا توجد مشاريع تحت إشرافك حالياً.</p>;
-
+  if (projects.length === 0) 
+    return <p className="p-6 text-gray-600">You currently have no projects under your supervision.</p>;
+  
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">Supervised Projects</h1>
