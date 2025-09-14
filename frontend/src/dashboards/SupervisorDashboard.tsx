@@ -1,11 +1,11 @@
-import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 
 export default function SupervisorDashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { teamId } = useParams<{ teamId: string }>();
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => navigate("/");
@@ -16,7 +16,7 @@ export default function SupervisorDashboard() {
     { path: "/dashboard/supervisor/supervised-projects", label: "📁 Supervised Projects" },
     { path: "/dashboard/supervisor/reports", label: "📑 Reports" },
     { path: "/dashboard/supervisor/feedback", label: "💬 Feedback" },
-    { path: `/dashboard/supervisor/kanban/${teamId || "default"}/Kanban`, label: "📊 Kanban" },
+   
   ];
 
   return (
