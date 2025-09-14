@@ -4,24 +4,28 @@ import StudentDashboard from "./dashboards/StudentDashboard";
 import SupervisorDashboard from "./dashboards/SupervisorDashboard";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import ProjectHistory from "./Component/ProjectHistory";
-import Supboard from "./Component/SupBoard";
 import StudentRouter from "./booking/StudentRouter";
 import CreateTeam from "./booking/CreateTeam";
 import BookingSupervisor from "./booking/BookingSupervisor";
+import SupervisorProjectKanban from "./Component/SupervisorProjectKanban"; 
+import SupervisorFeedback from "./Component/SupervisorFeedback";
+import StudentFeedback from "./Component/StudentFeedback"
+import SupervisorProjectFiles from "./Component/SupervisorProjectFiles";
+import StudentProjectFiles from "./Component/StudentProjectFiles";
 import StudentKanbanWrapper from "./Component/StudentKanbanWrapper";
-import SupervisorProjectKanban from "./Component/SupervisorProjectKanban";
-
+import SupBoard from "./Component/SupBoard";
 
 function App() {
 
-
   return (
     <Routes>
-      {/* Auth */}
       <Route path="/" element={<AuthPage />} />
 
-      {/* Student Routing */}
-      <Route path="/student-router" element={<StudentRouter>Default Content</StudentRouter>} />
+      {/* توجيه الطالب حسب الحالة */}
+      <Route
+        path="/student-router"
+        element={<StudentRouter>Default Content</StudentRouter>}
+      />
       <Route
         path="/create-team"
         element={
@@ -39,7 +43,7 @@ function App() {
         }
       />
 
-      {/* Student Dashboard */}
+      {/* Dashboard الطلاب */}
       <Route
         path="/dashboard/student"
         element={
@@ -48,14 +52,15 @@ function App() {
           </ProtectedRoute>
         }
       >
-        <Route path="KanbanBoard" element={<StudentKanbanWrapper />} />
-        <Route path="projects" element={<h2 className="text-2xl font-semibold">📁 Projects Page</h2>} />
+  <Route path="KanbanBoard" element={<StudentKanbanWrapper />} />
+
+        <Route path="projects" element={<StudentProjectFiles/>} />
         <Route path="reports" element={<h2 className="text-2xl font-semibold">📑 Reports Page</h2>} />
-        <Route path="feedback" element={<h2 className="text-2xl font-semibold">Feedback Page</h2>} />
+        <Route path="feedback" element={<StudentFeedback />} />
         <Route path="projectHistory" element={<ProjectHistory />} />
       </Route>
 
-      {/* Supervisor Dashboard */}
+      {/* Dashboard المشرفين */}
       <Route
         path="/dashboard/supervisor"
         element={
@@ -64,12 +69,13 @@ function App() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<Supboard />} />
+        <Route index element={<SupBoard/>} />
         <Route path="reviews" element={<h2 className="text-2xl font-semibold">📝 Reviews Page</h2>} />
-        <Route path="supervised-projects" element={<h2 className="text-2xl font-semibold">📁 Supervised Projects Page</h2>} />
-        <Route path="supervised-projects/:teamId/Kanban" element={<SupervisorProjectKanban />} />
+        <Route path="supervised-projects" element={<SupervisorProjectFiles/>} />
+        <Route path="kanban/:teamId/Kanban" element={<SupervisorProjectKanban />} />
         <Route path="reports" element={<h2 className="text-2xl font-semibold">📑 Reports Page</h2>} />
-        <Route path="feedback" element={<h2 className="text-2xl font-semibold">💬 Feedback Page</h2>} />
+        <Route path="feedback" element={<SupervisorFeedback />} />
+
       </Route>
     </Routes>
   );
