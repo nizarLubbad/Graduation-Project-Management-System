@@ -1,18 +1,28 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 
 export default function SupervisorDashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+  const { teamId } = useParams<{ teamId: string }>();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => navigate("/");
+
+  const menuItems = [
+    { path: "/dashboard/supervisor", label: "📊 Dashboard", exact: true },
+    { path: "/dashboard/supervisor/reviews", label: "📝 Reviews" },
+    { path: "/dashboard/supervisor/supervised-projects", label: "📁 Supervised Projects" },
+    { path: "/dashboard/supervisor/reports", label: "📑 Reports" },
+    { path: "/dashboard/supervisor/feedback", label: "💬 Feedback" },
+    { path: `/dashboard/supervisor/kanban/${teamId || "default"}/Kanban`, label: "📊 Kanban" },
+  ];
 
   return (
     <div className="h-screen flex flex-col bg-gray-100">
       {/* Header */}
-      <header className="h-16 bg-gray-200 shadow flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30">
+      <header className="h-16 bg-gray-200 shadow flex items-center justify-between px-4 sm:px-6 relative z-30">
         <div>
           <h1 className="text-base sm:text-lg font-semibold text-gray-800">
             Graduation Project Management System
@@ -23,74 +33,81 @@ export default function SupervisorDashboard() {
         </div>
 
         <div className="flex items-center gap-3">
+          {/* Hamburger for small/medium screens */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="lg:hidden p-2 bg-gray-300 rounded relative z-30"
+          >
+            <span className="block w-5 h-0.5 bg-black mb-1"></span>
+            <span className="block w-5 h-0.5 bg-black mb-1"></span>
+            <span className="block w-5 h-0.5 bg-black"></span>
+          </button>
+
+          {/* Role badge */}
           <span className="hidden sm:inline bg-gray-300 text-gray-800 px-2 py-0.5 rounded text-sm">
             Supervisor
           </span>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 text-gray-700 hover:bg-gray-300 rounded"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            ☰
-          </button>
-
-          {/* Logout for larger screens */}
+          {/* Sign Out only on large screens */}
           <button
             onClick={handleLogout}
-            className="hidden sm:inline bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-300 hover:text-black text-sm"
+            className="hidden lg:inline bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-300 hover:text-black text-sm"
           >
             Sign Out
           </button>
         </div>
+
+        {/* Dropdown menu for mobile/tablet */}
+        {menuOpen && (
+          <div className="absolute top-full left-0 right-0 bg-white shadow-md border-b border-gray-300 flex flex-col lg:hidden z-20">
+            {menuItems.map(item => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                end={item.exact}
+                className={({ isActive }) =>
+                  `block px-4 py-2 border-b last:border-b-0 ${
+                    isActive ? "bg-black text-white" : "text-gray-700 hover:bg-gray-200"
+                  }`
+                }
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+            {/* Sign Out only visible in dropdown for small/medium screens */}
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 text-left  text-black hover:bg-gray-700   hover:text-white  lg:hidden"
+            >
+              Sign Out
+            </button>
+          </div>
+        )}
       </header>
 
-      <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
-        <aside
-          className={`fixed lg:static top-16 left-0 h-full lg:h-auto w-64 bg-white shadow-md p-4 transform transition-transform duration-300 ease-in-out z-20
-          ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
-        >
+      <div className="flex flex-1">
+        {/* Sidebar only for large screens */}
+        <aside className="hidden lg:block top-16 h-full w-64 bg-white shadow-md p-4">
           <nav className="space-y-2">
-            {[
-              { path: "/dashboard/supervisor", label: "📊 Dashboard" },
-              { path: "/dashboard/supervisor/reviews", label: "📝 Reviews" },
-              { path: "/dashboard/supervisor/supervised-projects", label: "📁 Supervised Projects" },
-              { path: "/dashboard/supervisor/reports", label: "📑 Reports" },
-              { path: "/dashboard/supervisor/feedback", label: "💬 Feedback" },
-            ].map((link) => (
+            {menuItems.map(item => (
               <NavLink
-                key={link.path}
-                to={link.path}
+                key={item.path}
+                to={item.path}
+                end={item.exact}
                 className={({ isActive }) =>
                   `block p-2 rounded font-medium transition ${
                     isActive ? "bg-black text-white" : "text-gray-700 hover:bg-gray-200 hover:text-black"
                   }`
                 }
               >
-                {link.label}
+                {item.label}
               </NavLink>
             ))}
-
-            {/* Logout for mobile */}
-            <button
-              onClick={handleLogout}
-              className="block w-full text-left px-2 py-1 mt-4 bg-gray-700 text-white rounded hover:bg-gray-300 hover:text-black lg:hidden"
-            >
-              Sign Out
-            </button>
           </nav>
         </aside>
 
-        {/* Overlay for mobile */}
-        {isOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-30 z-10 lg:hidden"
-            onClick={() => setIsOpen(false)}
-          />
-        )}
-
-        {/* Content */}
+        {/* Main content */}
         <main className="flex-1 p-4 sm:p-6 overflow-y-auto bg-white mt-16 lg:mt-0">
           <Outlet />
         </main>
