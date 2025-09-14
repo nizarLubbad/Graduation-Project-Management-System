@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-
+﻿using GPMS.Models;
+using GPMS.Services;
+using Microsoft.EntityFrameworkCore;
 namespace GPMS.Models
 {
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+       
 
         public DbSet<Student> Students { get; set; }
         public DbSet<KanbanTask> Tasks { get; set; }
@@ -14,141 +16,132 @@ namespace GPMS.Models
         public DbSet<Team> Teams { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Supervisor> Supervisors { get; set; }
-        public DbSet<Todo> Todos { get; set; }
-        public DbSet<Doing> Doings { get; set; }
-        public DbSet<Done> Dones { get; set; }
-
+        public DbSet<Reply> Replys { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //add primary key for kan task
-            //modelBuilder.Entity<KanbanTask>()
-            //    .HasKey(t => t.Id);
-            // MAKE ID NOT AUTO INCREMENT
-            //modelBuilder.Entity<KanbanTask>()
-            //    .Property(t => t.Id)
-            //    .ValueGeneratedNever();
-            ////////////////////////////////////////////////////////////////////////////
-            // add primary key for student
-            modelBuilder.Entity<Student>()
-                .HasKey(s => s.StudentId);
-            // add primary key for supervisor
-            modelBuilder.Entity<Supervisor>()
-                .HasKey(s => s.SupervisorId);
-            modelBuilder.Entity<Student>()
-                .Property(s => s.StudentId)
-                .ValueGeneratedNever();
+            // Primary keys
+            modelBuilder.Entity<KanbanTask>().HasKey(t => t.TaskId);
+            modelBuilder.Entity<Team>().HasKey(t => t.TeamId);
+            modelBuilder.Entity<Student>().HasKey(s => s.StudentId);
+            modelBuilder.Entity<Supervisor>().HasKey(s => s.SupervisorId);
 
-            modelBuilder.Entity<Student>()
-                .HasIndex(s => s.Email)
-                .IsUnique();
-            //configure cascade delete for student tasks when a student is deleted
-            modelBuilder.Entity<Student>()
-                .HasMany(s => s.StudentTask)
-                .WithOne(st => st.Student)
-                .HasForeignKey(st => st.StudentId)
-                .OnDelete(DeleteBehavior.Cascade);
-            //configure cascade delete for student tasks when a task is deleted
-            modelBuilder.Entity<KanbanTask>()
-                .HasMany(t => t.StudentTasks)
-                .WithOne(st => st.Task)
-                .HasForeignKey(st => st.TaskId)
-                .OnDelete(DeleteBehavior.Cascade);
-            //configure cascade delete for links when a task is deleted
-            modelBuilder.Entity<KanbanTask>()
-                .HasMany(t => t.Links)
-                .WithOne(l => l.KanbanTask)
-                .HasForeignKey(l => l.TaskId)
-                .OnDelete(DeleteBehavior.Cascade);
-            //configure cascade delete for feedbacks when a task is deleted
-            modelBuilder.Entity<KanbanTask>()
-                .HasMany(t => t.Feedbacks)
-                .WithOne(f => f.KanbanTask)
-                .HasForeignKey(f => f.TaskId)
-                .OnDelete(DeleteBehavior.Cascade);
-            //make email unique for supervisor
-            modelBuilder.Entity<Supervisor>()
-                .HasIndex(s => s.Email)
-                .IsUnique();
-            //make email unique for student
-            modelBuilder.Entity<Student>()
-                .HasIndex(s => s.Email)
-                .IsUnique();
-            //one-one relationship between todo and team
+            // 
+          
+            //
+            modelBuilder.Entity<Project>()
+                .HasKey(p => p.ProjectTitle);
+
+            modelBuilder.Entity<Project>()
+                .Property(p => p.ProjectId)
+                .ValueGeneratedOnAdd();
+
+            // make TeamName unique
             modelBuilder.Entity<Team>()
-                .HasOne(t => t.Todo)
-                .WithOne(te => te.Team)
-                .HasForeignKey<Team>(te => te.TeamId)
-                .OnDelete(DeleteBehavior.Cascade);
-            //one-one relationship between Doing and team
+                .HasIndex(t => t.TeamName)
+                .IsUnique();
+
+            // 1. Team -> KanbanTasks (One-to-Many)
             modelBuilder.Entity<Team>()
-                .HasOne(t => t.Doing)
-                .WithOne(te => te.Team)
-                .HasForeignKey<Team>(te => te.TeamId)
+                .HasMany(t => t.KanbanTasks)
+                .WithOne(t => t.Team)
+                .HasForeignKey(t => t.TeamId)
                 .OnDelete(DeleteBehavior.Cascade);
-            //one-one relationship between Done and team
+
+            // 2. Team -> Students (One-to-Many) - العلاقة الجديدة
             modelBuilder.Entity<Team>()
-                .HasOne(t => t.Done)
-                .WithOne(te => te.Team)
-                .HasForeignKey<Team>(te => te.TeamId)
-                .OnDelete(DeleteBehavior.Cascade);
-            // One-to-Many: Supervisor -> Teams
+                .HasMany(t => t.Students)
+                .WithOne(s => s.Team)
+                .HasForeignKey(s => s.TeamId)
+                .OnDelete(DeleteBehavior.SetNull); //
+
+            // 3. Team -> Project (One-to-One)
+            modelBuilder.Entity<Team>()
+                .HasOne(t => t.Project)
+                .WithOne(p => p.Team)
+                .HasForeignKey<Project>(p => p.TeamId)
+                .OnDelete(DeleteBehavior.Cascade); // 
+
+            // 4. Supervisor -> Teams (One-to-Many)
             modelBuilder.Entity<Supervisor>()
                 .HasMany(s => s.Teams)
                 .WithOne(t => t.Supervisor)
-                .HasForeignKey(t => t.SupervisorId);
-            //one to one relationship between project and team
-            modelBuilder.Entity<Project>()
-                .HasOne(p => p.Team)
-                .WithOne(t => t.Project)
-                .HasForeignKey<Team>(t => t.ProjectTitle)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(t => t.SupervisorId)
+                .OnDelete(DeleteBehavior.SetNull);
+            // 5. Supervisor -> Feedback (One-to-Many)
+            modelBuilder.Entity<Supervisor>()
+                .HasMany(s => s.Feedbacks)
+                .WithOne(t => t.Supervisor)
+                .HasForeignKey(t => t.SupervisorId)
+                .OnDelete(DeleteBehavior.SetNull);
 
 
 
-
-            //one to one relationship between student and team
+            // Student configuration
             modelBuilder.Entity<Student>()
-                .HasOne(s => s.Team)
-                .WithOne(t => t.Student)
-                .HasForeignKey<Team>(t => t.StudentId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .Property(s => s.StudentId)
+                .ValueGeneratedNever();
+            modelBuilder.Entity<Student>()
+                .HasIndex(s => s.Email)
+                .IsUnique();
 
-            //modelBuilder.Entity<Student>()
-            //    .Property(s => s.Password)
-            //    .HasColumnType("varchar(100)");
+            // Supervisor configuration
+            modelBuilder.Entity<Supervisor>()
+                .HasIndex(s => s.Email)
+                .IsUnique();
 
+            // StudentTask many-to-many relationship
             modelBuilder.Entity<StudentTask>()
-                .HasKey(st => new { st.StudentId, st.TaskId }); // add composite primary key
+                .HasKey(st => new { st.StudentId, st.TaskId });
 
             modelBuilder.Entity<StudentTask>()
                 .HasOne(st => st.Student)
                 .WithMany(s => s.StudentTask)
                 .HasForeignKey(st => st.StudentId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<StudentTask>()
                 .HasOne(st => st.Task)
                 .WithMany(t => t.StudentTasks)
                 .HasForeignKey(st => st.TaskId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Link>()
-                .HasOne(l => l.KanbanTask)
-                .WithMany(t => t.Links)
+            // Cascade delete configurations 
+            modelBuilder.Entity<KanbanTask>()
+                .HasMany(t => t.Links)
+                .WithOne(l => l.KanbanTask)
                 .HasForeignKey(l => l.TaskId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Feedback>()
-                .HasOne(f => f.KanbanTask)
-                .WithMany(t => t.Feedbacks)
+            modelBuilder.Entity<KanbanTask>()
+                .HasMany(t => t.Feedbacks)
+                .WithOne(f => f.KanbanTask)
                 .HasForeignKey(f => f.TaskId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // one - many between Reply and Supervisor
+            modelBuilder.Entity<Supervisor>()
+                .HasMany(s => s.Replys)
+                .WithOne(r => r.Supervisor)
+                .HasForeignKey(r => r.SupervisorId)
                 .OnDelete(DeleteBehavior.Cascade);
-            //make project id auto increment
-            modelBuilder.Entity<Project>()
-                .Property(p => p.ProjectId)
-                .ValueGeneratedOnAdd();
+            // one - many between Reply and Feedback
+            modelBuilder.Entity<Feedback>()
+                .HasMany(f => f.Replys)
+                .WithOne(r => r.Feedback)
+                .HasForeignKey(r => r.FeedbackId)
+                .OnDelete(DeleteBehavior.Cascade);
+            //one - many between Reply and
+            modelBuilder.Entity<Student>()
+             .HasMany(f => f.Replys)
+             .WithOne(r => r.Student)
+             .HasForeignKey(r => r.StudentId)
+             .OnDelete(DeleteBehavior.Cascade);
 
         }
+
+
+
+
     }
 }
