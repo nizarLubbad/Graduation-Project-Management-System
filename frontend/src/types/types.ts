@@ -17,6 +17,8 @@ export interface Supervisor extends User {
   department?: never;
   status?: never;
   team?: never;
+  maxTeams?: number;
+  currentTeams?: number;
 }
 
 export interface Team {
@@ -86,6 +88,13 @@ export interface Task {
   createdBy: string;
   status: string;
   assignees: string[];
+  files?: { id: string; fileName: string; fileUrl: string }[]; // إذا بدك تحتفظ بملفات لكل مهمة
+
+  // خصائص مؤقتة للرفع
+  showUpload?: boolean;
+  newFileName?: string;
+  newFileUrl?: string;
+
 }
 
 export interface Column {
