@@ -170,3 +170,15 @@ C:\Users\User\Desktop\Graduation-Project-Management-System\backend\GPMS\bin\Debu
 C:\Users\User\Desktop\Graduation-Project-Management-System\backend\GPMS\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\User\Desktop\Graduation-Project-Management-System\backend\GPMS\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\User\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.csproj.AssemblyReference.cache
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.AssemblyInfoInputs.cache
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.AssemblyInfo.cs
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.csproj.CoreCompileInputs.cache
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.sourcelink.json
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.dll
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\refint\GPMS.dll
+C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.pdb
