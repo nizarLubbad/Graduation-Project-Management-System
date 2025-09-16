@@ -20,13 +20,13 @@ namespace GPMS.Models
 
         // Optional sender: could be a Student
         [ForeignKey("Student")]
-        public long StudentId { get; set; }
-        public Student Student { get; set; }
+        public long? StudentId { get; set; }
+        public Student? Student { get; set; }
 
         // Optional sender: could be a Supervisor
         [ForeignKey("Supervisor")]
-        public long SupervisorId { get; set; }
-        public Supervisor Supervisor { get; set; }
+        public long? SupervisorId { get; set; }
+        public Supervisor? Supervisor { get; set; }
     }
 }
 

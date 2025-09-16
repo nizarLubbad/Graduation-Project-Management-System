@@ -1,6 +1,7 @@
-﻿using GPMS.Models;
+﻿using GPMS.DTOS.Student;
 using GPMS.Interfaces;
-
+using GPMS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Services
 {
@@ -13,44 +14,42 @@ namespace GPMS.Services
             _studentRepository = studentRepository;
         }
 
+        //get students depending on their status (status =false)
+        
+
+        //basic crud operations
         public async Task<IEnumerable<Student>> GetAllAsync()
         {
             return await _studentRepository.GetAllAsync();
         }
 
-        public async Task<Student?> GetByIdAsync(long id)
+        public async Task<Student?> GetByIdAsync(object id)
         {
-            return await _studentRepository.GetByIdAsync(id);
+            if (id is long studentId)
+            {
+                return await _studentRepository.GetByIdAsync(studentId);
+            }
+            return null;
         }
 
-        public async Task<Student> CreateAsync(Student student)
+        public async Task<Student> AddAsync(Student entity)
         {
-            return await _studentRepository.AddAsync(student);
+            return await _studentRepository.AddAsync(entity);
         }
 
-        public async Task<Student> UpdateAsync(Student student)
+        public async Task<Student> UpdateAsync(Student entity)
         {
-            return await _studentRepository.UpdateAsync(student);
+            return await _studentRepository.UpdateAsync(entity);
         }
 
-        public async Task<bool> DeleteAsync(long id)
+        public async Task<bool> DeleteAsync(object id)
         {
-            return await _studentRepository.DeleteAsync(id);
+            if (id is long studentId)
+            {
+                return await _studentRepository.DeleteAsync(studentId);
+            }
+            return false;
         }
 
-        public Task<Student?> GetByIdAsync(object id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Student> AddAsync(Student entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteAsync(object id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

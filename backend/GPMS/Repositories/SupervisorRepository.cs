@@ -1,5 +1,6 @@
 ﻿using GPMS.Interfaces;
 using GPMS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Repositories
 {
@@ -11,6 +12,9 @@ namespace GPMS.Repositories
             _contextR = context;
         }
 
-
+        public async Task<Supervisor?> GetByEmailAsync(string email)
+        {
+            return await _context.Supervisors.FirstOrDefaultAsync(s => s.Email == email);
+        }
     }
 }

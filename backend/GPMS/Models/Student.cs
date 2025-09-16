@@ -13,7 +13,7 @@ namespace GPMS.Models
         [Column(TypeName = "varchar(100)")]
         public required string Name { get; set; }
 
-        public bool status { get; set; } = false;
+        public bool Status { get; set; } = false;
 
         [Required, Column(TypeName = "varchar(100)")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]

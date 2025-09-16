@@ -11,6 +11,17 @@ namespace GPMS.Repositories
                _contextR = context;
         }
 
+        public async Task<string?> GetByEmailAsync(string email)
+        {
+            var studentName = await _contextR.Students
+               .Where(s => s.Email == email)
+               .Select(s => s.Name)
+               .FirstOrDefaultAsync();
+
+            return studentName;
+
+        }
+
         public async  Task<string?> GetStudentNameAsync(long studentId)
         {
 
