@@ -3,6 +3,9 @@
     public class CreateLinkDto
     {
         public string Url { get; set; } = null!;
-        public int TaskId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public long TeamId { get; set; }
     }
 }
+

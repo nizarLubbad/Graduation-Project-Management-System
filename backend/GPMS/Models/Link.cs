@@ -18,7 +18,7 @@ namespace GPMS.Models
         [Column(TypeName = "text")]
         public string? Description { get; set; }
 
-        public int TeamId { get; set; }
+        public long TeamId { get; set; }
         public Team Team { get; set; } = null!;
         //[ForeignKey("KanbanTask")]
         //public int TaskId { get; set; }
