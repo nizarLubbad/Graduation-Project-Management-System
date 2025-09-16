@@ -5908,11 +5908,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\X1 Zano\\Desktop\\backend\\GPMS\\GPMS.csproj",
+      "projectUniqueName": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\GPMS.csproj",
       "projectName": "GPMS",
-      "projectPath": "C:\\Users\\X1 Zano\\Desktop\\backend\\GPMS\\GPMS.csproj",
+      "projectPath": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\GPMS.csproj",
       "packagesPath": "C:\\Users\\X1 Zano\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\X1 Zano\\Desktop\\backend\\GPMS\\obj\\",
+      "outputPath": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
