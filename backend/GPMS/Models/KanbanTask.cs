@@ -10,9 +10,7 @@ namespace GPMS.Models
         [Key]
         public int TaskId { get; set; }
 
-        [Required]
-        [Column(TypeName = "varchar(100)")]
-
+        [Required, MaxLength(100)]
         public required string Title { get; set; }
         [Column(TypeName = "varchar(100)")]
         public string? Description { get; set; }

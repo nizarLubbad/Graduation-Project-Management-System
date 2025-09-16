@@ -15,12 +15,14 @@ namespace GPMS.Models
         [Required]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
+        [Required, Column(TypeName = "varchar(100)")]
+        public string PasswordHash { get; set; }
 
         [Column(TypeName = "VARCHAR(15)")]
         [Required]
         public string Department { get; set; }
         //public string SubmitStudent { get; set; }
-
+        public int TeamCount { get; set; } 
         // One-to-Many with Teams
         public ICollection<Team> Teams { get; set; } = new List<Team>();
         public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
