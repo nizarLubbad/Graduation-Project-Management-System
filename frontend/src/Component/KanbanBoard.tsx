@@ -160,7 +160,7 @@ export function KanbanBoard({ teamId }: KanbanProps) {
     colId: string,
     taskAssignees: string[] = []
   ) => {
-    if (isSupervisor) return null; // 🔒 المشرف ما بيوزع مهام
+    if (isSupervisor) return null; // المشرف ما بيوزع مهام
     return (
       <div className="mt-2">
         <label className="font-semibold mb-1 block">Assign Members:</label>

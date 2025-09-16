@@ -26,7 +26,7 @@ export default function StudentDashboard() {
   const menuItems = [
     { path: "KanbanBoard", label: "📊 Dashboard" },
     { path: "projects", label: "📁 Projects" },
-    { path: "reports", label: "📑 Reports" },
+
     { path: "feedback", label: "💬 Feedback" },
     { path: "projectHistory", label: "📜 Project History" },
   ];

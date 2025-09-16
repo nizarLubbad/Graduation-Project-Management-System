@@ -12,9 +12,9 @@ export default function SupervisorDashboard() {
 
   const menuItems = [
     { path: "/dashboard/supervisor", label: "📊 Dashboard", exact: true },
-    { path: "/dashboard/supervisor/reviews", label: "📝 Reviews" },
+   
     { path: "/dashboard/supervisor/supervised-projects", label: "📁 Supervised Projects" },
-    { path: "/dashboard/supervisor/reports", label: "📑 Reports" },
+   
     { path: "/dashboard/supervisor/feedback", label: "💬 Feedback" },
    
   ];
