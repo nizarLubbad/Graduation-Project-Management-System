@@ -26,7 +26,7 @@ namespace GPMS.Services
             return await _linkRepository.AddAsync(link);
         }
 
-        public async Task<IEnumerable<Link>> GetLinksByTeamIdAsync(int teamId)
+        public async Task<IEnumerable<Link>> GetLinksByTeamIdAsync(long teamId)
         {
             var allLinks = await _linkRepository.GetAllAsync();
             return allLinks.Where(l => l.TeamId == teamId);

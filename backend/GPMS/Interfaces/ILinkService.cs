@@ -6,7 +6,7 @@ namespace GPMS.Interfaces
     public interface ILinkService
     {
         Task<Link> AddLinkAsync(CreateLinkDto dto);
-        Task<IEnumerable<Link>> GetLinksByTeamIdAsync(int teamId);
+        Task<IEnumerable<Link>> GetLinksByTeamIdAsync(long teamId);
         Task<Link?> UpdateLinkAsync(int id, LinkDto dto);
         Task<bool> DeleteLinkAsync(int id);
     }
