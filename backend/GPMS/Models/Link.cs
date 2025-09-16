@@ -6,22 +6,26 @@ namespace GPMS.Models
     public class Link
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }   
 
         [Required]
         [Column(TypeName = "varchar(500)")]
         public required string Url { get; set; }
+
         [Required]
         [Column(TypeName = "varchar(100)")]
-        public string Title { get; set; } = string.Empty;
+        public required string Title { get; set; }
 
-        [Column(TypeName = "text")]
-        public string? Description { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
 
+        
+        [ForeignKey("Student")]
+        public long StudentId { get; set; }
+        public Student Student { get; set; } = null!;
+
+      
+        [ForeignKey("Team")]
         public long TeamId { get; set; }
         public Team Team { get; set; } = null!;
-        //[ForeignKey("KanbanTask")]
-        //public int TaskId { get; set; }
-        //public required KanbanTask KanbanTask { get; set; }
     }
 }

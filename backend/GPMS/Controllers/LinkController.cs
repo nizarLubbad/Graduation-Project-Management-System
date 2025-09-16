@@ -15,67 +15,65 @@ namespace GPMS.Controllers
             _linkService = linkService;
         }
 
-        // GET: api/Link/team/{teamId}
+        // GET: api/Link/team/5
         [HttpGet("team/{teamId}")]
-        public async Task<ActionResult<IEnumerable<LinkDto>>> GetLinksByTeamId(long teamId)
+        public async Task<IActionResult> GetByTeam(long teamId)
         {
-            var links = await _linkService.GetLinksByTeamIdAsync(teamId);
+            var links = await _linkService.GetByTeamIdAsync(teamId);
 
-            var linkDtos = links.Select(l => new LinkDto
+            var result = links.Select(l => new LinkDto
             {
                 Id = l.Id,
                 Url = l.Url,
                 Title = l.Title,
-                Description = l.Description,
+                Date = l.Date,
+                StudentId = l.StudentId,
+                StudentName = l.Student.Name, // نفترض عندك Student.Name
                 TeamId = l.TeamId
             });
 
-            return Ok(linkDtos);
+            return Ok(result);
         }
 
-        // POST: api/Link
-        [HttpPost]
-        public async Task<ActionResult<LinkDto>> AddLink([FromBody] CreateLinkDto dto)
+        // GET: api/Link/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(long id)
         {
-            var link = await _linkService.AddLinkAsync(dto);
+            var link = await _linkService.GetByIdAsync(id);
+            if (link == null) return NotFound();
 
-            var linkDto = new LinkDto
+            var result = new LinkDto
             {
                 Id = link.Id,
                 Url = link.Url,
                 Title = link.Title,
-                Description = link.Description,
+                Date = link.Date,
+                StudentId = link.StudentId,
+                StudentName = link.Student.Name,
                 TeamId = link.TeamId
             };
 
-            return CreatedAtAction(nameof(GetLinksByTeamId), new { teamId = link.TeamId }, linkDto);
+            return Ok(result);
         }
 
-        // PUT: api/Link/{id}
-        [HttpPut("{id}")]
-        public async Task<ActionResult<LinkDto>> UpdateLink(int id, [FromBody] LinkDto dto)
+        // POST: api/Link
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateLinkDto dto)
         {
-            var updatedLink = await _linkService.UpdateLinkAsync(id, dto);
-            if (updatedLink == null) return NotFound();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var linkDto = new LinkDto
-            {
-                Id = updatedLink.Id,
-                Url = updatedLink.Url,
-                Title = updatedLink.Title,
-                Description = updatedLink.Description,
-                TeamId = updatedLink.TeamId
-            };
+            var link = await _linkService.AddLinkAsync(dto);
 
-            return Ok(linkDto);
+            return CreatedAtAction(nameof(GetById), new { id = link.Id }, link);
         }
 
-        // DELETE: api/Link/{id}
+        // DELETE: api/Link/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteLink(int id)
+        public async Task<IActionResult> Delete(long id)
         {
-            var deleted = await _linkService.DeleteLinkAsync(id);
+            var deleted = await _linkService.DeleteAsync(id);
             if (!deleted) return NotFound();
+
             return NoContent();
         }
     }

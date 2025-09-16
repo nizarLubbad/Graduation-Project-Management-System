@@ -2,11 +2,14 @@
 {
     public class LinkDto
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Url { get; set; } = null!;
-        public long TeamId { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string Title { get; set; } = null!;
+        public DateTime Date { get; set; }
 
+        public long StudentId { get; set; }
+        public string StudentName { get; set; } = null!;
+
+        public long TeamId { get; set; }
     }
 }

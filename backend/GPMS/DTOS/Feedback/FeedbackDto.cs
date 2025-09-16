@@ -2,9 +2,10 @@
 {
     public class FeedbackDto
     {
-        public int Id { get; set; }
+        public long Id { get; set; }   
         public string Content { get; set; } = null!;
         public DateTime Date { get; set; }
-        //public int TaskId { get; set; }
+        public long TeamId { get; set; }
+        public long SupervisorId { get; set; }
     }
 }

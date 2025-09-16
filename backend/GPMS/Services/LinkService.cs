@@ -1,6 +1,6 @@
-﻿using GPMS.DTOS.Link;
+﻿using GPMS.Models;
 using GPMS.Interfaces;
-using GPMS.Models;
+using GPMS.DTOS.Link;
 
 namespace GPMS.Services
 {
@@ -19,33 +19,25 @@ namespace GPMS.Services
             {
                 Url = dto.Url,
                 Title = dto.Title,
-                Description = dto.Description,
-                TeamId = dto.TeamId
+                TeamId = dto.TeamId,
+                StudentId = dto.StudentId,
+                Date = DateTime.Now
             };
 
             return await _linkRepository.AddAsync(link);
         }
 
-        public async Task<IEnumerable<Link>> GetLinksByTeamIdAsync(long teamId)
+        public async Task<IEnumerable<Link>> GetByTeamIdAsync(long teamId)
         {
-            var allLinks = await _linkRepository.GetAllAsync();
-            return allLinks.Where(l => l.TeamId == teamId);
+            return await _linkRepository.GetByTeamIdAsync(teamId);
         }
 
-        public async Task<Link?> UpdateLinkAsync(int id, LinkDto dto)
+        public async Task<Link?> GetByIdAsync(long id)
         {
-            var existingLink = await _linkRepository.GetByIdAsync(id);
-            if (existingLink == null) return null;
-
-            existingLink.Url = dto.Url;
-            existingLink.Title = dto.Title;
-            existingLink.Description = dto.Description;
-            existingLink.TeamId = dto.TeamId;
-
-            return await _linkRepository.UpdateAsync(existingLink);
+            return await _linkRepository.GetByIdAsync(id);
         }
 
-        public async Task<bool> DeleteLinkAsync(int id)
+        public async Task<bool> DeleteAsync(long id)
         {
             return await _linkRepository.DeleteAsync(id);
         }
