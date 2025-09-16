@@ -3,7 +3,12 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
 import Swal from "sweetalert2";
 import { Task, Column, User } from "../types/types";
 import { useAuth } from "../context/AuthContext";
@@ -26,14 +31,20 @@ export function KanbanBoard({ teamId }: KanbanProps) {
   const [newTask, setNewTask] = useState<{ [key: string]: Partial<Task> }>({});
   const [showForm, setShowForm] = useState<{ [key: string]: boolean }>({});
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-  const [teamMembersData, setTeamMembersData] = useState<{ id: string; name: string }[]>([]);
+  const [teamMembersData, setTeamMembersData] = useState<
+    { id: string; name: string }[]
+  >([]);
+
+  const isSupervisor = user?.role === "supervisor"; // 🔑 تحديد إذا كان مشرف
 
   // Fetch team members
   useEffect(() => {
     if (!user?.team?.members) return;
-    const storedUsers: User[] = JSON.parse(localStorage.getItem("users") || "[]");
-    const membersData = user.team.members.map(id => {
-      const member = storedUsers.find(u => u.studentId === id || u.id === id);
+    const storedUsers: User[] = JSON.parse(
+      localStorage.getItem("users") || "[]"
+    );
+    const membersData = user.team.members.map((id) => {
+      const member = storedUsers.find((u) => u.studentId === id || u.id === id);
       return { id, name: member?.name || `Unknown (${id})` };
     });
     setTeamMembersData(membersData);
@@ -64,12 +75,13 @@ export function KanbanBoard({ teamId }: KanbanProps) {
       title: newTask[colId]?.title || "Untitled Task",
       description: newTask[colId]?.description || "",
       priority: newTask[colId]?.priority || "medium",
-      dueDate: newTask[colId]?.dueDate || new Date().toISOString().split("T")[0],
+      dueDate:
+        newTask[colId]?.dueDate || new Date().toISOString().split("T")[0],
       createdBy: user.name,
       status: colId,
       assignees: newTask[colId]?.assignees || [],
     };
-    const updatedColumns = columns.map(c =>
+    const updatedColumns = columns.map((c) =>
       c.id === colId ? { ...c, tasks: [...c.tasks, task] } : c
     );
     setColumns(updatedColumns);
@@ -86,10 +98,12 @@ export function KanbanBoard({ teamId }: KanbanProps) {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
-    }).then(result => {
+    }).then((result) => {
       if (result.isConfirmed) {
-        const updatedColumns = columns.map(c =>
-          c.id === colId ? { ...c, tasks: c.tasks.filter(t => t.id !== taskId) } : c
+        const updatedColumns = columns.map((c) =>
+          c.id === colId
+            ? { ...c, tasks: c.tasks.filter((t) => t.id !== taskId) }
+            : c
         );
         setColumns(updatedColumns);
         saveToStorage(updatedColumns);
@@ -100,9 +114,14 @@ export function KanbanBoard({ teamId }: KanbanProps) {
 
   const saveEdit = (colId: string) => {
     if (!editingTask) return;
-    const updatedColumns = columns.map(col =>
+    const updatedColumns = columns.map((col) =>
       col.id === colId
-        ? { ...col, tasks: col.tasks.map(t => (t.id === editingTask.id ? editingTask : t)) }
+        ? {
+            ...col,
+            tasks: col.tasks.map((t) =>
+              t.id === editingTask.id ? editingTask : t
+            ),
+          }
         : col
     );
     setColumns(updatedColumns);
@@ -112,16 +131,17 @@ export function KanbanBoard({ teamId }: KanbanProps) {
   };
 
   const handleDragEnd = (result: DropResult) => {
+    if (isSupervisor) return; // 🔒 منع المشرف من السحب والإفلات
     const { source, destination } = result;
     if (!destination) return;
-    const sourceCol = columns.find(c => c.id === source.droppableId)!;
-    const destCol = columns.find(c => c.id === destination.droppableId)!;
+    const sourceCol = columns.find((c) => c.id === source.droppableId)!;
+    const destCol = columns.find((c) => c.id === destination.droppableId)!;
     const sourceTasks = Array.from(sourceCol.tasks);
     const destTasks = Array.from(destCol.tasks);
     const [moved] = sourceTasks.splice(source.index, 1);
     moved.status = destCol.id;
     destTasks.splice(destination.index, 0, moved);
-    const updatedColumns = columns.map(c => {
+    const updatedColumns = columns.map((c) => {
       if (c.id === sourceCol.id) return { ...c, tasks: sourceTasks };
       if (c.id === destCol.id) return { ...c, tasks: destTasks };
       return c;
@@ -136,48 +156,58 @@ export function KanbanBoard({ teamId }: KanbanProps) {
     return "bg-green-200 text-green-800";
   };
 
-  const renderAssigneesCheckbox = (colId: string, taskAssignees: string[] = []) => (
-    <div className="mt-2">
-      <label className="font-semibold mb-1 block">Assign Members:</label>
-      <div className="flex flex-col gap-1 max-h-40 overflow-y-auto border p-2 rounded">
-        {teamMembersData.map(member => {
-          const checked = taskAssignees.includes(member.id);
-          return (
-            <label key={member.id} className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={checked}
-                onChange={e => {
-                  let newAssignees: string[];
-                  if (e.target.checked) newAssignees = [...taskAssignees, member.id];
-                  else newAssignees = taskAssignees.filter(id => id !== member.id);
+  const renderAssigneesCheckbox = (
+    colId: string,
+    taskAssignees: string[] = []
+  ) => {
+    if (isSupervisor) return null; // 🔒 المشرف ما بيوزع مهام
+    return (
+      <div className="mt-2">
+        <label className="font-semibold mb-1 block">Assign Members:</label>
+        <div className="flex flex-col gap-1 max-h-40 overflow-y-auto border p-2 rounded">
+          {teamMembersData.map((member) => {
+            const checked = taskAssignees.includes(member.id);
+            return (
+              <label key={member.id} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={(e) => {
+                    let newAssignees: string[];
+                    if (e.target.checked)
+                      newAssignees = [...taskAssignees, member.id];
+                    else
+                      newAssignees = taskAssignees.filter(
+                        (id) => id !== member.id
+                      );
 
-                  if (editingTask) setEditingTask({ ...editingTask, assignees: newAssignees });
-                  else setNewTask({ ...newTask, [colId]: { ...newTask[colId], assignees: newAssignees } });
-                }}
-              />
-              {member.name}
-            </label>
-          );
-        })}
+                    if (editingTask)
+                      setEditingTask({
+                        ...editingTask,
+                        assignees: newAssignees,
+                      });
+                    else
+                      setNewTask({
+                        ...newTask,
+                        [colId]: { ...newTask[colId], assignees: newAssignees },
+                      });
+                  }}
+                />
+                {member.name}
+              </label>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  );
-
-  const getLastTaskDate = (col: Column) => {
-    if (!col.tasks.length) return null;
-    const latest = col.tasks
-      .map(t => t.dueDate)
-      .sort((a, b) => (a! > b! ? -1 : 1))[0];
-    return latest?.split("T")[0];
+    );
   };
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
-        {columns.map(col => (
+        {columns.map((col) => (
           <Droppable key={col.id} droppableId={col.id}>
-            {provided => (
+            {(provided) => (
               <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
@@ -186,58 +216,110 @@ export function KanbanBoard({ teamId }: KanbanProps) {
                 <h2 className="font-semibold mb-3 text-center">{col.title}</h2>
 
                 {col.tasks.map((task, index) => (
-                  <Draggable key={task.id} draggableId={task.id} index={index}>
-                    {provided => (
+                  <Draggable
+                    key={task.id}
+                    draggableId={task.id}
+                    index={index}
+                    isDragDisabled={isSupervisor}
+                  >
+                    {(provided) => (
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         className="mb-2"
                       >
-                        <Card className={`p-3 rounded-md shadow-sm ${getPriorityColor(task.priority)}`}>
+                        <Card
+                          className={`p-3 rounded-md shadow-sm ${getPriorityColor(
+                            task.priority
+                          )}`}
+                        >
                           {editingTask?.id === task.id ? (
-                            <div className="flex flex-col gap-2">
-                              <Input
-                                value={editingTask.title}
-                                onChange={e => setEditingTask({ ...editingTask, title: e.target.value })}
-                                placeholder="Task Title"
-                              />
-                              <Textarea
-                                value={editingTask.description}
-                                onChange={e => setEditingTask({ ...editingTask, description: e.target.value })}
-                                placeholder="Description"
-                              />
-                              <Input
-                                type="date"
-                                value={editingTask.dueDate?.split("T")[0] || ""}
-                                onChange={e => setEditingTask({ ...editingTask, dueDate: e.target.value })}
-                              />
-                              <select
-                                value={editingTask.priority}
-                                onChange={e =>
-                                  setEditingTask({ ...editingTask, priority: e.target.value as "high" | "medium" | "low" })
-                                }
-                                className="border p-1 rounded"
-                              >
-                                <option value="high">High 🔴</option>
-                                <option value="medium">Medium 🟡</option>
-                                <option value="low">Low 🟢</option>
-                              </select>
-                              {renderAssigneesCheckbox(col.id, editingTask.assignees)}
-                              <div className="flex gap-2">
-                                <Button size="sm" onClick={() => saveEdit(col.id)}>Save</Button>
-                                <Button size="sm" variant="secondary" onClick={() => setEditingTask(null)}>Cancel</Button>
+                            !isSupervisor && (
+                              <div className="flex flex-col gap-2">
+                                <Input
+                                  value={editingTask.title}
+                                  onChange={(e) =>
+                                    setEditingTask({
+                                      ...editingTask,
+                                      title: e.target.value,
+                                    })
+                                  }
+                                  placeholder="Task Title"
+                                />
+                                <Textarea
+                                  value={editingTask.description}
+                                  onChange={(e) =>
+                                    setEditingTask({
+                                      ...editingTask,
+                                      description: e.target.value,
+                                    })
+                                  }
+                                  placeholder="Description"
+                                />
+                                <Input
+                                  type="date"
+                                  value={
+                                    editingTask.dueDate?.split("T")[0] || ""
+                                  }
+                                  onChange={(e) =>
+                                    setEditingTask({
+                                      ...editingTask,
+                                      dueDate: e.target.value,
+                                    })
+                                  }
+                                />
+                                <select
+                                  value={editingTask.priority}
+                                  onChange={(e) =>
+                                    setEditingTask({
+                                      ...editingTask,
+                                      priority: e.target.value as
+                                        | "high"
+                                        | "medium"
+                                        | "low",
+                                    })
+                                  }
+                                  className="border p-1 rounded"
+                                >
+                                  <option value="high">High 🔴</option>
+                                  <option value="medium">Medium 🟡</option>
+                                  <option value="low">Low 🟢</option>
+                                </select>
+                                {renderAssigneesCheckbox(
+                                  col.id,
+                                  editingTask.assignees
+                                )}
+                                <div className="flex gap-2">
+                                  <Button
+                                    size="sm"
+                                    onClick={() => saveEdit(col.id)}
+                                  >
+                                    Save
+                                  </Button>
+                                  <Button
+                                    size="sm"
+                                    variant="secondary"
+                                    onClick={() => setEditingTask(null)}
+                                  >
+                                    Cancel
+                                  </Button>
+                                </div>
                               </div>
-                            </div>
+                            )
                           ) : (
                             <>
                               <p className="font-medium">{task.title}</p>
-                              <p className="text-sm text-gray-600">{task.description}</p>
+                              <p className="text-sm text-gray-600">
+                                {task.description}
+                              </p>
 
                               {/* Assignees */}
                               <div className="flex flex-wrap mt-1 gap-1">
-                                {task.assignees.map(id => {
-                                  const member = teamMembersData.find(m => m.id === id);
+                                {task.assignees.map((id) => {
+                                  const member = teamMembersData.find(
+                                    (m) => m.id === id
+                                  );
                                   return (
                                     <span
                                       key={id}
@@ -249,17 +331,25 @@ export function KanbanBoard({ teamId }: KanbanProps) {
                                 })}
                               </div>
 
-                              {/* Last task date */}
-                              {getLastTaskDate(col) && (
-                                <p className="text-xs text-gray-500 mt-1">
-                                  Last task date: {getLastTaskDate(col)}
-                                </p>
+                              {/* أزرار التعديل والحذف - الطلاب فقط */}
+                              {!isSupervisor && (
+                                <div className="flex gap-2 mt-2">
+                                  <Button
+                                    size="icon"
+                                    variant="ghost"
+                                    onClick={() => setEditingTask(task)}
+                                  >
+                                    Edit
+                                  </Button>
+                                  <Button
+                                    size="icon"
+                                    variant="ghost"
+                                    onClick={() => deleteTask(col.id, task.id)}
+                                  >
+                                    Delete
+                                  </Button>
+                                </div>
                               )}
-
-                              <div className="flex gap-2 mt-2">
-                                <Button size="icon" variant="ghost" onClick={() => setEditingTask(task)}>Edit</Button>
-                                <Button size="icon" variant="ghost" onClick={() => deleteTask(col.id, task.id)}>Delete</Button>
-                              </div>
                             </>
                           )}
                         </Card>
@@ -270,38 +360,76 @@ export function KanbanBoard({ teamId }: KanbanProps) {
 
                 {provided.placeholder}
 
-                {!showForm[col.id] && (
-                  <Button className="mt-3" onClick={() => setShowForm({ ...showForm, [col.id]: true })}>Add Task</Button>
+                {/* زر الإضافة - الطلاب فقط */}
+                {!isSupervisor && !showForm[col.id] && (
+                  <Button
+                    className="mt-3"
+                    onClick={() => setShowForm({ ...showForm, [col.id]: true })}
+                  >
+                    Add Task
+                  </Button>
                 )}
 
-                {showForm[col.id] && (
+                {/* الفورم - الطلاب فقط */}
+                {!isSupervisor && showForm[col.id] && (
                   <div className="mt-3 flex flex-col gap-2 border-t pt-2">
                     <Input
                       placeholder="Task title..."
                       value={newTask[col.id]?.title || ""}
-                      onChange={e =>
-                        setNewTask({ ...newTask, [col.id]: { ...newTask[col.id], title: e.target.value } })
+                      onChange={(e) =>
+                        setNewTask({
+                          ...newTask,
+                          [col.id]: {
+                            ...newTask[col.id],
+                            title: e.target.value,
+                          },
+                        })
                       }
                     />
                     <Textarea
                       placeholder="Description..."
                       value={newTask[col.id]?.description || ""}
-                      onChange={e =>
-                        setNewTask({ ...newTask, [col.id]: { ...newTask[col.id], description: e.target.value } })
+                      onChange={(e) =>
+                        setNewTask({
+                          ...newTask,
+                          [col.id]: {
+                            ...newTask[col.id],
+                            description: e.target.value,
+                          },
+                        })
                       }
                     />
                     <Input
                       type="date"
                       value={newTask[col.id]?.dueDate || ""}
-                      onChange={e =>
-                        setNewTask({ ...newTask, [col.id]: { ...newTask[col.id], dueDate: e.target.value } })
+                      onChange={(e) =>
+                        setNewTask({
+                          ...newTask,
+                          [col.id]: {
+                            ...newTask[col.id],
+                            dueDate: e.target.value,
+                          },
+                        })
                       }
                     />
-                    {renderAssigneesCheckbox(col.id, newTask[col.id]?.assignees)}
+
+                    {renderAssigneesCheckbox(
+                      col.id,
+                      newTask[col.id]?.assignees
+                    )}
                     <select
                       value={newTask[col.id]?.priority || "medium"}
-                      onChange={e =>
-                        setNewTask({ ...newTask, [col.id]: { ...newTask[col.id], priority: e.target.value as "high" | "medium" | "low" } })
+                      onChange={(e) =>
+                        setNewTask({
+                          ...newTask,
+                          [col.id]: {
+                            ...newTask[col.id],
+                            priority: e.target.value as
+                              | "high"
+                              | "medium"
+                              | "low",
+                          },
+                        })
                       }
                       className="border p-1 rounded"
                     >
@@ -311,7 +439,14 @@ export function KanbanBoard({ teamId }: KanbanProps) {
                     </select>
                     <div className="flex gap-2 mt-2">
                       <Button onClick={() => addTask(col.id)}>Add Task</Button>
-                      <Button variant="secondary" onClick={() => setShowForm({ ...showForm, [col.id]: false })}>Cancel</Button>
+                      <Button
+                        variant="secondary"
+                        onClick={() =>
+                          setShowForm({ ...showForm, [col.id]: false })
+                        }
+                      >
+                        Cancel
+                      </Button>
                     </div>
                   </div>
                 )}
