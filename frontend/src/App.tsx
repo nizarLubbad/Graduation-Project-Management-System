@@ -15,6 +15,7 @@ import SupervisorProjectFiles from "./Component/SupervisorProjectFiles";
 import StudentProjectFiles from "./Component/StudentProjectFiles";
 import SupBoard from "./Component/SupBoard";
 import StudentKanbanWrapper from "./Component/StudentKanbanWrapper";
+import EditProfile from "./Component/EditProfile";
 
 
 function App() {
@@ -24,8 +25,8 @@ function App() {
     <Routes>
       <Route path="/" element={<AuthPage />} />
 
-      {/* Student Routes */}
-
+      {/* Student Routes */}ط
+        <Route path="/edit-profile" element={<EditProfile/>} />
       <Route path="/create-team" element={<ProtectedRoute allowedRoles={["student"]}><CreateTeam /></ProtectedRoute>} />
       <Route path="/booking-supervisor" element={<ProtectedRoute allowedRoles={["student"]}><BookingSupervisor /></ProtectedRoute>} />
       <Route path="/dashboard/student" element={<ProtectedRoute allowedRoles={["student"]}><StudentDashboard /></ProtectedRoute>}>
@@ -34,7 +35,10 @@ function App() {
         <Route path="reports" element={<h2 className="text-2xl font-semibold">📑 Reports Page</h2>} />
         <Route path="feedback" element={<StudentFeedback />} />
         <Route path="projectHistory" element={<ProjectHistory />} />
+         <Route path="edit-profile" element={<EditProfile/>} />
+
       </Route>
+
 
       {/* Supervisor Routes */}
       <Route path="/dashboard/supervisor" element={<ProtectedRoute allowedRoles={["supervisor"]}><SupervisorDashboard /></ProtectedRoute>}>

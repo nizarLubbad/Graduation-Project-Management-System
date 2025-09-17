@@ -1,3 +1,4 @@
+// src/dashboards/StudentDashboard.tsx
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState, useEffect } from "react";
@@ -26,7 +27,6 @@ export default function StudentDashboard() {
   const menuItems = [
     { path: "KanbanBoard", label: "📊 Dashboard" },
     { path: "projects", label: "📁 Projects" },
-
     { path: "feedback", label: "💬 Feedback" },
     { path: "projectHistory", label: "📜 Project History" },
   ];
@@ -50,7 +50,7 @@ export default function StudentDashboard() {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Hamburger for small/medium screens */}
+          {/* Hamburger for small screens */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="sm:hidden p-2 bg-gray-300 rounded relative z-30"
@@ -60,11 +60,21 @@ export default function StudentDashboard() {
             <span className="block w-5 h-0.5 bg-black"></span>
           </button>
 
+          {/* Label */}
           <span className="hidden sm:inline bg-gray-300 text-gray-800 px-2 py-0.5 rounded text-sm">
             Student
           </span>
 
-          {/* Sign Out for large screens */}
+          {/* Edit Profile (Desktop) */}
+          <button
+            onClick={() => navigate("/edit-profile")}
+            className="hidden sm:inline p-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800"
+            title="Edit Profile"
+          >
+            👤
+          </button>
+
+          {/* Sign Out (Desktop) */}
           <button
             onClick={handleLogout}
             className="hidden sm:inline bg-black text-white px-3 py-1 rounded hover:bg-gray-800 text-sm"
@@ -82,7 +92,9 @@ export default function StudentDashboard() {
                 to={`/dashboard/student/${item.path}`}
                 className={({ isActive }) =>
                   `block px-4 py-2 border-b last:border-b-0 ${
-                    isActive ? "bg-black text-white" : "text-gray-700 hover:bg-gray-200"
+                    isActive
+                      ? "bg-black text-white"
+                      : "text-gray-700 hover:bg-gray-200"
                   }`
                 }
                 onClick={() => setMenuOpen(false)}
@@ -90,9 +102,23 @@ export default function StudentDashboard() {
                 {item.label}
               </NavLink>
             ))}
+            {/* Edit Profile (Mobile) */}
             <button
-              onClick={handleLogout}
-              className="px-4 py-2 text-left  text-black hover:bg-gray-700   hover:text-white  lg:hidden"
+              onClick={() => {
+                setMenuOpen(false);
+                navigate("/edit-profile");
+              }}
+              className="px-4 py-2 text-left text-gray-800 hover:bg-gray-200 border-b last:border-b-0"
+            >
+              👤 Edit Profile
+            </button>
+            {/* Sign Out (Mobile) */}
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                handleLogout();
+              }}
+              className="px-4 py-2 text-left text-black hover:bg-gray-700 hover:text-white last:border-b-0"
             >
               Sign Out
             </button>
@@ -110,7 +136,9 @@ export default function StudentDashboard() {
                 to={`/dashboard/student/${item.path}`}
                 className={({ isActive }) =>
                   `block p-2 rounded font-medium transition ${
-                    isActive ? "bg-black text-white" : "text-gray-700 hover:bg-gray-200 hover:text-black"
+                    isActive
+                      ? "bg-black text-white"
+                      : "text-gray-700 hover:bg-gray-200 hover:text-black"
                   }`
                 }
               >
