@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\User\\OneDrive\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\onedrive\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\iservices\\ibaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\iservices\\ibaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\onedrive\\desktop\\graduation-project-management-system\\backend\\gpms\\services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\onedrive\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\iservices\\ikanbantaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\iservices\\ikanbantaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\onedrive\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\iservices\\ifeedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\iservices\\ifeedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\onedrive\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\iservices\\ikanbantaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\iservices\\ikanbantaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\onedrive\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\iservices\\ibaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\iservices\\ibaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\onedrive\\desktop\\graduation-project-management-system\\backend\\gpms\\services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\user\\onedrive\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\iservices\\ilinkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -224,7 +224,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 171,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -236,8 +236,7 @@
               "RelativeToolTip": "Interfaces\\IServices\\IProjectService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T14:18:44.821Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T14:18:44.821Z"
             },
             {
               "$type": "Document",
@@ -249,12 +248,11 @@
               "RelativeToolTip": "Interfaces\\IServices\\ILinkService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T14:17:54.021Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T14:17:54.021Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "IKanbanTaskService.cs",
               "DocumentMoniker": "C:\\Users\\User\\OneDrive\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IServices\\IKanbanTaskService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IServices\\IKanbanTaskService.cs",
@@ -267,7 +265,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "IFeedbackService.cs",
               "DocumentMoniker": "C:\\Users\\User\\OneDrive\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IServices\\IFeedbackService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IServices\\IFeedbackService.cs",
@@ -280,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "IBaseService.cs",
               "DocumentMoniker": "C:\\Users\\User\\OneDrive\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IServices\\IBaseService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IServices\\IBaseService.cs",
@@ -288,21 +286,19 @@
               "RelativeToolTip": "Interfaces\\IServices\\IBaseService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T14:02:15.26Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T14:02:15.26Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "FeedbackService.cs",
               "DocumentMoniker": "C:\\Users\\User\\OneDrive\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\FeedbackService.cs",
               "RelativeDocumentMoniker": "Services\\FeedbackService.cs",
-              "ToolTip": "C:\\Users\\User\\OneDrive\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\FeedbackService.cs*",
-              "RelativeToolTip": "Services\\FeedbackService.cs*",
+              "ToolTip": "C:\\Users\\User\\OneDrive\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\FeedbackService.cs",
+              "RelativeToolTip": "Services\\FeedbackService.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAAAYAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T21:24:17.567Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T21:24:17.567Z"
             },
             {
               "$type": "Document",
@@ -314,8 +310,7 @@
               "RelativeToolTip": "Interfaces\\IServices\\IReplyService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T14:19:07.989Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T14:19:07.989Z"
             },
             {
               "$type": "Document",
@@ -327,8 +322,7 @@
               "RelativeToolTip": "Interfaces\\IServices\\IStudentService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T14:19:51.794Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T14:19:51.794Z"
             },
             {
               "$type": "Document",
@@ -336,12 +330,11 @@
               "Title": "IStudentTaskService.cs",
               "DocumentMoniker": "C:\\Users\\User\\OneDrive\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IServices\\IStudentTaskService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IServices\\IStudentTaskService.cs",
-              "ToolTip": "C:\\Users\\User\\OneDrive\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IServices\\IStudentTaskService.cs*",
-              "RelativeToolTip": "Interfaces\\IServices\\IStudentTaskService.cs*",
+              "ToolTip": "C:\\Users\\User\\OneDrive\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IServices\\IStudentTaskService.cs",
+              "RelativeToolTip": "Interfaces\\IServices\\IStudentTaskService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T14:20:08.721Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T14:20:08.721Z"
             },
             {
               "$type": "Document",
@@ -353,8 +346,7 @@
               "RelativeToolTip": "Interfaces\\IServices\\ISupervisorService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T14:20:53.053Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T14:20:53.053Z"
             },
             {
               "$type": "Document",
@@ -366,8 +358,7 @@
               "RelativeToolTip": "Interfaces\\IServices\\ITeamService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T14:21:10.57Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T14:21:10.57Z"
             },
             {
               "$type": "Document",
@@ -379,8 +370,7 @@
               "RelativeToolTip": "Interfaces\\IRepositories\\IKanbanTaskRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T14:47:37.388Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T14:47:37.388Z"
             },
             {
               "$type": "Document",
