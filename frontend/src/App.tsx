@@ -15,6 +15,7 @@ import StudentProjectFiles from "./Component/StudentProjectFiles";
 import SupBoard from "./Component/SupBoard";
 import StudentKanbanWrapper from "./Component/StudentKanbanWrapper";
 import EditProfile from "./Component/EditProfile";
+import StudentBoard from "./Component/StudentBoard";
 
 function App() {
   return (
@@ -46,6 +47,8 @@ function App() {
         <Route path="reports" element={<h2 className="text-2xl font-semibold">📑 Reports Page</h2>} />
         <Route path="feedback" element={<StudentFeedback />} />
         <Route path="projectHistory" element={<ProjectHistory />} />
+        <Route path="Myproject" element={<StudentBoard/>} />
+    
       </Route>
 
       {/* Supervisor Routes */}
