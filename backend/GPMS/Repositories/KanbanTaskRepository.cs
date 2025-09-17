@@ -4,19 +4,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Repositories
 {
-    public class KanbanTaskRepository : BaseRepository<KanbanTask>, IKanbanTaskRepository
+    public class TaskRepository : BaseRepository<KanbanTask>, ITaskRepository
     {
         private readonly AppDbContext _context;
-        public KanbanTaskRepository(AppDbContext context) : base(context) {
+
+        public TaskRepository(AppDbContext context) : base(context)
+        {
             _context = context;
         }
 
-        public Task<string?> GetTaskStatusAsync(int taskId)
+        public async Task<IEnumerable<KanbanTask>> GetByTeamIdAsync(long teamId)
         {
-            var task = _context.Tasks
-                               .AsNoTracking()
-                               .FirstOrDefault(t => t.TaskId == taskId);
-            return Task.FromResult(task?.status);
+            return await _context.Tasks
+                .Include(t => t.AssignedStudents)
+                .Where(t => t.TeamId == teamId)
+                .ToListAsync();
         }
     }
 }

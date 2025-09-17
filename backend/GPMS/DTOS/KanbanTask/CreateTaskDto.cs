@@ -1,13 +1,12 @@
-﻿using static GPMS.Models.Enums;
-
-namespace GPMS.DTOS.KanbanTask
+﻿namespace GPMS.DTOS.Task
 {
     public class CreateTaskDto
     {
-        public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string? Description { get; set; }
-        public PriorityLevel Priority { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime? DueDate { get; set; }
+        public long TeamId { get; set; }
+        public List<long> AssignedStudentIds { get; set; } = new();
+        public int Priority { get; set; } = 2; // Default Medium
     }
 }
