@@ -1,4 +1,3 @@
-// src/Component/EditProfile.tsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -9,15 +8,17 @@ export default function EditProfile() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
-  const [name, setName] = useState(user?.name || "");
-  const [email, setEmail] = useState(user?.email || "");
-  const [department, setDepartment] = useState(user?.department || "");
+  if (!user) return null;
+
+  const isStudent = user.role === "student";
+
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [department, setDepartment] = useState(user.department || "");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
   const handleSave = () => {
-    if (!user) return;
-
     // تحقق من كلمة السر الحالية إذا تم إدخال كلمة سر جديدة
     if (newPassword && currentPassword !== user.password) {
       Swal.fire({
@@ -32,19 +33,18 @@ export default function EditProfile() {
       ...user,
       name,
       email,
-      department,
+      ...(isStudent ? { department } : {}),
       ...(newPassword ? { password: newPassword } : {}),
     };
 
-    // تحديث context
-    setUser(updatedUser);
+    // تحديث الـ context
+    setUser && setUser(updatedUser);
 
     // تحديث localStorage
     const users: User[] = JSON.parse(localStorage.getItem("users") || "[]");
     const updatedUsers = users.map(u => (u.id === user.id ? updatedUser : u));
     localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-    // تنبيه نجاح
     Swal.fire({
       icon: "success",
       title: "Profile Updated",
@@ -52,7 +52,6 @@ export default function EditProfile() {
       confirmButtonText: "OK",
     });
 
-    // مسح حقول كلمة السر
     setCurrentPassword("");
     setNewPassword("");
   };
@@ -64,7 +63,11 @@ export default function EditProfile() {
         <div className="flex items-center mb-6">
           <div
             className="mr-3 cursor-pointer text-black hover:text-gray-700 text-xl font-bold"
-            onClick={() => navigate("/dashboard/student/KanbanBoard")}
+            onClick={() =>
+              navigate(isStudent
+                ? "/dashboard/student/KanbanBoard"
+                : "/dashboard/supervisor")
+            }
           >
             ←
           </div>
@@ -93,16 +96,18 @@ export default function EditProfile() {
           />
         </label>
 
-        {/* Department */}
-        <label className="block mb-3">
-          <span className="text-gray-700">Department</span>
-          <input
-            type="text"
-            value={department}
-            onChange={e => setDepartment(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border rounded-lg"
-          />
-        </label>
+        {/* Department فقط للطلاب */}
+        {isStudent && (
+          <label className="block mb-3">
+            <span className="text-gray-700">Department</span>
+            <input
+              type="text"
+              value={department}
+              onChange={e => setDepartment(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border rounded-lg"
+            />
+          </label>
+        )}
 
         {/* Current Password */}
         <label className="block mb-3">

@@ -1,3 +1,4 @@
+// src/dashboards/SupervisorDashboard.tsx
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
@@ -12,11 +13,9 @@ export default function SupervisorDashboard() {
 
   const menuItems = [
     { path: "/dashboard/supervisor", label: "📊 Dashboard", exact: true },
-   
     { path: "/dashboard/supervisor/supervised-projects", label: "📁 Supervised Projects" },
-   
     { path: "/dashboard/supervisor/feedback", label: "💬 Feedback" },
-   
+     { path: "/dashboard/supervisor/projectHistory", label: "📜 Project History" },
   ];
 
   return (
@@ -33,7 +32,7 @@ export default function SupervisorDashboard() {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Hamburger for small/medium screens */}
+          {/* Hamburger for small screens */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="lg:hidden p-2 bg-gray-300 rounded relative z-30"
@@ -48,7 +47,16 @@ export default function SupervisorDashboard() {
             Supervisor
           </span>
 
-          {/* Sign Out only on large screens */}
+          {/* Edit Profile (Desktop) */}
+          <button
+            onClick={() => navigate("/edit-profile")}
+            className="hidden sm:inline p-2 rounded-full bg-gray-300 hover:bg-gray-400 text-gray-800"
+            title="Edit Profile"
+          >
+            👤
+          </button>
+
+          {/* Sign Out (Desktop) */}
           <button
             onClick={handleLogout}
             className="hidden lg:inline bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-300 hover:text-black text-sm"
@@ -75,10 +83,23 @@ export default function SupervisorDashboard() {
                 {item.label}
               </NavLink>
             ))}
-            {/* Sign Out only visible in dropdown for small/medium screens */}
+            {/* Edit Profile (Mobile) */}
             <button
-              onClick={handleLogout}
-              className="px-4 py-2 text-left  text-black hover:bg-gray-700   hover:text-white  lg:hidden"
+              onClick={() => {
+                setMenuOpen(false);
+                navigate("/edit-profile");
+              }}
+              className="px-4 py-2 text-left text-gray-800 hover:bg-gray-200 border-b last:border-b-0"
+            >
+              👤 Edit Profile
+            </button>
+            {/* Sign Out (Mobile) */}
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                handleLogout();
+              }}
+              className="px-4 py-2 text-left text-black hover:bg-gray-700 hover:text-white last:border-b-0"
             >
               Sign Out
             </button>
@@ -87,7 +108,7 @@ export default function SupervisorDashboard() {
       </header>
 
       <div className="flex flex-1">
-        {/* Sidebar only for large screens */}
+        {/* Sidebar for large screens */}
         <aside className="hidden lg:block top-16 h-full w-64 bg-white shadow-md p-4">
           <nav className="space-y-2">
             {menuItems.map(item => (
