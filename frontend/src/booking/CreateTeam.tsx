@@ -50,7 +50,10 @@ export default function CreateTeam() {
     const storedTeams: Team[] = JSON.parse(localStorage.getItem("teams") || "[]");
     localStorage.setItem("teams", JSON.stringify([...storedTeams, newTeam]));
 
-    login({ ...user, status: true, team: { id: newTeam.teamId, name: newTeam.teamName } });
+    login({ ...user, status: true, team: {
+      id: newTeam.teamId, name: newTeam.teamName,
+      members: []
+    } });
 
     Swal.fire({
       icon: "success",

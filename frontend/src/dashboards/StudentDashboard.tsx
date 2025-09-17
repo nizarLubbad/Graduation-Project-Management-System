@@ -69,7 +69,7 @@ export default function StudentDashboard() {
           {/* Edit Profile (Desktop) */}
           <button
             onClick={() => navigate("/edit-profile")}
-            className="hidden sm:inline p-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800"
+            className="hidden sm:inline p-2  rounded-full bg-gray-300 hover:bg-gray-400 text-gray-800"
             title="Edit Profile"
           >
             👤
@@ -78,7 +78,7 @@ export default function StudentDashboard() {
           {/* Sign Out (Desktop) */}
           <button
             onClick={handleLogout}
-            className="hidden sm:inline bg-black text-white px-3 py-1 rounded hover:bg-gray-800 text-sm"
+            className="hidden sm:inline  rounded-full bg-black text-white px-3 py-1 rounded hover:bg-gray-800 text-sm"
           >
             Sign Out
           </button>
