@@ -1,13 +1,9 @@
-﻿using GPMS.Models;
-using GPMS.DTOS.Link;
+﻿using GPMS.DTOS.Link;
 
 namespace GPMS.Interfaces
 {
-    public interface ILinkService
+    public interface ILinkService : IBaseService<LinkDto>
     {
-        Task<Link> AddLinkAsync(CreateLinkDto dto);
-        Task<IEnumerable<Link>> GetByTeamIdAsync(long teamId);
-        Task<Link?> GetByIdAsync(long id);
-        Task<bool> DeleteAsync(long id);
+        Task<IEnumerable<LinkDto>> GetByTeamIdAsync(long teamId);
     }
 }

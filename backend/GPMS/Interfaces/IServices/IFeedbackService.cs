@@ -1,13 +1,10 @@
 ﻿using GPMS.DTOS.Feedback;
-using GPMS.Models;
+
 
 namespace GPMS.Interfaces
 {
-    public interface IFeedbackService
+    public interface IFeedbackService : IBaseService<FeedbackDto>
     {
-        Task<Feedback> AddFeedbackAsync(CreateFeedbackDto dto);
-        Task<IEnumerable<Feedback>> GetByTeamIdAsync(long teamId);
-        Task<Feedback?> GetByIdAsync(long id);
-        Task<bool> DeleteAsync(long id);
+        Task<IEnumerable<FeedbackDto>> GetByTeamIdAsync(long teamId);
     }
 }
