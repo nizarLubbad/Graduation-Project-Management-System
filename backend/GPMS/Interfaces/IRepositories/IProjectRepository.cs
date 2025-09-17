@@ -2,12 +2,8 @@
 
 namespace GPMS.Interfaces
 {
-    public interface IProjectRepository
+    public interface IProjectRepository : IBaseRepository<Project>
     {
-        Task<IEnumerable<Project>> GetAllAsync();
-        Task<Project?> GetByIdAsync(int id);
-        Task<Project> AddAsync(Project project);
-        Task<Project> UpdateAsync(Project project);
-        Task<bool> DeleteAsync(int id);
+
     }
 }
