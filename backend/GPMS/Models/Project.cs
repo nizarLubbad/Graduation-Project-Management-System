@@ -5,23 +5,25 @@ namespace GPMS.Models
 {
     public class Project
     {
-
         [Key]
+        public int Id { get; set; }
+
         [Required]
-        [Column(TypeName = "VARCHAR(100)")]
-        public string ProjectTitle { get; set; }
-        public int ProjectId { get; set; }
+        [MaxLength(300)]
+        public string ProjectName { get; set; } = string.Empty;
 
-        [Column(TypeName = "VARCHAR(100)")]
-        public string Description { get; set; }
+        [Required]
+        public string Description { get; set; } = string.Empty;
 
-        public bool projectStatus { get; set; } = false;
-        
-        public DateTime CreatedDate { get; set; }
+        public bool IsCompleted { get; set; } = false;
 
-        // One-to-One with Project
-        [ForeignKey("Team")]
-        public long TeamId { get; set; }
-        public Team Team { get; set; }
+        // Supervisor relation (Many Projects -> One Supervisor)
+        [Required]
+        public int SupervisorId { get; set; }
+        [ForeignKey("SupervisorId")]
+        public Supervisor Supervisor { get; set; } = null!;
+
+        // One Project -> Many Students
+        public ICollection<Student> Students { get; set; } = new List<Student>();
     }
 }

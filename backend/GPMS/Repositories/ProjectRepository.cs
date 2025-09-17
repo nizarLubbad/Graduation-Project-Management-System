@@ -1,48 +1,55 @@
-﻿using GPMS.Interfaces;
-using GPMS.Models;
+﻿using GPMS.Models;
+using GPMS.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Repositories
 {
-    public class ProjectRepository : BaseRepository<Project>, IProjectRepository
+    public class ProjectRepository : IProjectRepository
     {
-        private readonly AppDbContext _contextR;
-        public ProjectRepository(AppDbContext context) : base(context)
+        private readonly AppDbContext _context;
+
+        public ProjectRepository(AppDbContext context)
         {
-            _contextR = context;
+            _context = context;
         }
 
-        public async Task<bool?> GetProjectStatusAsync(string projectTitle)
+        public async Task<IEnumerable<Project>> GetAllAsync()
         {
-            var project = await _contextR.Projects
-                              .AsNoTracking()
-                              .FirstOrDefaultAsync(p => p.ProjectTitle == projectTitle);
-
-            return project?.projectStatus;
+            return await _context.Projects
+                                 .Include(p => p.Supervisor)
+                                 .Include(p => p.Students)
+                                 .ToListAsync();
         }
 
-        public async Task<string> GetProjectTitleAsync(int projectId)
+        public async Task<Project?> GetByIdAsync(int id)
         {
-            var project = await _contextR.Projects
-                                        .AsNoTracking()
-                                        .FirstOrDefaultAsync(p => p.ProjectId == projectId);
-
-            return project.ProjectTitle;
+            return await _context.Projects
+                                 .Include(p => p.Supervisor)
+                                 .Include(p => p.Students)
+                                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<bool?> UpdateProjectStatusAsync(string projectTitle)
+        public async Task<Project> AddAsync(Project project)
         {
-            var project = await _contextR.Projects
-                                  .FirstOrDefaultAsync(p => p.ProjectTitle == projectTitle);
+            _context.Projects.Add(project);
+            await _context.SaveChangesAsync();
+            return project;
+        }
 
-            if (project == null)
-                return null; 
+        public async Task<Project> UpdateAsync(Project project)
+        {
+            _context.Projects.Update(project);
+            await _context.SaveChangesAsync();
+            return project;
+        }
 
-            project.projectStatus = true;
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var project = await _context.Projects.FindAsync(id);
+            if (project == null) return false;
 
-            
-            await _contextR.SaveChangesAsync();
-
+            _context.Projects.Remove(project);
+            await _context.SaveChangesAsync();
             return true;
         }
     }
