@@ -17,7 +17,7 @@ namespace GPMS.Services
         {
             var reply = new Reply
             {
-                Message = dto.Message,
+                Content = dto.Content,
                 FeedbackId = dto.FeedbackId,
                 StudentId = dto.StudentId,
                 SupervisorId = dto.SupervisorId,
@@ -27,7 +27,7 @@ namespace GPMS.Services
             return await _replyRepository.AddAsync(reply);
         }
 
-        public async Task<IEnumerable<Reply>> GetByFeedbackIdAsync(int feedbackId)
+        public async Task<IEnumerable<Reply>> GetByFeedbackIdAsync(long feedbackId)
         {
             return await _replyRepository.GetByFeedbackIdAsync(feedbackId);
         }

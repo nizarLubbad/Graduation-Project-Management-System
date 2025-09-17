@@ -3,10 +3,9 @@ using GPMS.Models;
 
 namespace GPMS.Interfaces
 {
-    public interface IReplyService : IReplyRepository
+    public interface IReplyService
     {
         Task<Reply> AddReplyAsync(CreateReplyDto dto);
-        Task<IEnumerable<Reply>> GetByFeedbackIdAsync(int feedbackId);
-
+        Task<IEnumerable<Reply>> GetByFeedbackIdAsync(long feedbackId);
     }
 }

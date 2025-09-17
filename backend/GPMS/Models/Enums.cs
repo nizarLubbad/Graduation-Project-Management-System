@@ -1,12 +1,16 @@
-﻿namespace GPMS.Models
+﻿namespace GPMS.Models.Enums
 {
-    public class Enums
+    public enum TaskPriority
     {
-        public enum PriorityLevel
-        {
-            Low = 1,    // Could be 0, 1, 2 or "Low", "Medium", "High" if using strings
-            Medium = 2,
-            High = 3
-        }
+        Low = 1,
+        Medium = 2,
+        High = 3
+    }
+
+    public enum TaskStatus
+    {
+        ToDo = 1,
+        Doing = 2,
+        Done = 3
     }
 }

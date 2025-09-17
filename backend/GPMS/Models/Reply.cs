@@ -6,27 +6,24 @@ namespace GPMS.Models
     public class Reply
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
-        public string Message { get; set; }
+        [Column(TypeName = "text")]
+        public string Content { get; set; } = null!;
 
         public DateTime Date { get; set; } = DateTime.Now;
 
-        // Foreign key to Feedback
         [ForeignKey("Feedback")]
-        public int FeedbackId { get; set; }
-        public Feedback Feedback { get; set; }
+        public long FeedbackId { get; set; }
+        public Feedback Feedback { get; set; } = null!;
 
-        // Optional sender: could be a Student
         [ForeignKey("Student")]
         public long? StudentId { get; set; }
         public Student? Student { get; set; }
 
-        // Optional sender: could be a Supervisor
         [ForeignKey("Supervisor")]
         public long? SupervisorId { get; set; }
         public Supervisor? Supervisor { get; set; }
     }
 }
-

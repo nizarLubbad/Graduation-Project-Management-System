@@ -1,39 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static GPMS.Models.Enums;
+using TaskStatusEnum = GPMS.Models.Enums.TaskStatus;
+using TaskPriorityEnum = GPMS.Models.Enums.TaskPriority;
 
 namespace GPMS.Models
 {
     public class KanbanTask
     {
         [Key]
-        public int TaskId { get; set; }
+        public long Id { get; set; }
 
-        [Required, MaxLength(100)]
-        public required string Title { get; set; }
-        [Column(TypeName = "varchar(100)")]
+        [Required, MaxLength(200)]
+        public string Title { get; set; } = null!;
+
+        [Column(TypeName = "text")]
         public string? Description { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? DueDate { get; set; }
 
-        public PriorityLevel Priority { get; set; } // Enum: Low, Medium, High or 1, 2, 3
+        public TaskPriorityEnum Priority { get; set; } = TaskPriorityEnum.Medium;
 
-
-        [Column(TypeName = "varchar(100)")]
-        public string status { get; set; } = "To Do"; // Possible values: "To Do", "In Progress", "Done"
-
-        //public bool? IsCompleted { get; set; } = false;
+        public TaskStatusEnum Status { get; set; } = TaskStatusEnum.ToDo;
 
         [ForeignKey("Team")]
-        public long TeamId { get; set; } // Foreign key to  Team
-        public Team Team { get; set; }
-        [ForeignKey("Supervisor")]
-        public long SupervisorId { get; set; } // Foreign key to Supervisor
-        public Supervisor Supervisor { get; set; }
-        public ICollection<StudentTask> StudentTasks { get; set; } = new List<StudentTask>();
-        public ICollection<Link> Links { get; set; } = new List<Link>();
-        public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
+        public long TeamId { get; set; }
+        public Team Team { get; set; } = null!;
 
+        public ICollection<Student> AssignedStudents { get; set; } = new List<Student>();
     }
 }

@@ -31,9 +31,14 @@ namespace GPMS.Services
             return await _feedbackRepository.GetByTeamIdAsync(teamId);
         }
 
-        public async Task<Feedback?> GetByIdAsync(int id)
+        public async Task<Feedback?> GetByIdAsync(long id)
         {
             return await _feedbackRepository.GetByIdAsync(id);
+        }
+
+        public async Task<bool> DeleteAsync(long id)
+        {
+            return await _feedbackRepository.DeleteAsync(id);
         }
     }
 }

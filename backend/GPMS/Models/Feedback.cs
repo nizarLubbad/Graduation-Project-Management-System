@@ -6,27 +6,21 @@ namespace GPMS.Models
     public class Feedback
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
+        [Column(TypeName = "text")]
         public required string Content { get; set; }
 
         public DateTime Date { get; set; } = DateTime.Now;
 
-
-        //[ForeignKey("KanbanTask")]
-        //public int TaskId { get; set; }
-        //public KanbanTask KanbanTask { get; set; }
         [ForeignKey("Team")]
         public long TeamId { get; set; }
-        public Team Team { get; set; }
-
+        public Team Team { get; set; } = null!;
 
         [ForeignKey("Supervisor")]
-        public long? SupervisorId { get; set; } // Foreign key to Supervisor
+        public long? SupervisorId { get; set; }
         public Supervisor? Supervisor { get; set; }
-
         public ICollection<Reply> Replies { get; set; } = new List<Reply>();
-
     }
 }

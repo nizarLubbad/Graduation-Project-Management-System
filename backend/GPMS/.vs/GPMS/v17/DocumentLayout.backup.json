@@ -3,16 +3,120 @@
   "WorkspaceRootPath": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\controllers\\kanbantaskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:controllers\\kanbantaskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\services\\kanbantaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:services\\kanbantaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\ikanbantaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ikanbantaskservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\repositories\\kanbantaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:repositories\\kanbantaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\ikanbantaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ikanbantaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\dtos\\kanbantask\\updatetaskdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:dtos\\kanbantask\\updatetaskdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\dtos\\kanbantask\\createtaskdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:dtos\\kanbantask\\createtaskdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\dtos\\kanbantask\\taskresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:dtos\\kanbantask\\taskresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\dtos\\feedback\\createfeedbackdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:dtos\\feedback\\createfeedbackdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\models\\kanbantask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:models\\kanbantask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\ifeedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ifeedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\models\\link.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:models\\link.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\controllers\\replycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:controllers\\replycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\controllers\\linkcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:controllers\\linkcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\ilinkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ilinkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\controllers\\feedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:controllers\\feedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\services\\linkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:services\\linkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\services\\replyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:services\\replyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\ireplyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ireplyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\repositories\\replyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:repositories\\replyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\ireplyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ireplyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\dtos\\reply\\replyresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:dtos\\reply\\replyresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\dtos\\reply\\createreplydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:dtos\\reply\\createreplydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\models\\reply.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:models\\reply.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\repositories\\feedbackrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:repositories\\feedbackrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\ifeedbackrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ifeedbackrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\dtos\\feedback\\feedbackresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:dtos\\feedback\\feedbackresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\dtos\\feedback\\feedbackdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:dtos\\feedback\\feedbackdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\models\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:models\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\dtos\\link\\linkdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,8 +127,20 @@
       "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:dtos\\link\\createlinkdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\models\\link.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:models\\link.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\services\\linkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:services\\linkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\ilinkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ilinkservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\interfaces\\ilinkrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:interfaces\\ilinkrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|c:\\users\\x1 zano\\desktop\\graduation-project-management-system\\backend\\gpms\\repositories\\linkrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8D0CDBD-3F82-4A46-B2CC-8764A89EB598}|GPMS.csproj|solutionrelative:repositories\\linkrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,55 +149,414 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 171,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "KanbanTaskService.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\KanbanTaskService.cs",
+              "RelativeDocumentMoniker": "Services\\KanbanTaskService.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\KanbanTaskService.cs",
+              "RelativeToolTip": "Services\\KanbanTaskService.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAIwGgAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T23:08:27.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "KanbanTaskController.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Controllers\\KanbanTaskController.cs",
+              "RelativeDocumentMoniker": "Controllers\\KanbanTaskController.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Controllers\\KanbanTaskController.cs",
+              "RelativeToolTip": "Controllers\\KanbanTaskController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T23:10:28.085Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IKanbanTaskService.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IKanbanTaskService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IKanbanTaskService.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IKanbanTaskService.cs",
+              "RelativeToolTip": "Interfaces\\IKanbanTaskService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T23:09:13.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "KanbanTaskRepository.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\KanbanTaskRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\KanbanTaskRepository.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\KanbanTaskRepository.cs",
+              "RelativeToolTip": "Repositories\\KanbanTaskRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T23:08:12.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IKanbanTaskRepository.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IKanbanTaskRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IKanbanTaskRepository.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IKanbanTaskRepository.cs",
+              "RelativeToolTip": "Interfaces\\IKanbanTaskRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T23:07:55.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UpdateTaskDto.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\KanbanTask\\UpdateTaskDto.cs",
+              "RelativeDocumentMoniker": "DTOS\\KanbanTask\\UpdateTaskDto.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\KanbanTask\\UpdateTaskDto.cs",
+              "RelativeToolTip": "DTOS\\KanbanTask\\UpdateTaskDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T11:10:36.523Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CreateTaskDto.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\KanbanTask\\CreateTaskDto.cs",
+              "RelativeDocumentMoniker": "DTOS\\KanbanTask\\CreateTaskDto.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\KanbanTask\\CreateTaskDto.cs",
+              "RelativeToolTip": "DTOS\\KanbanTask\\CreateTaskDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T23:05:39.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TaskResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\KanbanTask\\TaskResponseDto.cs",
+              "RelativeDocumentMoniker": "DTOS\\KanbanTask\\TaskResponseDto.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\KanbanTask\\TaskResponseDto.cs",
+              "RelativeToolTip": "DTOS\\KanbanTask\\TaskResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T23:06:11.807Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CreateFeedbackDto.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Feedback\\CreateFeedbackDto.cs",
+              "RelativeDocumentMoniker": "DTOS\\Feedback\\CreateFeedbackDto.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Feedback\\CreateFeedbackDto.cs",
+              "RelativeToolTip": "DTOS\\Feedback\\CreateFeedbackDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T21:17:17.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "KanbanTask.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\KanbanTask.cs",
+              "RelativeDocumentMoniker": "Models\\KanbanTask.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\KanbanTask.cs",
+              "RelativeToolTip": "Models\\KanbanTask.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAA0wB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T23:02:16.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Enums.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Enums.cs",
+              "RelativeDocumentMoniker": "Models\\Enums.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Enums.cs",
+              "RelativeToolTip": "Models\\Enums.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T22:59:00.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IFeedbackService.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IFeedbackService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IFeedbackService.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IFeedbackService.cs",
+              "RelativeToolTip": "Interfaces\\IFeedbackService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T21:24:02.116Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LinkDto.cs",
-              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Link\\LinkDto.cs",
-              "RelativeDocumentMoniker": "DTOS\\Link\\LinkDto.cs",
-              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Link\\LinkDto.cs",
-              "RelativeToolTip": "DTOS\\Link\\LinkDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 13,
+              "Title": "ReplyController.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Controllers\\ReplyController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ReplyController.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Controllers\\ReplyController.cs",
+              "RelativeToolTip": "Controllers\\ReplyController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwD0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T14:17:39.892Z",
+              "WhenOpened": "2025-09-16T22:29:01.39Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LinkService.cs",
-              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\LinkService.cs",
-              "RelativeDocumentMoniker": "Services\\LinkService.cs",
-              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\LinkService.cs",
-              "RelativeToolTip": "Services\\LinkService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAABAAAAAAAAAA==",
+              "DocumentIndex": 12,
+              "Title": "Link.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Link.cs",
+              "RelativeDocumentMoniker": "Models\\Link.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Link.cs",
+              "RelativeToolTip": "Models\\Link.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T14:25:06.28Z",
+              "WhenOpened": "2025-09-16T14:26:07.918Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 16,
+              "Title": "ReplyService.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\ReplyService.cs",
+              "RelativeDocumentMoniker": "Services\\ReplyService.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\ReplyService.cs",
+              "RelativeToolTip": "Services\\ReplyService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T22:20:47.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IReplyService.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IReplyService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IReplyService.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IReplyService.cs",
+              "RelativeToolTip": "Interfaces\\IReplyService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T22:20:36.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ReplyRepository.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\ReplyRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\ReplyRepository.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\ReplyRepository.cs",
+              "RelativeToolTip": "Repositories\\ReplyRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T22:20:15.737Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "IReplyRepository.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IReplyRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IReplyRepository.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IReplyRepository.cs",
+              "RelativeToolTip": "Interfaces\\IReplyRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T22:20:04.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "FeedbackController.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Controllers\\FeedbackController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FeedbackController.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Controllers\\FeedbackController.cs",
+              "RelativeToolTip": "Controllers\\FeedbackController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAgwFYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T21:30:28.366Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "LinkController.cs",
               "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Controllers\\LinkController.cs",
               "RelativeDocumentMoniker": "Controllers\\LinkController.cs",
               "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Controllers\\LinkController.cs",
               "RelativeToolTip": "Controllers\\LinkController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwAcAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAkwAEAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T14:37:44.782Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T14:37:44.782Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 20,
+              "Title": "ReplyResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Reply\\ReplyResponseDto.cs",
+              "RelativeDocumentMoniker": "DTOS\\Reply\\ReplyResponseDto.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Reply\\ReplyResponseDto.cs",
+              "RelativeToolTip": "DTOS\\Reply\\ReplyResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T22:19:52.012Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CreateReplyDto.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Reply\\CreateReplyDto.cs",
+              "RelativeDocumentMoniker": "DTOS\\Reply\\CreateReplyDto.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Reply\\CreateReplyDto.cs",
+              "RelativeToolTip": "DTOS\\Reply\\CreateReplyDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T22:19:42.339Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Reply.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Reply.cs",
+              "RelativeDocumentMoniker": "Models\\Reply.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Reply.cs",
+              "RelativeToolTip": "Models\\Reply.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA1wB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T22:19:07.352Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "FeedbackService.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\FeedbackService.cs",
+              "RelativeDocumentMoniker": "Services\\FeedbackService.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\FeedbackService.cs",
+              "RelativeToolTip": "Services\\FeedbackService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T21:24:17.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "FeedbackRepository.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\FeedbackRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\FeedbackRepository.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\FeedbackRepository.cs",
+              "RelativeToolTip": "Repositories\\FeedbackRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T21:23:05.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "IFeedbackRepository.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IFeedbackRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IFeedbackRepository.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\IFeedbackRepository.cs",
+              "RelativeToolTip": "Interfaces\\IFeedbackRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T21:22:31.227Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "FeedbackResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Feedback\\FeedbackResponseDto.cs",
+              "RelativeDocumentMoniker": "DTOS\\Feedback\\FeedbackResponseDto.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Feedback\\FeedbackResponseDto.cs",
+              "RelativeToolTip": "DTOS\\Feedback\\FeedbackResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T21:21:44.497Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "FeedbackDto.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Feedback\\FeedbackDto.cs",
+              "RelativeDocumentMoniker": "DTOS\\Feedback\\FeedbackDto.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Feedback\\FeedbackDto.cs",
+              "RelativeToolTip": "DTOS\\Feedback\\FeedbackDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T21:17:52.446Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Feedback.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Feedback.cs",
+              "RelativeDocumentMoniker": "Models\\Feedback.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Feedback.cs",
+              "RelativeToolTip": "Models\\Feedback.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T21:16:35.428Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "LinkDto.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Link\\LinkDto.cs",
+              "RelativeDocumentMoniker": "DTOS\\Link\\LinkDto.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Link\\LinkDto.cs",
+              "RelativeToolTip": "DTOS\\Link\\LinkDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T14:17:39.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "CreateLinkDto.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Link\\CreateLinkDto.cs",
+              "RelativeDocumentMoniker": "DTOS\\Link\\CreateLinkDto.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Link\\CreateLinkDto.cs",
+              "RelativeToolTip": "DTOS\\Link\\CreateLinkDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T14:18:55.59Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "LinkService.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\LinkService.cs",
+              "RelativeDocumentMoniker": "Services\\LinkService.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Services\\LinkService.cs",
+              "RelativeToolTip": "Services\\LinkService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAADwvy0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T14:25:06.28Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
               "Title": "ILinkService.cs",
               "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\ILinkService.cs",
               "RelativeDocumentMoniker": "Interfaces\\ILinkService.cs",
@@ -89,34 +564,31 @@
               "RelativeToolTip": "Interfaces\\ILinkService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T14:21:00.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T14:21:00.918Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CreateLinkDto.cs",
-              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Link\\CreateLinkDto.cs",
-              "RelativeDocumentMoniker": "DTOS\\Link\\CreateLinkDto.cs",
-              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\DTOS\\Link\\CreateLinkDto.cs",
-              "RelativeToolTip": "DTOS\\Link\\CreateLinkDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 33,
+              "Title": "ILinkRepository.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\ILinkRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\ILinkRepository.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Interfaces\\ILinkRepository.cs",
+              "RelativeToolTip": "Interfaces\\ILinkRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T14:18:55.59Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T21:28:34.434Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Link.cs",
-              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Link.cs",
-              "RelativeDocumentMoniker": "Models\\Link.cs",
-              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Models\\Link.cs",
-              "RelativeToolTip": "Models\\Link.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
+              "DocumentIndex": 34,
+              "Title": "LinkRepository.cs",
+              "DocumentMoniker": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\LinkRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\LinkRepository.cs",
+              "ToolTip": "C:\\Users\\X1 Zano\\Desktop\\Graduation-Project-Management-System\\backend\\GPMS\\Repositories\\LinkRepository.cs",
+              "RelativeToolTip": "Repositories\\LinkRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T14:26:07.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T21:28:04.094Z"
             }
           ]
         }

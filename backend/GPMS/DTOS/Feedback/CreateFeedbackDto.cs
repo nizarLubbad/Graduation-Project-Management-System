@@ -4,7 +4,6 @@
     {
         public string Content { get; set; }
         public long TeamId { get; set; }
-        public int TaskId { get; set; }
         public long SupervisorId { get; set; }
     }
 }

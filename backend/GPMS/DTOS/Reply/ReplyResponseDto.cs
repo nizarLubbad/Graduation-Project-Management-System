@@ -2,10 +2,14 @@
 {
     public class ReplyResponseDto
     {
-        public int Id { get; set; }
-        public string Message { get; set; }
+        public long Id { get; set; }
+        public string Content { get; set; } = null!;
         public DateTime Date { get; set; }
+
         public long? StudentId { get; set; }
+        public string? StudentName { get; set; }
+
         public long? SupervisorId { get; set; }
+        public string? SupervisorName { get; set; }
     }
 }
