@@ -98,6 +98,8 @@ export function KanbanBoard({ teamId }: KanbanProps) {
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: "green" 
+
     }).then((result) => {
       if (result.isConfirmed) {
         const updatedColumns = columns.map((c) =>

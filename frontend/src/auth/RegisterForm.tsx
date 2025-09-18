@@ -84,6 +84,8 @@ export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
           icon: "success",
           showCancelButton: true,
           confirmButtonText: "Create Team Now",
+          confirmButtonColor: "green" ,
+
           cancelButtonText: "Skip for Now",
         }).then((result) => {
           if (result.isConfirmed) navigate("/create-team");
@@ -96,6 +98,8 @@ export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
         text: "You have registered successfully.",
         icon: "success",
         confirmButtonText: "Go to Dashboard",
+        confirmButtonColor: "green" 
+
       }).then(() => navigate("/dashboard/supervisor"));
     }
   };

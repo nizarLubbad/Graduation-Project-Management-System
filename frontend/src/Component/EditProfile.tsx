@@ -50,6 +50,8 @@ export default function EditProfile() {
       title: "Profile Updated",
       text: "Your profile has been updated successfully",
       confirmButtonText: "OK",
+      confirmButtonColor: "green" 
+
     });
 
     setCurrentPassword("");
