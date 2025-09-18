@@ -44,7 +44,7 @@ function App() {
       }>
         <Route path="KanbanBoard" element={<StudentKanbanWrapper />} />
         <Route path="projects" element={<StudentProjectFiles />} />
-        <Route path="reports" element={<h2 className="text-2xl font-semibold">📑 Reports Page</h2>} />
+  
         <Route path="feedback" element={<StudentFeedback />} />
         <Route path="projectHistory" element={<ProjectHistory />} />
         <Route path="Myproject" element={<StudentBoard/>} />
@@ -57,7 +57,7 @@ function App() {
           <SupervisorDashboard />
         </ProtectedRoute>
       }>
-        <Route index element={<SupBoard />} />
+        <Route path="SupBoard" element={<SupBoard />} />
       
         <Route path="supervised-projects" element={<SupervisorProjectFiles />} />
         <Route path="kanban/:teamId/Kanban" element={<SupervisorProjectKanban />} />
