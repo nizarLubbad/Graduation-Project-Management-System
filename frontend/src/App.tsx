@@ -58,11 +58,11 @@ function App() {
         </ProtectedRoute>
       }>
         <Route index element={<SupBoard />} />
-        <Route path="reviews" element={<h2 className="text-2xl font-semibold">📝 Reviews Page</h2>} />
+      
         <Route path="supervised-projects" element={<SupervisorProjectFiles />} />
         <Route path="kanban/:teamId/Kanban" element={<SupervisorProjectKanban />} />
         <Route path="projectHistory" element={<ProjectHistory />} />
-        <Route path="reports" element={<h2 className="text-2xl font-semibold">📑 Reports Page</h2>} />
+  
         <Route path="feedback" element={<SupervisorFeedback />} />
       </Route>
     </Routes>

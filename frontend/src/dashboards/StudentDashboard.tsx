@@ -2,7 +2,8 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState, useEffect } from "react";
-import { Assignment } from "../types/types";
+import Swal from "sweetalert2";
+import { Assignment, User } from "../types/types";
 
 export default function StudentDashboard() {
   const { user } = useAuth();
@@ -18,16 +19,67 @@ export default function StudentDashboard() {
     const assignments: Assignment[] = JSON.parse(
       localStorage.getItem("supervisorAssignments") || "[]"
     );
-    const myAssignment = assignments.find(a => a.teamId === user.team?.id);
+    const myAssignment = assignments.find((a) => a.teamId === user.team?.id);
     setCanAccessDashboard(!!myAssignment);
   }, [user]);
 
   const handleLogout = () => navigate("/");
 
+  // ✅ Create Team button handler with same conditions/messages as RegisterForm
+  const handleCreateTeam = () => {
+    const allUsers: User[] = JSON.parse(localStorage.getItem("users") || "[]");
+    const students = allUsers.filter((u) => u.role === "student");
+    const supervisors = allUsers.filter((u) => u.role === "supervisor");
+
+    const availableStudents = students.filter((u) => u.status === false);
+    const busyStudents = students.filter((u) => u.status === true);
+
+    if (availableStudents.length < 2) {
+      Swal.fire({
+        title: "Warning",
+        text: "Not enough students available to create a team.",
+        icon: "warning",
+        iconColor: "gray", 
+        confirmButtonText: "Go to Dashboard",
+          confirmButtonColor: "green" 
+
+      });
+      return;
+    }
+
+    if (supervisors.length === 0) {
+      Swal.fire({
+        title: "Warning",
+        text: "No supervisors are registered yet.",
+        icon: "warning",
+        iconColor: "gray", 
+        confirmButtonText: "Go to Dashboard",
+        confirmButtonColor: "green" 
+
+      });
+      return;
+    }
+
+    if (students.length >= 2 && availableStudents.length === 0 && busyStudents.length > 0) {
+      Swal.fire({
+        title: "Warning",
+        text: "No available students to create a team.",
+        icon: "warning",
+        iconColor: "gray", 
+        confirmButtonText: "Go to Dashboard",
+          confirmButtonColor: "green" 
+      });
+      return;
+    }
+
+  
+    navigate("/create-team");
+  };
+
   const menuItems = [
     { path: "KanbanBoard", label: "📊 Dashboard" },
     { path: "Myproject", label: "📜 My project" },
-    { path: "projects", label: "📁Submissions" },
+    { path: "projects", label: "📁 Submissions" },
     { path: "feedback", label: "💬 Feedback" },
     { path: "projectHistory", label: "📜 Project History" },
   ];
@@ -69,7 +121,7 @@ export default function StudentDashboard() {
           {/* Edit Profile (Desktop) */}
           <button
             onClick={() => navigate("/edit-profile")}
-            className="hidden sm:inline p-2  rounded-full bg-gray-300 hover:bg-gray-400 text-gray-800"
+            className="hidden sm:inline p-2 rounded-full bg-gray-300 hover:bg-gray-400 text-gray-800"
             title="Edit Profile"
           >
             👤
@@ -78,7 +130,7 @@ export default function StudentDashboard() {
           {/* Sign Out (Desktop) */}
           <button
             onClick={handleLogout}
-            className="hidden sm:inline  rounded-full bg-black text-white px-3 py-1 rounded hover:bg-gray-800 text-sm"
+            className="hidden sm:inline bg-black text-white px-3 py-1 rounded hover:bg-gray-800 text-sm"
           >
             Sign Out
           </button>
@@ -87,7 +139,7 @@ export default function StudentDashboard() {
         {/* Dropdown menu for mobile */}
         {menuOpen && (
           <div className="absolute top-full left-0 right-0 bg-white shadow-md border-b border-gray-300 flex flex-col sm:hidden z-20">
-            {menuItems.map(item => (
+            {menuItems.map((item) => (
               <NavLink
                 key={item.path}
                 to={`/dashboard/student/${item.path}`}
@@ -131,7 +183,7 @@ export default function StudentDashboard() {
         {/* Sidebar for large screens */}
         <aside className="hidden sm:block top-16 h-full w-64 bg-white shadow-md p-4">
           <nav className="space-y-2">
-            {menuItems.map(item => (
+            {menuItems.map((item) => (
               <NavLink
                 key={item.path}
                 to={`/dashboard/student/${item.path}`}
@@ -164,7 +216,7 @@ export default function StudentDashboard() {
                 Please create a team and book a supervisor to access the dashboard features.
               </p>
               <button
-                onClick={() => navigate("/create-team")}
+                onClick={handleCreateTeam} // ✅ Uses same conditions/messages as RegisterForm
                 className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
               >
                 Create Team

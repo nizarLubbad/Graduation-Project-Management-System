@@ -48,7 +48,7 @@ export default function EditProfile() {
     Swal.fire({
       icon: "success",
       title: "Profile Updated",
-      text: "✅ Your profile has been updated successfully",
+      text: "Your profile has been updated successfully",
       confirmButtonText: "OK",
     });
 
