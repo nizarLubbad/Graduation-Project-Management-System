@@ -8,8 +8,8 @@ namespace GPMS.Interfaces
 
         Task<FeedbackDto> CreateFeedbackAsync(CreateFeedbackDto feedbackCreateDto);
         //Task<FeedbackDto> AddFeedbackAsync(CreateFeedbackDto feedbackCreateDto);
-        Task<FeedbackDto?> UpdateFeedbackAsync(int feedbackId, UpdateFeedbackDto dto);
-        Task<bool> DeleteFeedbackAsync(int feedbackId);
+        Task<FeedbackDto?> UpdateFeedbackAsync(long feedbackId, UpdateFeedbackDto dto);
+        Task<bool> DeleteFeedbackAsync(long feedbackId);
         Task<FeedbackDto?> GetByIdAsync(long feedbackId);
 
 

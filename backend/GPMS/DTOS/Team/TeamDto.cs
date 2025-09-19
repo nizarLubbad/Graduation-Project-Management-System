@@ -1,4 +1,4 @@
-﻿namespace GPMS.DTOS.Project
+﻿namespace GPMS.DTOS.Team
 {
     public class TeamDto
     {

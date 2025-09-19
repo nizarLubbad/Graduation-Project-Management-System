@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GPMS.DTOS.Project;
+using GPMS.DTOS.Team;
 using GPMS.Models;
 
 namespace GPMS.MappingProfiles
@@ -9,6 +9,8 @@ namespace GPMS.MappingProfiles
         public TeamProfile()
         {
             CreateMap<Team,CreateTeamDto>();
+            CreateMap<Team,TeamDto>();
+            CreateMap<Team,UpdateTeamDto>();
         }
     }
 }

@@ -10,8 +10,9 @@ namespace GPMS.MappingProfiles
         public ReplyProfile()
         {
             
-
+            CreateMap<Reply, ReplyResponseDto>();
             CreateMap<Reply, CreateReplyDto>();
+            CreateMap<Reply, UpdateReplyDto>();
         }
     }
 }

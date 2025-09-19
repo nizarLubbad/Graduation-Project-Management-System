@@ -32,7 +32,7 @@ namespace GPMS.Services
 
         }
 
-        public async Task<bool> DeleteFeedbackAsync(int feedbackId)
+        public async Task<bool> DeleteFeedbackAsync(long feedbackId)
         {
             return await _feedbackRepository.DeleteAsync(feedbackId);
         }
@@ -59,7 +59,19 @@ namespace GPMS.Services
             return _mapper.Map<IEnumerable<FeedbackDto>>(feedbacks);
         }
 
-        public async Task<FeedbackDto?> UpdateFeedbackAsync(int feedbackId, UpdateFeedbackDto dto)
+        //public async Task<FeedbackDto?> UpdateFeedbackAsync(int feedbackId, UpdateFeedbackDto dto)
+        //{
+        //    var feedback = await _feedbackRepository.GetByIdAsync(feedbackId);
+        //    if (feedback == null) return null;
+
+        //    feedback.Content = dto.Content;
+        //    feedback.Date = DateTime.UtcNow;
+
+        //    var updated = await _feedbackRepository.UpdateAsync(feedback);
+        //    return _mapper.Map<FeedbackDto>(updated);
+        //}
+
+        public async Task<FeedbackDto?> UpdateFeedbackAsync(long feedbackId, UpdateFeedbackDto dto)
         {
             var feedback = await _feedbackRepository.GetByIdAsync(feedbackId);
             if (feedback == null) return null;

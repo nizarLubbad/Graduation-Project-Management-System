@@ -9,6 +9,7 @@ namespace GPMS.MappingProfiles
         public SupervisorProfile()
         {
             CreateMap<Supervisor,CreateSupervisorDto>();
+            CreateMap<Supervisor,SupervisorDto>();
         }
     }
 }

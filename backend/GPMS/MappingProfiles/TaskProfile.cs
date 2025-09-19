@@ -10,6 +10,8 @@ namespace GPMS.MappingProfiles
         {
             CreateMap<KanbanTask,CreateTaskDto>();
             CreateMap<KanbanTask, UpdateTaskDto>();
+            CreateMap<KanbanTask, TaskDto>();
+            CreateMap<KanbanTask, UpdateTaskStatusDto>();
         }
     }
 }

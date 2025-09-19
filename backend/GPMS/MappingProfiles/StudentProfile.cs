@@ -9,6 +9,8 @@ namespace GPMS.MappingProfiles
         public StudentProfile()
         {
             CreateMap<Student, CreateStudentDto>();
+            CreateMap<Student, UpdateStudentStatusDto>();
+            CreateMap<Student, StudentDto>();
         }
     }
 }
