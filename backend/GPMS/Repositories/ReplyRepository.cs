@@ -6,20 +6,22 @@ namespace GPMS.Repositories
 {
     public class ReplyRepository : BaseRepository<Reply>, IReplyRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _contextr;
 
         public ReplyRepository(AppDbContext context) : base(context)
         {
-            _context = context;
+            _contextr = context;
         }
 
         public async Task<IEnumerable<Reply>> GetByFeedbackIdAsync(long feedbackId)
         {
-            return await _context.Replies
+            return await _contextr.Replys
                 .Include(r => r.Student)
                 .Include(r => r.Supervisor)
                 .Where(r => r.FeedbackId == feedbackId)
                 .ToListAsync();
         }
+        //Task<IEnumerable<Reply>> GetByFeedbackIdAsync(long feedbackId);
+
     }
 }

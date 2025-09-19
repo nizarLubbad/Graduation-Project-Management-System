@@ -31,6 +31,7 @@ namespace GPMS.Models
         //public long StudentId { get; set; }
         public ICollection<Student> Students { get; set; } = new List<Student>();
 
+      
 
 
 

@@ -5,12 +5,12 @@ namespace GPMS.Models
 {
     public class Project
     {
-        [Key]
+        
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(300)]
-        public string ProjectName { get; set; } = string.Empty;
+        [Column(TypeName = "varchar(100)")]
+        public string ProjectTitle { get; set; }
 
         [Required]
         public string Description { get; set; } = string.Empty;
@@ -19,11 +19,16 @@ namespace GPMS.Models
 
         // Supervisor relation (Many Projects -> One Supervisor)
         [Required]
-        public int SupervisorId { get; set; }
+        public long SupervisorId { get; set; }
         [ForeignKey("SupervisorId")]
         public Supervisor Supervisor { get; set; } = null!;
 
         // One Project -> Many Students
         public ICollection<Student> Students { get; set; } = new List<Student>();
+        //one to one with team
+        
+        [ForeignKey("Team")]
+        public long? TeamId { get; set; }
+        public Team? Team { get; set; }
     }
 }

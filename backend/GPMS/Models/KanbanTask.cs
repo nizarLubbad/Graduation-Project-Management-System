@@ -21,7 +21,7 @@ namespace GPMS.Models
         public TaskPriorityEnum Priority { get; set; } = TaskPriorityEnum.Medium;
 
         public TaskStatusEnum Status { get; set; } = TaskStatusEnum.ToDo;
-
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         [ForeignKey("Team")]
         public long TeamId { get; set; }
         public Team Team { get; set; } = null!;
