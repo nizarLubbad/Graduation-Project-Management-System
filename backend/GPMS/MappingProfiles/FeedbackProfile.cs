@@ -10,6 +10,8 @@ namespace GPMS.MappingProfiles
         {
             CreateMap<Feedback, CreateFeedbackDto>();
             CreateMap<Feedback,FeedbackDto>();
+            CreateMap<Feedback, FeedbackResponseDto>();
+            CreateMap<Feedback,UpdateFeedbackDto>();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GPMS.Models
 
         [Required]
         [Column(TypeName = "varchar(100)")]
-        public string ProjectTitle { get; set; }
+        public string ProjectTitle { get; set; } = null!;
 
         [Required]
         public string Description { get; set; } = string.Empty;

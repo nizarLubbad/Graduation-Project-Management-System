@@ -1,7 +1,7 @@
 ﻿
 namespace GPMS.Interfaces
 {
-    public interface IBaseService<TDto>
+    public interface IBaseService<TDto> where TDto : class
     {
         Task<IEnumerable<TDto>> GetAllAsync();
         Task<TDto?> GetByIdAsync(object id);

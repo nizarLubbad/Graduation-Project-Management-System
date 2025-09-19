@@ -7,7 +7,7 @@ using TaskStatusEnum = GPMS.Models.Enums.TaskStatus;
 
 namespace GPMS.Interfaces
 {
-    public interface IKanbanTaskService
+    public interface IKanbanTaskService 
     {
         //Task<KanbanTask> CreateAsync(CreateTaskDto dto);
         //Task<KanbanTask?> UpdateAsync(long id, UpdateTaskDto dto);

@@ -9,6 +9,9 @@ namespace GPMS.MappingProfiles
         public ProjectProfile()
         {
             CreateMap<Project, CreateProjectDto>();
+            CreateMap<Project, UpdateProjectDto>();
+            CreateMap<Project, ProjectResponseDto>();
+            CreateMap<Project, UpdateProjectStatusDto>();
         }
     }
 }

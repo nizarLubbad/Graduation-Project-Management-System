@@ -17,6 +17,10 @@ namespace GPMS.Interfaces
         Task<ProjectResponseDto?> UpdateAsync(int projectId, UpdateProjectDto dto);
 
         Task<bool> DeleteAsync(int projectId);
+        // UpdateStatusToTrueAsync
+        Task<ProjectResponseDto?> UpdateStatusToTrueAsync(int projectId);
+        // GetStatusAsync
+        Task<bool?> GetStatusAsync(int projectId);
 
     }
 }

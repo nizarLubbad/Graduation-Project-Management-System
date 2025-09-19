@@ -9,7 +9,7 @@ namespace GPMS.Services
     public class SupervisorService : ISupervisorService
     {
         private readonly ISupervisorRepository _repository;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
         public SupervisorService(ISupervisorRepository _repository,IMapper mapper )
         {
             this._repository = _repository;

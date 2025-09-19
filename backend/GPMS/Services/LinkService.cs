@@ -57,7 +57,7 @@ namespace GPMS.Services
         }
 
         // Create a new link
-        public async Task<LinkDto> CreateAsync(LinkDto dto)
+        public async Task<LinkDto> CreateAsync(CreateLinkDto dto)
         {
             var link = new Link
             {
@@ -72,7 +72,7 @@ namespace GPMS.Services
             return _mapper.Map<LinkDto>(saved);
         }
 
-        public async Task<LinkDto?> GetByIdAsync(object id)
+        public async Task<LinkDto?> GetByIdAsync(long id)
         {
             var link = await _linkRepository.GetByIdAsync(id);
             if (link == null) return null;
@@ -86,7 +86,7 @@ namespace GPMS.Services
             return _mapper.Map<IEnumerable<LinkDto>>(links);
         }
 
-        public async Task<LinkDto?> UpdateAsync(object id, LinkDto dto)
+        public async Task<LinkDto?> UpdateAsync(long id, LinkDto dto)
         {
             var link = await _linkRepository.GetByIdAsync(id);
             if (link == null) return null;
@@ -100,7 +100,7 @@ namespace GPMS.Services
             return _mapper.Map<LinkDto>(updated);
         }
 
-        public async Task<bool> DeleteAsync(object id)
+        public async Task<bool> DeleteAsync(long id)
         {
             return await _linkRepository.DeleteAsync(id);
         }
@@ -118,8 +118,12 @@ namespace GPMS.Services
             var filtered = links.Where(l => l.StudentId == studentId);
             return _mapper.Map<IEnumerable<LinkDto>>(filtered);
         }
+
+
+       
+
     }
 
 
 }
-}
+
