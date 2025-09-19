@@ -182,3 +182,15 @@ C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\D
 C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.dll
 C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\refint\GPMS.dll
 C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.pdb
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.csproj.AssemblyReference.cache
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.AssemblyInfoInputs.cache
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.AssemblyInfo.cs
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.csproj.CoreCompileInputs.cache
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.sourcelink.json
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.dll
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\refint\GPMS.dll
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.pdb

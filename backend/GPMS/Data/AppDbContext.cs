@@ -21,19 +21,23 @@ namespace GPMS.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Primary keys
-            modelBuilder.Entity<KanbanTask>().HasKey(t => t.TaskId);
+            modelBuilder.Entity<KanbanTask>().HasKey(t => t.Id);
             modelBuilder.Entity<Team>().HasKey(t => t.TeamId);
             modelBuilder.Entity<Student>().HasKey(s => s.StudentId);
             modelBuilder.Entity<Supervisor>().HasKey(s => s.SupervisorId);
+            //make project id auto increment and unique
+            modelBuilder.Entity<Project>()
+                .HasIndex(p => p.Id)
+                .IsUnique();
 
             // 
-          
+
             //
             modelBuilder.Entity<Project>()
                 .HasKey(p => p.ProjectTitle);
 
             modelBuilder.Entity<Project>()
-                .Property(p => p.ProjectId)
+                .Property(p => p.Id)
                 .ValueGeneratedOnAdd();
 
             // make TeamName unique
@@ -106,7 +110,7 @@ namespace GPMS.Models
                 .HasForeignKey(st => st.TaskId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Cascade delete configurations 
+            Cascade delete configurations
             modelBuilder.Entity<KanbanTask>()
                 .HasMany(t => t.Links)
                 .WithOne(l => l.KanbanTask)

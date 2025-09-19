@@ -6,16 +6,16 @@ namespace GPMS.Repositories
 {
     public class LinkRepository : BaseRepository<Link>, ILinkRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _contextl;
 
         public LinkRepository(AppDbContext context) : base(context)
         {
-            _context = context;
+            _contextl = context;
         }
 
         public async Task<IEnumerable<Link>> GetByTeamIdAsync(long teamId)
         {
-            return await _context.Links
+            return await _contextl.Links
                                  .Include(l => l.Student)
                                  .Where(l => l.TeamId == teamId)
                                  .ToListAsync();

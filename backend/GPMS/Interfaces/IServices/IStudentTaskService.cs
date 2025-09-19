@@ -1,6 +1,6 @@
-﻿namespace GPMS.Interfaces
-{
-    public interface IStudentTaskService : IBaseService<StudentTaskDto>
-    {
-    }
-}
+﻿//namespace GPMS.Interfaces
+//{
+//    public interface IStudentTaskService : IBaseService<StudentTaskDto>
+//    {
+//    }
+//}

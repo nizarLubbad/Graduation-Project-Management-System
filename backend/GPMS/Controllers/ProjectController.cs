@@ -38,7 +38,7 @@ namespace GPMS.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateProjectDto dto)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateProjectStatusDto dto)
         {
             var updated = await _service.UpdateAsync(id, dto);
             if (updated == null) return NotFound();

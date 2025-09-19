@@ -2,9 +2,11 @@
 {
     public class CreateProjectDto
     {
-        public string ProjectName { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public int SupervisorId { get; set; }
+        public string ProjectName { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public long SupervisorId { get; set; }
+        public long TeamId { get; set; }
         public bool IsCompleted { get; set; } = false;
+
     }
 }
