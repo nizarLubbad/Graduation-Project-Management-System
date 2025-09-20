@@ -32,18 +32,41 @@ namespace GPMS.Services
         {
             if (await _userRepo.ExistsByEmailAsync(dto.Email))
                 throw new Exception("Email already exists");
-
-            var hashedPassword = _passwordHasher.HashPassword(dto.Password);
-
-            var student = new Student
+            var user = new User
             {
-                Name = dto.Name,
                 Email = dto.Email,
-                PasswordHash = hashedPassword,
-                StudentId = dto.StudentId,
-                Department = dto.Department
+                PasswordHash = _passwordHasher.HashPassword(dto.Password),
+                Role = "Student",
+                Name = dto.Name
             };
 
+            await _userRepo.AddAsync(user);
+            await _userRepo.SaveChangesAsync();
+
+            //var hashedPassword = _passwordHasher.HashPassword(dto.Password);
+
+            //var student = new Student
+            //{
+            //    Name = dto.Name,
+            //    Email = dto.Email,
+            //    PasswordHash = hashedPassword,
+            //    StudentId = dto.StudentId,
+            //    Department = dto.Department
+            //};
+
+            //await _studentRepo.AddAsync(student);
+            //await _studentRepo.SaveChangesAsync();
+            var student = new Student
+            {
+                StudentId = dto.StudentId,
+                Name = dto.Name,
+                Email = dto.Email,
+                PasswordHash = user.PasswordHash, 
+                Department = dto.Department,
+                Status = false,
+                UserId = user.UserId,
+                TeamId = null 
+            };
             await _studentRepo.AddAsync(student);
             await _studentRepo.SaveChangesAsync();
         }
@@ -52,15 +75,33 @@ namespace GPMS.Services
         {
             if (await _userRepo.ExistsByEmailAsync(dto.Email))
                 throw new Exception("Email already exists");
+            var user = new User
+            {
+                Email = dto.Email,
+                PasswordHash = _passwordHasher.HashPassword(dto.Password),
+                Role = "Supervisor",
+                Name = dto.Name
+            };
 
-            var hashedPassword = _passwordHasher.HashPassword(dto.Password);
+            //var hashedPassword = _passwordHasher.HashPassword(dto.Password);
 
+            //var supervisor = new Supervisor
+            //{
+            //    Name = dto.Name,
+            //    Email = dto.Email,
+            //    PasswordHash = hashedPassword
+            //};
+            await _userRepo.AddAsync(user);
+            await _userRepo.SaveChangesAsync();
             var supervisor = new Supervisor
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                PasswordHash = hashedPassword
+                PasswordHash = user.PasswordHash,
+                //TeamCount = 0,
+                UserId = user.UserId
             };
+
 
             await _supervisorRepo.AddAsync(supervisor);
             await _supervisorRepo.SaveChangesAsync();
@@ -70,16 +111,19 @@ namespace GPMS.Services
         {
             var user = await _userRepo.GetByEmailAsync(dto.Email);
             if (user == null)
-                throw new Exception("Invalid email or password");
+                throw new UnauthorizedAccessException("Invalid email ");
 
             if (!_passwordHasher.VerifyPassword(dto.Password, user.PasswordHash))
-                throw new Exception("Invalid email or password");
+                throw new UnauthorizedAccessException("Invalid Password ");
 
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role.ToString())
+                new Claim(ClaimTypes.Role, user.Role),
+                new Claim(ClaimTypes.Name, user.Name)
+
+
             };
 
             var token = _jwtProvider.GenerateToken(claims);
@@ -87,7 +131,9 @@ namespace GPMS.Services
             return new LoginResponseDto
             {
                 Token = token,
-                Role = user.Role.ToString()
+                Role = user.Role,
+                Name = user.Name
+
             };
         }
     }

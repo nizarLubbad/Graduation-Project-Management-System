@@ -112,6 +112,20 @@ namespace GPMS.Controllers
             _taskService = taskService;
             _logger = logger;
         }
+        [HttpGet("team/{teamId:long}")]
+        public async Task<ActionResult<IEnumerable<TaskDto>>> GetByTeam(long teamId)
+        {
+            try
+            {
+                var tasks = await _taskService.GetAllByTeamIdAsync(teamId);
+                return Ok(tasks);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching tasks for team {TeamId}", teamId);
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TaskDto>>> GetAll()

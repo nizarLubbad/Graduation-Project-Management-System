@@ -112,7 +112,7 @@ namespace GPMS.Services
     //    }
     //}
 
-        public class ProjectService : IProjectService
+    public class ProjectService : IProjectService
         {
             private readonly IProjectRepository _projectRepository;
             private readonly IMapper _mapper;
@@ -169,10 +169,10 @@ namespace GPMS.Services
                 return await _projectRepository.DeleteAsync(projectId);
             }
 
-            public async Task UpdateStatusToTrueAsync(int projectId)
+        public async Task UpdateStatusToTrueAsync(int projectId)
             {
                 var project = await _projectRepository.GetByIdAsync(projectId);
-                if (project == null) return;
+                if (project == null) return ;
 
                 project.IsCompleted = true;
                 await _projectRepository.UpdateAsync(project);

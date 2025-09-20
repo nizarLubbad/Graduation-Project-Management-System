@@ -7,9 +7,9 @@ namespace GPMS.Interfaces
     {
         //Task<IEnumerable<TDto>> GetAllAsync();
         //Task<TDto?> GetByIdAsync(int id);
-        Task<SupervisorDto> CreateAsync(SupervisorDto dto);
+        //Task<SupervisorDto> CreateAsync(SupervisorDto dto);
         Task<SupervisorDto?> UpdateAsync(int id, SupervisorDto dto);
         //Task<bool> DeleteAsync(int id);
-        Task<SupervisorDto?> GetByEmailAsync(string email);
+        //Task<SupervisorDto?> GetByEmailAsync(string email);
     }
 }

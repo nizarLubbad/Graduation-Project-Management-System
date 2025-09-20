@@ -6,16 +6,16 @@ namespace GPMS.Repositories
 {
     public class TaskRepository : BaseRepository<KanbanTask>, ITaskRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _contextk;
 
         public TaskRepository(AppDbContext context) : base(context)
         {
-            _context = context;
+            _contextk = context;
         }
 
         public async Task<IEnumerable<KanbanTask>> GetByTeamIdAsync(long teamId)
         {
-            return await _context.Tasks
+            return await _contextk.Tasks
                 .Include(t => t.AssignedStudents)
                 .Where(t => t.TeamId == teamId)
                 .ToListAsync();

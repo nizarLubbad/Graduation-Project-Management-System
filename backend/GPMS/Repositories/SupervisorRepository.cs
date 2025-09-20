@@ -37,13 +37,23 @@ namespace GPMS.Repositories
             return await _contextR.Supervisors.AnyAsync(s => s.Email == email);
         }
 
-        public async Task SaveChangesAsync()
+        //public async Task SaveChangesAsync()
+        //{
+        //    await _contextR.SaveChangesAsync();
+        //}
+
+
+        public async Task<Supervisor?> GetByUserIdAsync(long userId)
         {
-            await _contextR.SaveChangesAsync();
+            return await _contextR.Supervisors
+                .Include(s => s.User)
+                .FirstOrDefaultAsync(s => s.UserId == userId);
         }
 
-       
-
+        //Task<Supervisor?> ISupervisorRepository.GetByEmailAsync(string email)
+        //{
+        //    throw new NotImplementedException();
+        //}
         //public async Task<Supervisor?> GetByEmailAsync(string email)
         //{
         //    return await _contextR.Supervisors
