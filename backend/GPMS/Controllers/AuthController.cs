@@ -10,10 +10,12 @@ namespace GPMS.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly ILogger<AuthController> _logger;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, ILogger<AuthController> logger)
         {
             _authService = authService;
+            _logger = logger;
         }
 
         [HttpPost("register/student")]
@@ -26,6 +28,8 @@ namespace GPMS.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error occurred while registering student with email {Email}", dto.Email);
+
                 return BadRequest(new { message = ex.Message });
             }
         }
@@ -40,6 +44,8 @@ namespace GPMS.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error occurred while registering supervisor with email {Email}", dto.Email);
+
                 return BadRequest(new { message = ex.Message });
             }
         }
@@ -52,12 +58,16 @@ namespace GPMS.Controllers
                 var response = await _authService.LoginAsync(dto);
                 return Ok(response);
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException ex)
             {
+                _logger.LogWarning(ex, "Unauthorized login attempt with email {Email}", dto.Email);
+
                 return Unauthorized(new { message = "Invalid email or password" });
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Unexpected error during login for email {Email}", dto.Email);
+
                 return BadRequest(new { message = ex.Message });
             }
         }
