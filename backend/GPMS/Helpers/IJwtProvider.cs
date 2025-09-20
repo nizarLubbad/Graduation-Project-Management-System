@@ -1,7 +1,9 @@
-﻿namespace GPMS.Helpers
+﻿using System.Security.Claims;
+
+namespace GPMS.Helpers
 {
     public interface IJwtProvider
     {
-        string GenerateToken(int userId, string role);
+        string GenerateToken(IEnumerable<Claim> claims);
     }
 }

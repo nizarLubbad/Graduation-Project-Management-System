@@ -1,35 +1,38 @@
-﻿using GPMS.Helpers;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
-public class JwtProvider : IJwtProvider
+namespace GPMS.Helpers
 {
-    private readonly string _secretKey;
-
-    public JwtProvider(string secretKey)
+    public class JwtProvider : IJwtProvider
     {
-        _secretKey = secretKey;
-    }
+        private readonly IConfiguration _configuration;
 
-    public string GenerateToken(int userId, string role)
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_secretKey);
-
-        var tokenDescriptor = new SecurityTokenDescriptor
+        public JwtProvider(IConfiguration configuration)
         {
-            Subject = new ClaimsIdentity(new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                new Claim(ClaimTypes.Role, role)
-            }),
-            Expires = DateTime.UtcNow.AddHours(3),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-        };
+            _configuration = configuration;
+        }
 
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
+        public string GenerateToken(IEnumerable<Claim> claims)
+        {
+            var secretKey = _configuration["Jwt:Key"];
+            var issuer = _configuration["Jwt:Issuer"];
+            var audience = _configuration["Jwt:Audience"];
+            var expiryMinutes = int.Parse(_configuration["Jwt:ExpiryMinutes"]);
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: issuer,
+                audience: audience,
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(expiryMinutes),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
     }
 }

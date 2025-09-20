@@ -17,7 +17,7 @@ namespace GPMS.Models
         public DbSet<Project> Projects { get; set; }
         public DbSet<Supervisor> Supervisors { get; set; }
         public DbSet<Reply> Replys { get; set; }
-
+        public DbSet<User> Users { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Primary keys
@@ -141,6 +141,22 @@ namespace GPMS.Models
              .WithOne(r => r.Student)
              .HasForeignKey(r => r.StudentId)
              .OnDelete(DeleteBehavior.Cascade);
+            /*
+             // One-to-one: User <-> StudentProfile
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.StudentProfile)
+                .WithOne(s => s.User)
+                .HasForeignKey<Student>(s => s.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // One-to-one: User <-> SupervisorProfile
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.SupervisorProfile)
+                .WithOne(sp => sp.User)
+                .HasForeignKey<Supervisor>(sp => sp.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+             
+             */
 
         }
 
