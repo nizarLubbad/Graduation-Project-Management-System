@@ -2,7 +2,6 @@
 using GPMS.DTOS.Project;
 using GPMS.Interfaces;
 using GPMS.Models;
-using GPMS.Repositories;
 
 namespace GPMS.Services
 {
@@ -10,86 +9,87 @@ namespace GPMS.Services
     {
         private readonly ISupervisorRepository _repository;
         private readonly IMapper _mapper;
-        public SupervisorService(ISupervisorRepository _repository,IMapper mapper )
-        {
-            this._repository = _repository;
-            mapper = _mapper;
 
+        public SupervisorService(ISupervisorRepository repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
         }
 
-
+        
         public async Task<SupervisorDto> CreateAsync(SupervisorDto dto)
         {
             var supervisor = _mapper.Map<Supervisor>(dto);
             await _repository.AddAsync(supervisor);
+            await _repository.SaveChangesAsync();
             return _mapper.Map<SupervisorDto>(supervisor);
         }
 
-        public Task<TDto> CreateAsync(TDto dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> DeleteAsync(long Teamid)
-        {
-            var supervisor = await _repository.GetByIdAsync(Teamid); // it should take a long  , change the ISupervisorRepo to not extends from IBaseRepo abd take own method
-            if (supervisor == null) return false;
-
-            await _repository.DeleteAsync(supervisor);
-            return true;
-        }
-
-        public Task<bool> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public async Task<IEnumerable<SupervisorDto>> GetAllAsync()
         {
             var supervisors = await _repository.GetAllAsync();
             return _mapper.Map<IEnumerable<SupervisorDto>>(supervisors);
         }
 
+       
         public async Task<SupervisorDto?> GetByEmailAsync(string email)
         {
             var supervisor = await _repository.GetByEmailAsync(email);
             return _mapper.Map<SupervisorDto?>(supervisor);
         }
 
-        public async Task<SupervisorDto?> GetByIdAsync(long Teamid)
+       
+        public async Task<SupervisorDto?> GetByIdAsync(long supervisorId)
         {
-            var supervisor = await _repository.GetByIdAsync(Teamid);
+            var supervisor = await _repository.GetByIdAsync(supervisorId);
             return _mapper.Map<SupervisorDto?>(supervisor);
         }
 
-        public Task<TDto?> GetByIdAsync(int id)
+        
+        public async Task<SupervisorDto?> GetByIdAsync(object id)
         {
-            throw new NotImplementedException();
+            var supervisorId = Convert.ToInt64(id);
+            return await GetByIdAsync(supervisorId);
         }
 
-        public async Task<SupervisorDto?> UpdateAsync(long teamid, SupervisorDto dto)
+        public async Task<SupervisorDto?> UpdateAsync(long supervisorId, SupervisorDto dto)
         {
-            var supervisor = await _repository.GetByIdAsync(teamid);
+            var supervisor = await _repository.GetByIdAsync(supervisorId);
             if (supervisor == null) return null;
 
-            // تحديث القيم
             supervisor.Name = dto.Name;
             supervisor.Email = dto.Email;
-            supervisor.Department = dto.Department;
-
-            await _repository.UpdateAsync(supervisor);
+            
+            _repository.Update(supervisor);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<SupervisorDto>(supervisor);
         }
 
-        public Task<TDto?> UpdateAsync(int id, TDto dto)
+       
+        public async Task<SupervisorDto?> UpdateAsync(object id, SupervisorDto dto)
         {
-            throw new NotImplementedException();
+            var supervisorId = Convert.ToInt64(id);
+            return await UpdateAsync(supervisorId, dto);
         }
 
-        Task<IEnumerable<TDto>> ISupervisorService.GetAllAsync()
+      
+        public async Task<bool> DeleteAsync(long supervisorId)
         {
-            throw new NotImplementedException();
+            var supervisor = await _repository.GetByIdAsync(supervisorId);
+            if (supervisor == null) return false;
+
+            _repository.Delete(supervisor);
+            await _repository.SaveChangesAsync();
+            return true;
+        }
+
+       
+        public async Task<bool> DeleteAsync(object id)
+        {
+            var supervisorId = Convert.ToInt64(id);
+            return await DeleteAsync(supervisorId);
         }
     }
 }

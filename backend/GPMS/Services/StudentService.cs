@@ -1,7 +1,5 @@
-﻿using GPMS.DTOS.Student;
-using GPMS.Interfaces;
+﻿using GPMS.Interfaces;
 using GPMS.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Services
 {

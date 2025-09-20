@@ -6,5 +6,6 @@ namespace GPMS.Interfaces
     {
         Task<Supervisor?> GetByEmailAsync(string email);
         Task SaveChangesAsync();
+        Task<bool> ExistsByEmailAsync(string email);
     }
 }

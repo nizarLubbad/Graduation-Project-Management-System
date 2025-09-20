@@ -7,6 +7,7 @@ namespace GPMS.Interfaces
         Task<string?> GetStudentNameAsync(long studentId);
         Task<string?> GetByEmailAsync(string email);
         Task SaveChangesAsync();
+        Task<bool> ExistsByEmailAsync(string email);
 
     }
 }
