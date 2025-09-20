@@ -24,15 +24,15 @@ namespace GPMS.Migrations
 
             modelBuilder.Entity("GPMS.Models.Feedback", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -40,53 +40,50 @@ namespace GPMS.Migrations
                     b.Property<long?>("SupervisorId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
+                    b.Property<long>("TeamId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SupervisorId");
 
-                    b.HasIndex("TaskId");
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("GPMS.Models.KanbanTask", b =>
                 {
-                    b.Property<int>("TaskId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TaskId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
-                    b.Property<long>("SupervisorId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<long>("TeamId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("TaskId");
-
-                    b.HasIndex("SupervisorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("TeamId");
 
@@ -95,22 +92,34 @@ namespace GPMS.Migrations
 
             modelBuilder.Entity("GPMS.Models.Link", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Url")
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TeamId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("varchar(500)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("TaskId");
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Links");
                 });
@@ -118,57 +127,63 @@ namespace GPMS.Migrations
             modelBuilder.Entity("GPMS.Models.Project", b =>
                 {
                     b.Property<string>("ProjectTitle")
-                        .HasColumnType("VARCHAR(100)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(100)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProjectId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjectId"));
-
-                    b.Property<long>("TeamId")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("projectStatus")
-                        .HasColumnType("bit");
-
-                    b.HasKey("ProjectTitle");
-
-                    b.HasIndex("TeamId")
-                        .IsUnique();
-
-                    b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("GPMS.Models.Reply", b =>
-                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("SupervisorId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("TeamId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ProjectTitle");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("SupervisorId");
+
+                    b.HasIndex("TeamId")
+                        .IsUnique()
+                        .HasFilter("[TeamId] IS NOT NULL");
+
+                    b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("GPMS.Models.Reply", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FeedbackId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("StudentId")
+                    b.Property<long>("FeedbackId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("SupervisorId")
+                    b.Property<long?>("StudentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("SupervisorId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -187,9 +202,16 @@ namespace GPMS.Migrations
                     b.Property<long>("StudentId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("Department")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
+
+                    b.Property<long?>("KanbanTaskId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -199,53 +221,39 @@ namespace GPMS.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("ProjectTitle")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.Property<long?>("TeamId")
                         .HasColumnType("bigint");
 
-                    b.Property<bool>("status")
-                        .HasColumnType("bit");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("StudentId");
 
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("KanbanTaskId");
+
+                    b.HasIndex("ProjectTitle");
+
                     b.HasIndex("TeamId");
 
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("GPMS.Models.StudentTask", b =>
-                {
-                    b.Property<long>("StudentId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
-
-                    b.Property<DateTime>("AssignedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("StudentId", "TaskId");
-
-                    b.HasIndex("TaskId");
-
-                    b.ToTable("StudentTasks");
                 });
 
             modelBuilder.Entity("GPMS.Models.Supervisor", b =>
                 {
                     b.Property<long>("SupervisorId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("SupervisorId"));
 
                     b.Property<string>("Department")
                         .IsRequired()
@@ -259,9 +267,22 @@ namespace GPMS.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(100)");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("TeamCount")
+                        .HasColumnType("int");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("SupervisorId");
 
                     b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("Supervisors");
@@ -270,10 +291,7 @@ namespace GPMS.Migrations
             modelBuilder.Entity("GPMS.Models.Team", b =>
                 {
                     b.Property<long>("TeamId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("TeamId"));
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -295,6 +313,32 @@ namespace GPMS.Migrations
                     b.ToTable("Teams");
                 });
 
+            modelBuilder.Entity("GPMS.Models.User", b =>
+                {
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("GPMS.Models.Feedback", b =>
                 {
                     b.HasOne("GPMS.Models.Supervisor", "Supervisor")
@@ -302,27 +346,8 @@ namespace GPMS.Migrations
                         .HasForeignKey("SupervisorId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("GPMS.Models.KanbanTask", "KanbanTask")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("TaskId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("KanbanTask");
-
-                    b.Navigation("Supervisor");
-                });
-
-            modelBuilder.Entity("GPMS.Models.KanbanTask", b =>
-                {
-                    b.HasOne("GPMS.Models.Supervisor", "Supervisor")
-                        .WithMany()
-                        .HasForeignKey("SupervisorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GPMS.Models.Team", "Team")
-                        .WithMany("KanbanTasks")
+                        .WithMany()
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -332,24 +357,50 @@ namespace GPMS.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("GPMS.Models.Link", b =>
+            modelBuilder.Entity("GPMS.Models.KanbanTask", b =>
                 {
-                    b.HasOne("GPMS.Models.KanbanTask", "KanbanTask")
-                        .WithMany("Links")
-                        .HasForeignKey("TaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("GPMS.Models.Team", "Team")
+                        .WithMany("KanbanTasks")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("KanbanTask");
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("GPMS.Models.Link", b =>
+                {
+                    b.HasOne("GPMS.Models.Student", "Student")
+                        .WithMany("Links")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GPMS.Models.Team", "Team")
+                        .WithMany("Links")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("GPMS.Models.Project", b =>
                 {
+                    b.HasOne("GPMS.Models.Supervisor", "Supervisor")
+                        .WithMany()
+                        .HasForeignKey("SupervisorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("GPMS.Models.Team", "Team")
                         .WithOne("Project")
                         .HasForeignKey("GPMS.Models.Project", "TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Supervisor");
 
                     b.Navigation("Team");
                 });
@@ -357,22 +408,20 @@ namespace GPMS.Migrations
             modelBuilder.Entity("GPMS.Models.Reply", b =>
                 {
                     b.HasOne("GPMS.Models.Feedback", "Feedback")
-                        .WithMany("Replys")
+                        .WithMany("Replies")
                         .HasForeignKey("FeedbackId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GPMS.Models.Student", "Student")
-                        .WithMany("Replys")
+                        .WithMany("Replies")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("GPMS.Models.Supervisor", "Supervisor")
                         .WithMany("Replys")
                         .HasForeignKey("SupervisorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Feedback");
 
@@ -383,31 +432,39 @@ namespace GPMS.Migrations
 
             modelBuilder.Entity("GPMS.Models.Student", b =>
                 {
+                    b.HasOne("GPMS.Models.KanbanTask", null)
+                        .WithMany("AssignedStudents")
+                        .HasForeignKey("KanbanTaskId");
+
+                    b.HasOne("GPMS.Models.Project", null)
+                        .WithMany("Students")
+                        .HasForeignKey("ProjectTitle");
+
                     b.HasOne("GPMS.Models.Team", "Team")
                         .WithMany("Students")
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GPMS.Models.User", "User")
+                        .WithOne("Student")
+                        .HasForeignKey("GPMS.Models.Student", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("GPMS.Models.StudentTask", b =>
+            modelBuilder.Entity("GPMS.Models.Supervisor", b =>
                 {
-                    b.HasOne("GPMS.Models.Student", "Student")
-                        .WithMany("StudentTask")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("GPMS.Models.User", "User")
+                        .WithOne("Supervisor")
+                        .HasForeignKey("GPMS.Models.Supervisor", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GPMS.Models.KanbanTask", "Task")
-                        .WithMany("StudentTasks")
-                        .HasForeignKey("TaskId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-
-                    b.Navigation("Task");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GPMS.Models.Team", b =>
@@ -422,23 +479,24 @@ namespace GPMS.Migrations
 
             modelBuilder.Entity("GPMS.Models.Feedback", b =>
                 {
-                    b.Navigation("Replys");
+                    b.Navigation("Replies");
                 });
 
             modelBuilder.Entity("GPMS.Models.KanbanTask", b =>
                 {
-                    b.Navigation("Feedbacks");
+                    b.Navigation("AssignedStudents");
+                });
 
-                    b.Navigation("Links");
-
-                    b.Navigation("StudentTasks");
+            modelBuilder.Entity("GPMS.Models.Project", b =>
+                {
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("GPMS.Models.Student", b =>
                 {
-                    b.Navigation("Replys");
+                    b.Navigation("Links");
 
-                    b.Navigation("StudentTask");
+                    b.Navigation("Replies");
                 });
 
             modelBuilder.Entity("GPMS.Models.Supervisor", b =>
@@ -454,9 +512,18 @@ namespace GPMS.Migrations
                 {
                     b.Navigation("KanbanTasks");
 
+                    b.Navigation("Links");
+
                     b.Navigation("Project");
 
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("GPMS.Models.User", b =>
+                {
+                    b.Navigation("Student");
+
+                    b.Navigation("Supervisor");
                 });
 #pragma warning restore 612, 618
         }

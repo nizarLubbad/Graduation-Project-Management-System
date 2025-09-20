@@ -73,6 +73,8 @@ namespace GPMS.Models
         public Team? Team { get; set; }
 
         public ICollection<Reply> Replies { get; set; } = new List<Reply>();
+        public ICollection<Link> Links { get; set; } = new List<Link>();
+
     }
 }
 

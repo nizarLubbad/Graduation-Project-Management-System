@@ -223,8 +223,16 @@ namespace GPMS.Services
             await _taskRepository.DeleteAsync(task);
             return true;
         }
+        public async Task<IEnumerable<TaskDto>> GetAllByTeamIdAsync(long teamId)
+        {
+            var tasks = (await _taskRepository.GetAllAsync())
+                .Where(t => t.TeamId == teamId)
+                .ToList();
 
-        
+            return _mapper.Map<IEnumerable<TaskDto>>(tasks);
+        }
+
+
     }
 
 

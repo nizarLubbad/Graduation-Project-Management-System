@@ -23,5 +23,6 @@ namespace GPMS.Interfaces
         Task<TaskDto?> UpdateAsync(long taskId, UpdateTaskDto dto);
         Task<TaskDto?> UpdateStatusAsync(UpdateTaskStatusDto dto);
         Task<bool> DeleteAsync(long taskId);
+        Task<IEnumerable<TaskDto>> GetAllByTeamIdAsync(long teamId);
     }
 }
