@@ -37,9 +37,15 @@ namespace GPMS.Repositories
             return await _contextR.Students.AnyAsync(s => s.Email == email);
         }
 
-        public async Task SaveChangesAsync()
+        //public async Task SaveChangesAsync()
+        //{
+        //    await _contextR.SaveChangesAsync();
+        //}
+        public async Task<Student?> GetByUserIdAsync(long userId)
         {
-            await _contextR.SaveChangesAsync();
+            return await _contextR.Students
+                .Include(s => s.User)
+                .FirstOrDefaultAsync(s => s.UserId == userId);
         }
     }
 }

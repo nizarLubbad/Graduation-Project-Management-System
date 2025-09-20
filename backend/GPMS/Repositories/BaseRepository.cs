@@ -46,6 +46,10 @@ namespace GPMS.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
     }
 }
 
