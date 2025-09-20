@@ -8,49 +8,38 @@ namespace GPMS.Services
 
     public class StudentService : IStudentService
     {
-        //        private readonly IStudentRepository _studentRepository;
+        private readonly IStudentRepository _studentRepository;
 
-        //        public StudentService(IStudentRepository studentRepository)
-        //        {
-        //            _studentRepository = studentRepository;
-        //        }
+        public StudentService(IStudentRepository studentRepository)
+        {
+            _studentRepository = studentRepository;
+        }
 
-        //        //get students depending on their status (status =false)
+        public async Task<IEnumerable<StudentDto>> GetAllAsync()
+        {
+            var students = await _studentRepository.GetAllAsync();
+            return students.Select(s => new StudentDto
+            {
+                Id = s.StudentId,
+                Name = s.Name,
+                Email = s.Email,
+                Department = s.Department
+            });
+        }
 
+        public async Task<StudentDto?> GetByIdAsync(int id)
+        {
+            var student = await _studentRepository.GetByIdAsync(id);
+            if (student == null) return null;
 
-        //        //basic crud operations
-        //        public async Task<IEnumerable<Student>> GetAllAsync()
-        //        {
-        //            return await _studentRepository.GetAllAsync();
-        //        }
-
-        //        public async Task<Student?> GetByIdAsync(object id)
-        //        {
-        //            if (id is long studentId)
-        //            {
-        //                return await _studentRepository.GetByIdAsync(studentId);
-        //            }
-        //            return null;
-        //        }
-
-        //        public async Task<Student> AddAsync(Student entity)
-        //        {
-        //            return await _studentRepository.AddAsync(entity);
-        //        }
-
-        //        public async Task<Student> UpdateAsync(Student entity)
-        //        {
-        //            return await _studentRepository.UpdateAsync(entity);
-        //        }
-
-        //        public async Task<bool> DeleteAsync(object id)
-        //        {
-        //            if (id is long studentId)
-        //            {
-        //                return await _studentRepository.DeleteAsync(studentId);
-        //            }
-        //            return false;
-        //        }
+            return new StudentDto
+            {
+                Id = student.StudentId,
+                Name = student.Name,
+                Email = student.Email,
+                Department = student.Department
+            };
+        }
         public Task<StudentDto> CreateAsync(StudentDto dto)
         {
             throw new NotImplementedException();
@@ -61,10 +50,7 @@ namespace GPMS.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<StudentDto>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public Task<StudentDto?> GetByIdAsync(object id)
         {
