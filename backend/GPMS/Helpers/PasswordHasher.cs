@@ -5,17 +5,18 @@ namespace GPMS.Helpers
 {
     public class PasswordHasher : IPasswordHasher
     {
-        public string Hash(string password)
+        public string HashPassword(string password)
         {
-            using var sha256 = SHA256.Create();
-            var bytes = Encoding.UTF8.GetBytes(password);
-            var hash = sha256.ComputeHash(bytes);
-            return Convert.ToBase64String(hash);
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(hashedBytes);
+            }
         }
 
-        public bool Verify(string password, string hashedPassword)
+        public bool VerifyPassword(string password, string hashedPassword)
         {
-            var hashOfInput = Hash(password);
+            var hashOfInput = HashPassword(password);
             return hashOfInput == hashedPassword;
         }
     }
