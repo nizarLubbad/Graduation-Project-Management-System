@@ -32,5 +32,9 @@ namespace GPMS.Repositories
 
             return studentName;
         }
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -20,14 +20,20 @@ namespace GPMS.Models
 
         [Column(TypeName = "VARCHAR(15)")]
         [Required]
-        public string Department { get; set; }
+        public string Department { get; set; }//in our form there is no such a field for the supervisor
         //public string SubmitStudent { get; set; }
-        public int TeamCount { get; set; } 
+        public int TeamCount { get; set; }
         // One-to-Many with Teams
+
+        [Required]
+        public long UserId { get; set; }
+
+        [ForeignKey(nameof(UserId))]
+        public User User { get; set; } = null!;
         public ICollection<Team> Teams { get; set; } = new List<Team>();
         public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
         public ICollection<Reply> Replys { get; set; } = new List<Reply>();
-
+        
 
     }
 }

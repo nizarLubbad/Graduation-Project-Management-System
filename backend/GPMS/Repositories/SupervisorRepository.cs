@@ -16,5 +16,9 @@ namespace GPMS.Repositories
         {
             return await _context.Supervisors.FirstOrDefaultAsync(s => s.Email == email);
         }
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

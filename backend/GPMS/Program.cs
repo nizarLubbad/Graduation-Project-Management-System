@@ -1,39 +1,42 @@
+using GPMS.Helpers;
+using GPMS.Interfaces;
 using GPMS.Middlewares;
 using GPMS.Models;
 using GPMS.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 var builder = WebApplication.CreateBuilder(args);
-//add authentication
+
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
-var jwtKey = builder.Configuration["Jwt:Key"] 
-             ?? throw new InvalidOperationException("JWT Key not configured.");
-var jwtIssuer = builder.Configuration["Jwt:Issuer"] 
-                ?? throw new InvalidOperationException("JWT Issuer not configured.");
-var jwtAudience = builder.Configuration["Jwt:Audience"] 
-                  ?? throw new InvalidOperationException("JWT Audience not configured.");
-
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer(options =>
+//configure the jwt authentication
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false; 
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = jwtIssuer,
-            ValidAudience = jwtAudience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
-        };
-    });
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
 
-builder.Services.AddAuthorization();
-
-
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(key)
+    };
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -66,11 +69,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
-
+//enable the authentication and the authorization
+app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
