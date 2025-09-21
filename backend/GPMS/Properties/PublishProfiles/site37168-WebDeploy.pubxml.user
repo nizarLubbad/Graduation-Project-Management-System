@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAI3RpDasxPkSvDATl9+3PBgAAAAACAAAAAAAQZgAAAAEAACAAAADmuaB9n96QEWoK4NhVKJ5WlETSscax5/YZYBIrfCCEsAAAAAAOgAAAAAIAACAAAABIsUnCU/spEQ/fmHmpRX3WL6Gbhyo78qiis74kRTyL0CAAAADLNbz/BhrBbW7+39NZjxIjAPLseDpKbsnuQoiIwDN1W0AAAAAh83oW8y14Wk4+menpCZDAfXcGnxUfTwUmHv88XQINY+x/EXCjCO2ZdquwenwnVjqRwz6rXN4d6Fe7U5x5RtPI</EncryptedPassword>
+    <History>True|2025-09-21T07:47:29.1077258Z||;True|2025-09-21T10:33:52.6145530+03:00||;True|2025-09-21T10:33:09.3846254+03:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=db27798.public.databaseasp.net%3b Database=db27798%3b User Id=db27798%3b Password=Q%40f6r3_TE%3fx8%3b Encrypt=False%3b MultipleActiveResultSets=True%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="GPMS.Models.AppDbContext">
+      <Value>Server=db27798.public.databaseasp.net%3b Database=db27798%3b User Id=db27798%3b Password=Q%40f6r3_TE%3fx8%3b Encrypt=False%3b MultipleActiveResultSets=True%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

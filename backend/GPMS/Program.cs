@@ -210,11 +210,15 @@ namespace GPMS
             app.UseMiddleware<LoggingMiddleware>();
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-            if (app.Environment.IsDevelopment())
-            {
+       //     if (app.Environment.IsDevelopment())
+       //     {
                 app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty; // يخلي Swagger هو الصفحة الرئيسية
+            });
+            //     }
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
