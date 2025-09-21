@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GPMS.Migrations
 {
     /// <inheritdoc />
-    public partial class addeduserentityandchangesomeofrelationshipsandremovestudenttask : Migration
+    public partial class added : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

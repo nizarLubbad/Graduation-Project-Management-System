@@ -192,7 +192,7 @@ namespace GPMS
             });
 
             // ---------------- Database ----------------
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+            var connectionString = builder.Configuration.GetConnectionString("CloudConnection")
                 ?? throw new InvalidOperationException("Connection string not found.");
 
             builder.Services.AddSingleton(new ConnectionStringProvider(connectionString));

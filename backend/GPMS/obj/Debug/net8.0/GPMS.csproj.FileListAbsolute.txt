@@ -323,7 +323,6 @@ C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS
 C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.csproj.Up2Date
 C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.genruntimeconfig.cache
 C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\ref\GPMS.dll

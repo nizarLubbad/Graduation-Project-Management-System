@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GPMS.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250920155948_added user entity and change some of relationships and remove studenttask")]
-    partial class addeduserentityandchangesomeofrelationshipsandremovestudenttask
+    [Migration("20250921062739_added")]
+    partial class added
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.9")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
