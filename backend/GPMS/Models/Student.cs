@@ -1,44 +1,28 @@
-﻿//using Microsoft.EntityFrameworkCore.Metadata.Internal;
-//using System.ComponentModel.DataAnnotations;
+﻿//using System.ComponentModel.DataAnnotations;
 //using System.ComponentModel.DataAnnotations.Schema;
 
 //namespace GPMS.Models
 //{
 //    public class Student
 //    {
-
-//        public long StudentId { get; set; }
-
-//        [Required]
-//        [Column(TypeName = "varchar(100)")]
-//        public required string Name { get; set; }
-
-//        public bool Status { get; set; } = false;
-//        public string Department { get; set; }
-
-//        [Required, Column(TypeName = "varchar(100)")]
-//        [EmailAddress(ErrorMessage = "Invalid Email Address")]
-//        public required string Email { get; set; }
-
-//        [Required, Column(TypeName = "varchar(100)")]
-//        public required string PasswordHash { get; set; }
-//        [Required]
-//        //-----------------------------
+//        // المفتاح الأساسي هو UserId (مش StudentId مستقل)
+//        [Key, ForeignKey(nameof(User))]
 //        public long UserId { get; set; }
 
-//        [ForeignKey(nameof(UserId))]
+//        public bool Status { get; set; } = false;
+//        public string? Department { get; set; }
+
+//        // العلاقة مع User
 //        public User User { get; set; } = null!;
-//        //-------------------------------
-//        public ICollection<StudentTask> StudentTask { get; set; } = new List<StudentTask>();
+
 //        [ForeignKey("Team")]
 //        public long? TeamId { get; set; }
-//        public Team Team { get; set; }
-//        public ICollection<Reply> Replys { get; set; } = new List<Reply>();
+//        public Team? Team { get; set; }
 
+//        public ICollection<Reply> Replies { get; set; } = new List<Reply>();
+//        public ICollection<Link> Links { get; set; } = new List<Link>();
 //    }
-
 //}
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -46,35 +30,21 @@ namespace GPMS.Models
 {
     public class Student
     {
-        public long StudentId { get; set; }
-
-        [Required]
-        [Column(TypeName = "varchar(100)")]
-        public required string Name { get; set; }
-
-        public bool Status { get; set; } = false;
-        public string Department { get; set; }
-
-        [Required, Column(TypeName = "varchar(100)")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
-        public required string Email { get; set; }
-
-        [Required, Column(TypeName = "varchar(100)")]
-        public required string PasswordHash { get; set; }
-
-        [Required]
+        [Key, ForeignKey("User")]
         public long UserId { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        public User User { get; set; } = null!;
+        public bool? Status { get; set; } = false;
+
+        [MaxLength(100)]
+        public string? Department { get; set; }
 
         [ForeignKey("Team")]
         public long? TeamId { get; set; }
-        public Team? Team { get; set; }
 
+        // Navigation properties
+        public User User { get; set; } = null!;
+        public Team? Team { get; set; }
         public ICollection<Reply> Replies { get; set; } = new List<Reply>();
         public ICollection<Link> Links { get; set; } = new List<Link>();
-
     }
 }
-

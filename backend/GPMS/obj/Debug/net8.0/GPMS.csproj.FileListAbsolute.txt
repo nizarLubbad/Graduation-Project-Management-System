@@ -459,3 +459,10 @@ C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\D
 C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.csproj.Up2Date
 C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\GPMS.genruntimeconfig.cache
 C:\Users\X1 Zano\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\ref\GPMS.dll
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\bin\Debug\net8.0\publ\web.config
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\bin\Debug\net8.0\publ\appsettings.Development.json
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\bin\Debug\net8.0\publ\appsettings.json
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\bin\Debug\net8.0\publ\GPMS.deps.json
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\bin\Debug\net8.0\publ\GPMS.runtimeconfig.json
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\bin\Debug\net8.0\publ\GPMS.staticwebassets.endpoints.json
+C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

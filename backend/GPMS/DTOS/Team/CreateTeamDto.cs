@@ -5,6 +5,7 @@ namespace GPMS.DTOS.Team
 {
     public class CreateTeamDto
     {
+        public long TeamId { get; set; }
         public string? TeamName { get; set; }
 
         // Optional: list of student ids to add as members when creating

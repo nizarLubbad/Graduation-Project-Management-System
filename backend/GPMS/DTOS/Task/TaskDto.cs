@@ -9,8 +9,8 @@
         //public string Status { get; set; } // "Todo"/"Doing"/"Done"
         //public DateTime CreatedDate { get; set; }
         public long Id { get; set; } // Task primary key
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
         public long TeamId { get; set; }
         public string Status { get; set; } = null!; // "Todo"/"Doing"/"Done"
         public DateTime? DueDate { get; set; }

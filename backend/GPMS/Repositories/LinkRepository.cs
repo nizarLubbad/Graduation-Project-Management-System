@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Repositories
 {
-    public class LinkRepository : BaseRepository<Link>, ILinkRepository
+    public class LinkRepository : BaseRepository<Link, long>, ILinkRepository
     {
         private readonly AppDbContext _contextl;
 

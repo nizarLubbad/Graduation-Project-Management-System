@@ -651,96 +651,82 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "GPMS.Controllers.StudentController",
-    "Method": "GetAll",
-    "RelativePath": "api/Student",
+    "ContainingType": "GPMS.Controllers.StudentsController",
+    "Method": "GetProfile",
+    "RelativePath": "api/Students/profile",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[GPMS.DTOS.Student.StudentDto, GPMS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "GPMS.Controllers.StudentController",
-    "Method": "GetById",
-    "RelativePath": "api/Student/{id}",
-    "HttpMethod": "GET",
+    "ContainingType": "GPMS.Controllers.StudentsController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/Students/profile",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "dto",
+        "Type": "GPMS.DTOS.Student.UpdateStudentProfileDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GPMS.Controllers.SupervisorsController",
+    "Method": "BookTeam",
+    "RelativePath": "api/Supervisors/{supervisorId}/book-team/{teamId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "supervisorId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "teamId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GPMS.Controllers.SupervisorsController",
+    "Method": "SetMaxTeams",
+    "RelativePath": "api/Supervisors/{userId}/max-teams",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "maxTeams",
         "Type": "System.Int32",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "GPMS.DTOS.Student.StudentDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "GPMS.Controllers.SupervisorController",
-    "Method": "GetAll",
-    "RelativePath": "api/Supervisor",
+    "ContainingType": "GPMS.Controllers.SupervisorsController",
+    "Method": "GetProfile",
+    "RelativePath": "api/Supervisors/profile",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[GPMS.DTOS.Project.SupervisorDto, GPMS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "GPMS.Controllers.SupervisorController",
-    "Method": "GetById",
-    "RelativePath": "api/Supervisor/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "GPMS.DTOS.Project.SupervisorDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "GPMS.Controllers.TeamsController",
@@ -804,7 +790,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "GPMS.DTOS.Team.TeamDto",
+        "Type": "GPMS.DTOS.Team.CreateTeamDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

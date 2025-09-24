@@ -2,6 +2,7 @@
 using GPMS.DTOS.Feedback;
 using GPMS.Interfaces;
 using GPMS.Models;
+using GPMS.Repositories;
 
 namespace GPMS.Services
 {
@@ -9,16 +10,27 @@ namespace GPMS.Services
     {
         private readonly IFeedbackRepository _feedbackRepository;
         private readonly IMapper _mapper;
-        public FeedbackService(IFeedbackRepository feedbackRepository, IMapper mapper)
+        private readonly ITeamRepository _teamRepository;
+        private readonly ISupervisorRepository _supervisorRepository;
+        public FeedbackService(IFeedbackRepository feedbackRepository, IMapper mapper, ITeamRepository teamRepository, ISupervisorRepository supervisorRepository)
         {
             _feedbackRepository = feedbackRepository;
             _mapper = mapper;
-
+            _teamRepository = teamRepository;
+            _supervisorRepository = supervisorRepository;
         }
 
 
         public async Task<FeedbackDto> CreateFeedbackAsync(CreateFeedbackDto dto)
         {
+            var team = await _teamRepository.GetTeamWithDetailsAsync(dto.TeamId);
+            if (team == null)
+                throw new KeyNotFoundException("Team not found");
+
+            var isSupervisorOfTeam = await _supervisorRepository.IsSupervisorOfTeamAsync(dto.SupervisorId, dto.TeamId);
+            if (!isSupervisorOfTeam)
+                throw new UnauthorizedAccessException("Supervisor cannot add feedback to this team");
+
             var feedback = new Feedback
             {
                 Content = dto.Content,
@@ -27,9 +39,10 @@ namespace GPMS.Services
                 Date = DateTime.Now
             };
 
-            var savedFeedback = await _feedbackRepository.AddAsync(feedback);
-            return _mapper.Map<FeedbackDto>(savedFeedback);
+            await _feedbackRepository.AddAsync(feedback);
+            await _feedbackRepository.SaveChangesAsync();
 
+            return _mapper.Map<FeedbackDto>(feedback);
         }
 
         public async Task<bool> DeleteFeedbackAsync(long feedbackId)

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Repositories
 {
-    public class TaskRepository : BaseRepository<KanbanTask>, ITaskRepository
+    public class TaskRepository : BaseRepository<KanbanTask, long>, ITaskRepository
     {
         private readonly AppDbContext _contextk;
 

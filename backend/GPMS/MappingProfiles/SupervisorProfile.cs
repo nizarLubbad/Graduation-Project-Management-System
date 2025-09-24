@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GPMS.DTOS.Project;
+using GPMS.DTOS.Supervisor;
 using GPMS.Models;
 
 namespace GPMS.MappingProfiles
@@ -10,6 +11,7 @@ namespace GPMS.MappingProfiles
         {
             CreateMap<Supervisor,CreateSupervisorDto>();
             CreateMap<Supervisor,SupervisorDto>();
+            CreateMap<Supervisor,SetMaxTeamsDto>();
         }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Repositories
 {
-    public class ProjectRepository :BaseRepository<Project> ,IProjectRepository
+    public class ProjectRepository :BaseRepository<Project,int> ,IProjectRepository
     {
         private readonly AppDbContext _contextp;
 
@@ -13,60 +13,16 @@ namespace GPMS.Repositories
             _contextp = context;
         }
 
-        //public async Task<IEnumerable<Project>> GetAllAsync()
-        //{
-        //    return await _context.Projects
-        //                         .Include(p => p.Supervisor)
-        //                         .Include(p => p.Students)
-        //                         .ToListAsync();
-        //}
-
-        //public async Task<Project?> GetByIdAsync(int id)
-        //{
-        //    return await _context.Projects
-        //                         .Include(p => p.Supervisor)
-        //                         .Include(p => p.Students)
-        //                         .FirstOrDefaultAsync(p => p.Id == id);
-        //}
-
-        //public async Task<Project> AddAsync(Project project)
-        //{
-        //    _context.Projects.Add(project);
-        //    await _context.SaveChangesAsync();
-        //    return project;
-        //}
-
-        //public async Task<Project> UpdateAsync(Project project)
-        //{
-        //    _context.Projects.Update(project);
-        //    await _context.SaveChangesAsync();
-        //    return project;
-        //}
-
-        //public async Task<bool> DeleteAsync(string projectTitle)
-        //{
-        //    var project = await _context.Projects.FindAsync(projectTitle);
-        //    if (project == null) return false;
-
-        //    _context.Projects.Remove(project);
-        //    await _context.SaveChangesAsync();
-        //    return true;
-        //}
-
-        //public Task<Project?> GetByIdAsync(object id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
+     
 
 
         public async Task UpdateStatusToTrueAsync(int projectId)
         {
             var project = await _context.Projects.FindAsync(projectId);
-            if (project == null) return; 
+            if (project == null) return;
 
-            project.IsCompleted = true; 
-            await _context.SaveChangesAsync(); 
+            project.IsCompleted = true;
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool?> GetStatusAsync(int projectId)
@@ -77,5 +33,36 @@ namespace GPMS.Repositories
 
             return project?.IsCompleted;
         }
+        ///////////////
+        ///
+
+        public override async Task<IEnumerable<Project>> GetAllAsync()
+        {
+            return await _contextp.Projects
+                 .Include(p => p.Team!)
+                 .ThenInclude(t => t!.Supervisor)
+                 .Where(p => p.Team != null) 
+                 .ToListAsync();
+        }
+
+        public override async Task<Project?> GetByIdAsync(int id)
+        {
+            return await _contextp.Projects
+                 .Include(p => p.Team!)
+                 .ThenInclude(t => t!.Supervisor)
+                 .FirstOrDefaultAsync(p => p.Id == id);
+        }
+        public async Task<Team?> GetTeamWithSupervisorAsync(long teamId)
+        {
+            return await _contextp.Teams
+                .Include(t => t.Supervisor)
+                .ThenInclude(s => s.User)
+                .FirstOrDefaultAsync(t => t.TeamId == teamId);
+        }
+
+
     }
+
+
 }
+

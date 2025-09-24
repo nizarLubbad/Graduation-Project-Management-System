@@ -5,6 +5,8 @@ namespace GPMS.Models
 {
     public class Team
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long TeamId { get; set; }
 
         [Required]
@@ -26,6 +28,7 @@ namespace GPMS.Models
         // One-to-Many with KanbanTask
         public ICollection<KanbanTask> KanbanTasks { get; set; } = new List<KanbanTask>();
 
+        public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
 
 
         //public long StudentId { get; set; }

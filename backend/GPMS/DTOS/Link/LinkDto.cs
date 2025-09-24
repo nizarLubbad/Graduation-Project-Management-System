@@ -10,6 +10,6 @@
         public long StudentId { get; set; }
         public string StudentName { get; set; } = null!;
 
-        public long TeamId { get; set; }
+        //public long TeamId { get; set; }
     }
 }

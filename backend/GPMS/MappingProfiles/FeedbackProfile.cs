@@ -9,7 +9,9 @@ namespace GPMS.MappingProfiles
         public FeedbackProfile()
         {
             CreateMap<Feedback, CreateFeedbackDto>();
-            CreateMap<Feedback,FeedbackDto>();
+            
+                CreateMap<Feedback, FeedbackDto>()
+    .ForMember(dest => dest.FeedbackId, opt => opt.MapFrom(src => src.Id));
             CreateMap<Feedback, FeedbackResponseDto>();
             CreateMap<Feedback,UpdateFeedbackDto>();
         }
