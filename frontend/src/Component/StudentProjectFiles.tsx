@@ -1,92 +1,185 @@
+// StudentProjectFiles.tsx
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { User, ProjectFile } from "../types/types";
+import { useAuth } from "../context/AuthContext";
+import { ProjectFile } from "../types/types";
+
+interface Student {
+  userId: number;
+  name: string;
+}
 
 export default function StudentProjectFiles() {
-  // =========================
-  // 🔹 State Management
-  // =========================
+  const { user } = useAuth();
   const [files, setFiles] = useState<ProjectFile[]>([]);
-  const [fileUrl, setFileUrl] = useState<string>("");
-  const [fileName, setFileName] = useState<string>("");
+  const [fileName, setFileName] = useState("");
+  const [fileUrl, setFileUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [teamMembers, setTeamMembers] = useState<Student[]>([]);
 
-  const user: User = JSON.parse(localStorage.getItem("currentUser") || "{}");
-
-  // =========================
-  // 🔹 Fetch Files from LocalStorage (per team)
-  // =========================
-  useEffect(() => {
-    if (!user?.team?.id) return;
-
-    const savedFiles: ProjectFile[] = JSON.parse(localStorage.getItem("projectFiles") || "[]");
-    const filtered: ProjectFile[] = savedFiles.filter(
-      (f: ProjectFile) => f.projectId === user.team?.id
-    );
-    setFiles(filtered);
-  }, [user.team?.id]);
+  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
 
   // =========================
-  // 🔹 Save Files Helper
+  // 🔹 Fetch all team members
   // =========================
-  const saveFiles = (updated: ProjectFile[]) => {
-    const allFiles: ProjectFile[] = JSON.parse(localStorage.getItem("projectFiles") || "[]")
-      .filter((f: ProjectFile) => f.projectId !== user.team?.id);
-    localStorage.setItem("projectFiles", JSON.stringify([...allFiles, ...updated]));
-    setFiles(updated);
+  const fetchTeamMembers = async () => {
+    if (!user?.team?.teamId) return;
+    try {
+      const res = await fetch(`${baseUrl}/api/Students/all`);
+      const data: { students: Student[] } = await res.json();
+      const members = data.students.filter(s => user.team?.memberStudentIds?.includes(s.userId));
+      setTeamMembers(members);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // =========================
-  // 🔹 Upload File
+  // 🔹 Fetch all team files
   // =========================
-  const handleUpload = () => {
-    if (!fileName.trim() || !fileUrl.trim()) return;
+  const fetchFiles = async () => {
+    if (!user?.team?.teamId) return;
+    setLoading(true);
+    try {
+      const res = await fetch(`${baseUrl}/api/Link/team/${user.team.teamId}`);
+      const data: ProjectFile[] = await res.json();
+      setFiles(data);
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Failed to load project files", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const newFile: ProjectFile = {
-      id: Date.now().toString(),
-      projectId: user.team?.id || "",
-      projectName: user.team?.name || "Unknown Project",
-      uploaderId: user.id,
-      uploaderName: user.name,
-      uploaderRole: user.role,
-      fileName,
-      fileUrl,
-      date: new Date().toLocaleString(),
+  useEffect(() => {
+    fetchTeamMembers();
+    fetchFiles();
+  }, [user?.team?.teamId]);
+
+  const getStudentName = (id: number) => {
+    const student = teamMembers.find(s => s.userId === id);
+    return student ? student.name : "Unknown";
+  };
+
+  // =========================
+  // 🔹 Upload new file
+  // =========================
+  const handleUpload = async () => {
+    if (!user) return Swal.fire("Error", "User is not logged in!", "error");
+    if (!fileName.trim() || !fileUrl.trim() || !user.team?.teamId) {
+      return Swal.fire("Warning", "Please fill in both File Name and File URL!", "warning");
+    }
+
+    const newFile = {
+      title: fileName,
+      url: fileUrl,
+      studentId: user.userId,
+      teamId: user.team.teamId,
     };
 
-    saveFiles([...files, newFile]);
-    setFileName("");
-    setFileUrl("");
-    Swal.fire("Uploaded!", "File has been uploaded.", "success");
+    setLoading(true);
+    try {
+      const res = await fetch(`${baseUrl}/api/Link`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newFile),
+      });
+      if (!res.ok) throw new Error("Upload failed");
+      const savedFile: ProjectFile = await res.json();
+      setFiles(prev => [...prev, savedFile]);
+      setFileName("");
+      setFileUrl("");
+      Swal.fire("Uploaded!", "File has been uploaded successfully.", "success");
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error!", err instanceof Error ? err.message : "Failed to upload the file.", "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // =========================
-  // 🔹 Delete File
+  // 🔹 Delete file
   // =========================
-  const handleDelete = (id: string) => {
-    Swal.fire({
+  const handleDelete = async (id: number) => {
+    const file = files.find(f => f.id === id);
+    if (!file || file.studentId !== user?.userId) {
+      Swal.fire("Error", "You can only delete your own files", "error");
+      return;
+    }
+
+    const result = await Swal.fire({
       title: "Are you sure?",
-      text: "You cannot undo this!",
+      text: "This action cannot be undone!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
-    }).then(result => {
-      if (result.isConfirmed) {
-        const updated: ProjectFile[] = files.filter((f: ProjectFile) => f.id !== id);
-        saveFiles(updated);
-        Swal.fire("Deleted!", "File has been deleted.", "success");
-      }
     });
+
+    if (!result.isConfirmed) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch(`${baseUrl}/api/Link/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Delete failed");
+      setFiles(prev => prev.filter(f => f.id !== id));
+      Swal.fire("Deleted!", "File has been deleted.", "success");
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error!", "Failed to delete the file.", "error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // =========================
-  // 🔹 UI Rendering
+  // 🔹 Edit file
   // =========================
+  const handleEdit = async (file: ProjectFile) => {
+    if (!user || file.studentId !== user.userId) {
+      Swal.fire("Error", "You can only edit your own files", "error");
+      return;
+    }
+
+    const { value: formValues } = await Swal.fire({
+      title: "Edit File",
+      html:
+        `<input id="swal-file-title" class="swal2-input" placeholder="Title" value="${file.title}">` +
+        `<input id="swal-file-url" class="swal2-input" placeholder="URL" value="${file.url}">`,
+      focusConfirm: false,
+      preConfirm: () => {
+        const title = (document.getElementById("swal-file-title") as HTMLInputElement).value;
+        const url = (document.getElementById("swal-file-url") as HTMLInputElement).value;
+        if (!title || !url) Swal.showValidationMessage("Please fill both fields");
+        return { title, url };
+      },
+    });
+
+    if (!formValues) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch(`${baseUrl}/api/Link/${file.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...file, title: formValues.title, url: formValues.url }),
+      });
+      if (!res.ok) throw new Error("Update failed");
+      const updatedFile: ProjectFile = await res.json();
+      setFiles(prev => prev.map(f => f.id === file.id ? updatedFile : f));
+      Swal.fire("Updated!", "File has been updated.", "success");
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error!", "Failed to update the file.", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="p-4 sm:p-6 md:p-8 max-w-4xl mx-auto space-y-6">
-      {/* Title */}
-      <h1 className="text-3xl sm:text-4xl font-bold text-center text-teal-700">
-        📁 Project Files
-      </h1>
+    <div className="p-6 max-w-4xl mx-auto space-y-6">
+      <h1 className="text-3xl font-bold text-center text-teal-700">📁 Student Project Files</h1>
 
       {/* Upload Section */}
       <div className="flex flex-col sm:flex-row gap-3 items-center">
@@ -94,60 +187,44 @@ export default function StudentProjectFiles() {
           type="text"
           placeholder="File Name"
           value={fileName}
-          onChange={e => setFileName(e.target.value)}
+          onChange={(e) => setFileName(e.target.value)}
           className="flex-1 p-3 border border-teal-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
         <input
           type="text"
           placeholder="File URL"
           value={fileUrl}
-          onChange={e => setFileUrl(e.target.value)}
+          onChange={(e) => setFileUrl(e.target.value)}
           className="flex-1 p-3 border border-teal-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
         <button
           onClick={handleUpload}
-          className="px-5 py-3 bg-teal-600 text-white font-semibold rounded-lg shadow hover:bg-teal-700 transition"
+          disabled={loading}
+          className="px-5 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition disabled:opacity-50"
         >
-          Upload
+          {loading ? "Uploading..." : "Upload"}
         </button>
       </div>
 
       {/* Files List */}
-      {files.length === 0 ? (
+      {!loading && files.length === 0 ? (
         <p className="text-gray-500 text-center mt-4">No files uploaded yet.</p>
       ) : (
-        <ul className="space-y-3">
-          {files.map((f: ProjectFile) => (
-            <li
-              key={f.id}
-              className="p-4 sm:p-5 border border-teal-200 rounded-lg flex flex-col sm:flex-row sm:justify-between items-start sm:items-center bg-white shadow hover:shadow-lg transition"
-            >
-              {/* File Details */}
-              <div className="flex-1 w-full sm:mr-4">
-                <p className="font-semibold text-teal-700 text-lg sm:text-xl">{f.fileName}</p>
-                <p className="text-xs sm:text-sm text-gray-500">
-                  Uploaded by: <span className="font-medium">{f.uploaderName}</span> ({f.uploaderRole})
-                </p>
-                <p className="text-xs sm:text-sm text-gray-400">📅 {f.date}</p>
+        <ul className="space-y-3 mt-4">
+          {files.map((f) => (
+            <li key={f.id} className="p-4 border border-teal-200 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white shadow hover:shadow-lg transition">
+              <div className="flex-1">
+                <p className="font-semibold text-teal-700 text-lg">{f.title}</p>
+                <p className="text-sm text-gray-400">📅 {f.date}</p>
+                <p className="text-sm text-gray-500">👤 Uploaded by: {getStudentName(f.studentId)}</p>
               </div>
-
-              {/* Actions */}
               <div className="flex gap-2 mt-3 sm:mt-0">
-                <a
-                  href={f.fileUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm sm:text-base"
-                >
-                  Download
-                </a>
-                {f.uploaderId === user.id && (
-                  <button
-                    onClick={() => handleDelete(f.id)}
-                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm sm:text-base"
-                  >
-                    Delete
-                  </button>
+                <a href={f.url} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm">Download</a>
+                {f.studentId === user?.userId && (
+                  <>
+                    <button onClick={() => handleEdit(f)} className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition text-sm">Edit</button>
+                    <button onClick={() => handleDelete(f.id)} disabled={loading} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-sm disabled:opacity-50">Delete</button>
+                  </>
                 )}
               </div>
             </li>

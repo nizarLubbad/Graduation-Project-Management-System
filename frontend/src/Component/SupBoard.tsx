@@ -1,79 +1,127 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Assignment, User, ProjectDisplay, Supervisor } from "../types/types";
+import { useAuth } from "../context/AuthContext";
+
+ export interface Project {
+  id: number;
+  projectName: string;
+  description: string;
+  isCompleted: boolean;
+  supervisorId: number | null;
+  supervisorName: string | null;
+  teamId: number;
+  teamName: string;
+}
+
+interface Team {
+  teamId: number;
+  teamName: string;
+  memberStudentIds: number[];
+}
+
+interface User {
+  userId: number;
+  name: string;
+  role?: string;
+}
 
 export default function SupBoard() {
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const [projects, setProjects] = useState<ProjectDisplay[]>([]);
-  const [currentSupervisor, setCurrentSupervisor] = useState<Supervisor | null>(null);
+
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [currentSupervisor, setCurrentSupervisor] = useState<any>(null);
   const [maxTeams, setMaxTeams] = useState<number | null>(null);
   const [inputValue, setInputValue] = useState<number>(0);
   const [bookedTeams, setBookedTeams] = useState<number>(0);
 
+  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
+
   useEffect(() => {
-    const userData: User | null = JSON.parse(localStorage.getItem("currentUser") || "null");
-    if (!userData || userData.role !== "supervisor") return;
+    const fetchData = async () => {
+      if (!user) return;
 
-    const supervisor = userData as Supervisor;
-    setCurrentSupervisor(supervisor);
+      try {
+        const userId = user.userId;
 
-    const storedUsers = JSON.parse(localStorage.getItem("users") || "[]") as User[];
-    const supervisorData = storedUsers.find(u => u.id === supervisor.id) as Supervisor | undefined;
+        // جلب بيانات المشرف
+        const resUser = await fetch(`${baseUrl}/api/Auth/${userId}`);
+        const supervisorData = await resUser.json();
+        setCurrentSupervisor(supervisorData);
 
-    const assignments = JSON.parse(localStorage.getItem("supervisorAssignments") || "[]") as Assignment[];
-    const myProjects = assignments
-      .filter(a => a.supervisorName === supervisor.name)
-      .map(a => ({
-        id: a.teamId,
-        title: a.projectTitle || a.teamName,
-        teamName: a.teamName,
-        description: a.projectDescription || "",
-        members: a.members,
-      }));
+        // جلب كل المشاريع
+        const resProjects = await fetch(`${baseUrl}/api/Project`);
+        const allProjects: Project[] = await resProjects.json();
+        const myProjects = allProjects.filter(p => p.supervisorId === userId);
+        setProjects(myProjects);
+        setBookedTeams(myProjects.length);
 
-    setProjects(myProjects);
+        // جلب كل الفرق
+        const resTeams = await fetch(`${baseUrl}/api/Teams`);
+        const allTeams: Team[] = await resTeams.json();
+        setTeams(allTeams);
 
-    if (supervisorData) {
-      setMaxTeams(supervisorData.maxTeams ?? null);
-      setBookedTeams(supervisorData.currentTeams ?? myProjects.length);
-    }
-  }, []);
+        // جلب كل المستخدمين
+        const resUsers = await fetch(`${baseUrl}/api/Auth/getUsers`);
+        const allUsers: User[] | { users: User[] } = await resUsers.json();
+        setUsers(Array.isArray(allUsers) ? allUsers : allUsers.users || []);
+        
 
-  const handleSetMax = () => {
-    if (!currentSupervisor) return;
-    const updatedUsers = ((JSON.parse(localStorage.getItem("users") || "[]")) as User[]).map(u => {
-      if (u.id === currentSupervisor.id && u.role === "supervisor") {
-        return { ...u, maxTeams: inputValue, currentTeams: 0 } as Supervisor;
+        // جلب العدد المتبقي للفرق
+        const resRemaining = await fetch(`${baseUrl}/api/Supervisors/${userId}/remaining-teams`);
+        const remainingData = await resRemaining.json();
+        const remaining = typeof remainingData === "number" ? remainingData : remainingData.remainingTeams ?? 0;
+
+        setMaxTeams(remaining + myProjects.length);
+        setInputValue(remaining + myProjects.length);
+
+      } catch (err) {
+        console.error("Error fetching data:", err);
       }
-      return u;
-    });
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-    setMaxTeams(inputValue);
-    setBookedTeams(0);
+    };
+
+    fetchData();
+  }, [user]);
+
+  const handleSetMax = async () => {
+    if (!currentSupervisor) return;
+
+    try {
+      const res = await fetch(
+        `${baseUrl}/api/Supervisors/${currentSupervisor.userId}/max-teams`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: inputValue.toString(),
+        }
+      );
+
+      if (!res.ok) throw new Error(`Failed to update max teams (status: ${res.status})`);
+
+      const resUpdated = await fetch(`${baseUrl}/api/Auth/${currentSupervisor.userId}`);
+      const updatedSupervisor = await resUpdated.json();
+      setCurrentSupervisor(updatedSupervisor);
+      setMaxTeams(Number(inputValue));
+    } catch (err) {
+      console.error("Error updating max teams:", err);
+    }
   };
 
   const remainingSlots = maxTeams !== null ? maxTeams - bookedTeams : 0;
 
-  if (maxTeams === null) {
-    return (
-      <div className="p-6 max-w-md mx-auto bg-white shadow-lg rounded-xl space-y-4">
-        <h2 className="text-2xl font-bold mb-2">Set Maximum Teams</h2>
-        <input
-          type="number"
-          min={1}
-          value={inputValue}
-          onChange={e => setInputValue(Number(e.target.value))}
-          className="w-full p-2 border rounded"
-        />
-        <button
-          onClick={handleSetMax}
-          className="w-full bg-teal-600 text-white px-4 py-2 rounded"
-        >
-          Save
-        </button>
-      </div>
-    );
-  }
+  // دالة للحصول على أسماء أعضاء الفريق
+  const getTeamMembersNames = (teamId: number) => {
+    const team = teams.find(t => t.teamId === teamId);
+    if (!team) return "No members";
+    const memberNames = team.memberStudentIds.map(id => {
+      const student = users.find(u => u.userId === id);
+      return student ? student.name : `ID: ${id}`;
+    });
+    return memberNames.join(", ");
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -82,7 +130,19 @@ export default function SupBoard() {
       <div className="grid grid-cols-3 gap-4 mb-4">
         <div className="p-4 bg-white shadow rounded-xl border border-gray-200 text-center">
           <p className="font-semibold text-gray-700">Max Teams</p>
-          <p className="text-lg font-bold">{maxTeams}</p>
+          <input
+            type="number"
+            min={bookedTeams}
+            value={inputValue}
+            onChange={e => setInputValue(Number(e.target.value))}
+            className="w-full mt-2 p-2 border rounded text-center"
+          />
+          <button
+            onClick={handleSetMax}
+            className="mt-2 w-full bg-teal-600 text-white px-4 py-1 rounded"
+          >
+            Save
+          </button>
         </div>
         <div className="p-4 bg-white shadow rounded-xl border border-gray-200 text-center">
           <p className="font-semibold text-gray-700">Booked Teams</p>
@@ -95,7 +155,6 @@ export default function SupBoard() {
       </div>
 
       <h2 className="text-2xl font-bold mb-4">Supervised Projects</h2>
-
       {projects.length === 0 ? (
         <p className="p-6 text-gray-600">No projects are currently under your supervision.</p>
       ) : (
@@ -104,18 +163,14 @@ export default function SupBoard() {
             <li
               key={project.id}
               className="p-4 bg-white/90 rounded-xl shadow-md shadow-gray-400 cursor-pointer transition hover:shadow-lg hover:shadow-gray-500"
-              onClick={() => navigate(`/dashboard/supervisor/kanban/${project.id}/Kanban`)}
+              onClick={() => navigate(`/dashboard/supervisor/kanban/${project.teamId}/Kanban`)}
             >
-              <p className="font-semibold text-lg mb-1">{project.title}</p>
+              <p className="font-semibold text-lg mb-1">{project.projectName}</p>
               <p className="text-sm text-gray-500">Team: {project.teamName}</p>
               {project.description && (
-                <p className="text-sm text-gray-400 mb-1">
-                  Description: {project.description}
-                </p>
+                <p className="text-sm text-gray-400 mb-1">Description: {project.description}</p>
               )}
-              <p className="text-sm text-gray-500">
-                Members: {project.members.join(", ")}
-              </p>
+              <p className="text-sm text-gray-500">Members: {getTeamMembersNames(project.teamId)}</p>
             </li>
           ))}
         </ul>

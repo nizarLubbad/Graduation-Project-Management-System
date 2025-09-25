@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { User } from "../types/types";
+import { User, Team } from "../types/types";
+import Swal from "sweetalert2";
 
 export default function LoginForm({ onSwitch }: { onSwitch: () => void }) {
   const [email, setEmail] = useState("");
@@ -10,18 +12,58 @@ export default function LoginForm({ onSwitch }: { onSwitch: () => void }) {
 
   const navigate = useNavigate();
   const { login } = useAuth();
+  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const storedUsers: User[] = JSON.parse(localStorage.getItem("users") || "[]");
-    const foundUser = storedUsers.find((u) => u.email === email && u.password === password);
+    setError("");
 
-    if (foundUser) {
-      login(foundUser);
-      if (foundUser.role === "student") navigate("/dashboard/student");
+    try {
+      const res = await fetch(`${baseUrl}/api/Auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Login failed");
+
+      const normalizedRole = data.role?.toLowerCase() === "supervisor" ? "supervisor" : "student";
+
+      let user: User = {
+        userId: data.userId,
+        name: data.name,
+        email: data.email || email,
+        role: normalizedRole,
+        department: data.department,
+        status: data.status ?? false,
+        token: data.token,
+      };
+
+      // 🔹 جلب الفريق الحالي إذا موجود
+      if (normalizedRole === "student") {
+        try {
+          const teamRes = await fetch(`${baseUrl}/api/Teams/members`, {
+            headers: { Authorization: `Bearer ${user.token}` },
+          });
+          if (teamRes.ok) {
+            const allStudents: User[] = await teamRes.json();
+            const myTeam = allStudents.find(s => s.userId === user.userId)?.team;
+            if (myTeam) user = { ...user, team: myTeam, status: true };
+          }
+        } catch (err) {
+          console.error("Failed to fetch team after login", err);
+        }
+      }
+
+      login(user);
+
+      // توجيه حسب الدور
+      if (normalizedRole === "student") navigate("/dashboard/student");
       else navigate("/dashboard/supervisor");
-    } else {
-      setError("Invalid email or password");
+    } catch (err) {
+      if (err instanceof Error) setError(err.message);
+      else setError("Something went wrong");
     }
   };
 
@@ -29,10 +71,38 @@ export default function LoginForm({ onSwitch }: { onSwitch: () => void }) {
     <form onSubmit={handleLogin} className="bg-gray-50 shadow-xl rounded-2xl p-6 w-full max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-2 text-center text-teal-700">Welcome</h2>
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full p-3 border rounded-lg mb-2" />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full p-3 border rounded-lg mb-2" />
-      <button type="submit" className="w-full p-3 mt-4 bg-teal-700 text-white rounded-xl">Login</button>
-      <p className="mt-4 text-center text-sm">Don’t have an account? <span onClick={onSwitch} className="text-blue-600 cursor-pointer">Register</span></p>
+
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        className="w-full p-3 border rounded-lg mb-2"
+      />
+
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        className="w-full p-3 border rounded-lg mb-2"
+      />
+
+      <button
+        type="submit"
+        className="w-full p-3 mt-4 bg-teal-700 text-white rounded-xl"
+      >
+        Login
+      </button>
+
+      <p className="mt-4 text-center text-sm">
+        Don’t have an account?{" "}
+        <span onClick={onSwitch} className="text-blue-600 cursor-pointer">
+          Register
+        </span>
+      </p>
     </form>
   );
 }

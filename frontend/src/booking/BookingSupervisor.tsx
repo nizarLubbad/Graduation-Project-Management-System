@@ -1,160 +1,252 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { Team, Supervisor, Assignment, User } from "../types/types";
+import { User, Team } from "../types/types";
+
+interface SupervisorWithRemaining extends User {
+  remainingTeams: number;
+}
 
 export default function BookingSupervisor() {
-  const { user } = useAuth();
+  const { user, updateUserTeam } = useAuth();
   const navigate = useNavigate();
 
   const [team, setTeam] = useState<Team | null>(null);
-  const [supervisors, setSupervisors] = useState<Supervisor[]>([]);
-  const [selectedSupervisor, setSelectedSupervisor] = useState<Supervisor | null>(null);
-  const [projectTitle, setProjectTitle] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
-  const [remainingSlots, setRemainingSlots] = useState<number>(0);
+  const [supervisors, setSupervisors] = useState<SupervisorWithRemaining[]>([]);
+  const [selectedSupervisor, setSelectedSupervisor] = useState<number | null>(null);
+  const [projectTitle, setProjectTitle] = useState<string>("");
+  const [projectDescription, setProjectDescription] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
-  function isSupervisor(u: User): u is Supervisor {
-    return u.role === "supervisor";
-  }
+  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
 
+  // 🔹 جلب بيانات الفريق والمشرفين
   useEffect(() => {
-    if (!user?.studentId) return;
+    const fetchTeamAndSupervisors = async () => {
+      if (!user) return;
 
-    const storedUsers: User[] = JSON.parse(localStorage.getItem("users") || "[]");
+      try {
+        const resTeams = await fetch(`${baseUrl}/api/Teams`);
+        const allTeamsRaw = await resTeams.json();
+        const allTeams: Team[] = Array.isArray(allTeamsRaw)
+          ? allTeamsRaw
+          : allTeamsRaw.teams || [];
 
-    const availableSupervisors = storedUsers.filter(isSupervisor).filter(s => {
-      const max = s.maxTeams || 0;
-      const booked = s.currentTeams || 0;
-      return max - booked > 0;
-    });
+        // العثور على فريق الطالب الحالي
+        const myTeam = allTeams.find((t) =>
+          t.memberStudentIds.some((id) => Number(id) === Number(user.userId))
+        );
 
-    setSupervisors(availableSupervisors);
+        if (!myTeam) {
+          Swal.fire({
+            icon: "warning",
+            title: "No team found",
+            text: "You must create a team first.",
+          });
+          navigate("/dashboard/student");
+          return;
+        }
 
-    const storedTeams: Team[] = JSON.parse(localStorage.getItem("teams") || "[]");
-    const myTeam = storedTeams.find((t) => t.leaderId === user.studentId);
-    if (myTeam) {
-      setTeam(myTeam);
-      setProjectTitle(myTeam.projectTitle || "");
-      setProjectDescription(myTeam.projectDescription || "");
-    }
-  }, [user]);
+        setTeam(myTeam);
+        if (updateUserTeam) updateUserTeam(myTeam);
 
-  useEffect(() => {
-    if (!selectedSupervisor) {
-      setRemainingSlots(0);
-      return;
-    }
-    const max = selectedSupervisor.maxTeams || 0;
-    const booked = selectedSupervisor.currentTeams || 0;
-    setRemainingSlots(max - booked);
-  }, [selectedSupervisor]);
+        // جلب جميع المستخدمين
+        const resUsers = await fetch(`${baseUrl}/api/Auth/getUsers`);
+        const rawUsers = await resUsers.json();
+        const allUsers: User[] = Array.isArray(rawUsers)
+          ? rawUsers
+          : rawUsers.users || [];
 
-  const handleSubmit = () => {
-    if (!team || !selectedSupervisor || !projectTitle.trim()) {
-      Swal.fire({ icon: "error", title: "Missing Info", text: "Complete all fields." });
-      return;
-    }
+        // فلترة المشرفين المتاحين مع عدد الفرق المتبقية
+        const availableSupervisors: SupervisorWithRemaining[] = [];
+        for (const u of allUsers) {
+          if (u.role && u.role.toLowerCase() === "supervisor") {
+            const resRemaining = await fetch(
+              `${baseUrl}/api/Supervisors/${u.userId}/remaining-teams`
+            );
+            const remainingRaw = await resRemaining.json();
+            const remaining =
+              typeof remainingRaw === "number"
+                ? remainingRaw
+                : remainingRaw.remainingTeams ?? 0;
 
-    if (remainingSlots <= 0) {
-      Swal.fire({
-        icon: "error",
-        title: "No Slots Available",
-        text: `${selectedSupervisor.name} cannot take more teams.`,
-      });
-      return;
-    }
+            if (remaining > 0) {
+              availableSupervisors.push({ ...u, remainingTeams: remaining });
+            }
+          }
+        }
 
-    const storedAssignments: Assignment[] = JSON.parse(localStorage.getItem("supervisorAssignments") || "[]");
-    const storedUsers: User[] = JSON.parse(localStorage.getItem("users") || "[]");
-
-    const memberNames = storedUsers
-      .filter((u) => team.members.includes(u.studentId!))
-      .map((u) => u.name);
-
-    const newAssignment: Assignment = {
-      id: Date.now().toString(),
-      teamId: team.teamId,
-      teamName: team.teamName,
-      members: memberNames,
-      supervisorName: selectedSupervisor.name,
-      projectTitle,
-      projectDescription,
+        setSupervisors(availableSupervisors);
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Error fetching data",
+          text: err instanceof Error ? err.message : "Something went wrong",
+        });
+      }
     };
 
-    localStorage.setItem("supervisorAssignments", JSON.stringify([...storedAssignments, newAssignment]));
+    fetchTeamAndSupervisors();
+  }, [user, navigate, updateUserTeam]);
 
-    const updatedUsers: User[] = storedUsers.map(u => {
-      if (isSupervisor(u) && u.id === selectedSupervisor.id) {
-        return { ...u, currentTeams: (u.currentTeams || 0) + 1 };
+  // 🔹 إنشاء المشروع وحجز المشرف
+  const handleBooking = async () => {
+    if (!team || !selectedSupervisor || !projectTitle || !projectDescription) return;
+
+    setLoading(true);
+    try {
+      // 1️⃣ إنشاء المشروع وإرجاعه (مع الـ id)
+      const projectRes = await fetch(`${baseUrl}/api/Project`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          projectTitle,
+          description: projectDescription,
+          supervisorId: selectedSupervisor,
+          teamId: team.teamId,
+          isCompleted: false,
+        }),
+      });
+
+      if (!projectRes.ok) {
+        throw new Error(`Failed to create project (status: ${projectRes.status})`);
       }
-      return u;
-    });
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-    const updatedTeams: Team[] = JSON.parse(localStorage.getItem("teams") || "[]").map((t: Team) =>
-      t.teamId === team.teamId ? { ...t, projectTitle, projectDescription } : t
-    );
-    localStorage.setItem("teams", JSON.stringify(updatedTeams));
+      const createdProject = await projectRes.json();
+      console.log("✅ Created Project from backend:", createdProject);
 
-    Swal.fire({
-      icon: "success",
-      title: "Supervisor Booked!",
-      text: `You booked ${selectedSupervisor.name} successfully.`,
-    }).then(() => navigate("/dashboard/student"));
+      // 2️⃣ حجز المشرف
+      const res = await fetch(
+        `${baseUrl}/api/Supervisors/${selectedSupervisor}/book-team/${team.teamId}`,
+        { method: "POST" }
+      );
+
+      if (!res.ok) {
+        throw new Error(`Failed to book supervisor (status: ${res.status})`);
+      }
+
+      const supervisorName =
+        supervisors.find((s) => s.userId === selectedSupervisor)?.name ?? "Unknown";
+
+      // 3️⃣ تحديث الـ context مباشرة (مع project.id)
+      if (updateUserTeam) {
+        updateUserTeam({
+          ...team,
+          supervisorId: selectedSupervisor,
+          supervisorName,
+          project: {
+            id: createdProject.id, // ✅ تخزين الـ id
+            projectTitle,
+            description: projectDescription,
+            supervisorId: selectedSupervisor,
+            teamId: team.teamId,
+            isCompleted: false,
+          },
+        });
+      }
+
+      // 4️⃣ تحديث الحالة المحلية
+      setTeam({
+        ...team,
+        supervisorId: selectedSupervisor,
+        supervisorName,
+        project: {
+          id: createdProject.id, // ✅ تخزين الـ id
+          projectTitle,
+          description: projectDescription,
+          supervisorId: selectedSupervisor,
+          teamId: team.teamId,
+          isCompleted: false,
+        },
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Supervisor booked and project created!",
+        confirmButtonText: "Go to Dashboard",
+      }).then(() => {
+        navigate("/dashboard/student");
+      });
+
+      setSelectedSupervisor(null);
+      setProjectTitle("");
+      setProjectDescription("");
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: err instanceof Error ? err.message : "Something went wrong",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  if (!team) return <p className="text-center mt-10">Loading your team...</p>;
-
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-white shadow-lg rounded-xl space-y-4">
-      <h2 className="text-2xl font-bold text-teal-700 mb-4">Book a Supervisor</h2>
-      <p className="mb-4"><strong>Team Name:</strong> {team.teamName}</p>
+    <div className="p-6 max-w-3xl mx-auto bg-white shadow-lg rounded-xl">
+      <h2 className="text-xl font-bold text-teal-700 mb-4 text-center">
+        Book a Supervisor
+      </h2>
 
-      <input
-        type="text"
-        placeholder="Project Title"
-        value={projectTitle}
-        onChange={(e) => setProjectTitle(e.target.value)}
-        className="w-full p-2 border rounded mb-2"
-      />
+      {team && (
+        <>
+          <p className="mb-2">
+            <strong>Team:</strong> {team.teamName}
+          </p>
+          {team.supervisorName && (
+            <p className="mb-2">
+              <strong>Current Supervisor:</strong> {team.supervisorName}
+            </p>
+          )}
+          {team.project && (
+            <p className="mb-2">
+              <strong>Project:</strong> {team.project.projectTitle}
+              {team.project.id && (
+                <span className="ml-2 text-gray-500">[ID: {team.project.id}]</span>
+              )}
+            </p>
+          )}
 
-      <textarea
-        placeholder="Project Description"
-        value={projectDescription}
-        onChange={(e) => setProjectDescription(e.target.value)}
-        className="w-full p-2 border rounded mb-4"
-      />
+          <input
+            type="text"
+            placeholder="Project Title"
+            value={projectTitle}
+            onChange={(e) => setProjectTitle(e.target.value)}
+            className="w-full p-2 border rounded mb-2"
+          />
 
-      <h3 className="text-lg font-semibold mb-2">Select Supervisor</h3>
-      <select
-        value={selectedSupervisor?.id || ""}
-        onChange={(e) =>
-          setSelectedSupervisor(supervisors.find((s) => s.id === e.target.value) || null)
-        }
-        className="w-full p-2 border rounded mb-2"
-      >
-        <option value="">Select a supervisor</option>
-        {supervisors.map((s) => (
-          <option key={s.id} value={s.id}>
-            {s.name} (Remaining Slots: {(s.maxTeams || 0) - (s.currentTeams || 0)})
-          </option>
-        ))}
-      </select>
+          <textarea
+            placeholder="Project Description"
+            value={projectDescription}
+            onChange={(e) => setProjectDescription(e.target.value)}
+            className="w-full p-2 border rounded mb-4"
+          />
 
-      {selectedSupervisor && (
-        <p className="text-sm font-semibold mb-4">
-          Remaining Slots: {remainingSlots}
-        </p>
+          <select
+            onChange={(e) => setSelectedSupervisor(Number(e.target.value))}
+            value={selectedSupervisor || ""}
+            className="w-full p-2 border rounded mb-4"
+          >
+            <option value="">Select a supervisor</option>
+            {supervisors.map((s) => (
+              <option key={s.userId} value={s.userId}>
+                {s.name} ({s.remainingTeams} slots remaining)
+              </option>
+            ))}
+          </select>
+
+          <button
+            onClick={handleBooking}
+            disabled={
+              !selectedSupervisor || !projectTitle || !projectDescription || loading
+            }
+            className="w-full bg-teal-600 text-white px-4 py-2 rounded disabled:opacity-50"
+          >
+            {loading ? "Processing..." : "Confirm Booking"}
+          </button>
+        </>
       )}
-
-      <button
-        onClick={handleSubmit}
-        className="w-full bg-teal-600 text-white px-4 py-2 rounded"
-      >
-        Confirm Booking
-      </button>
     </div>
   );
 }

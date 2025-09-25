@@ -8,18 +8,19 @@ export default function EditProfile() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
-  if (!user) return null;
-
-  const isStudent = user.role === "student";
-
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [department, setDepartment] = useState(user.department || "");
+  // hooks فوق عشان ESLint
+  const [name, setName] = useState(user?.name ?? "");
+  const [email, setEmail] = useState(user?.email ?? "");
+  const [department, setDepartment] = useState(user?.department ?? "");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
+  if (!user) return null;
+
+  const isStudent = user.role.toLowerCase() === "student";
+
   const handleSave = () => {
-    // تحقق من كلمة السر الحالية إذا تم إدخال كلمة سر جديدة
+    // تحقق من كلمة السر
     if (newPassword && currentPassword !== user.password) {
       Swal.fire({
         icon: "error",
@@ -33,16 +34,19 @@ export default function EditProfile() {
       ...user,
       name,
       email,
+      role: user.role.toLowerCase() as "student" | "supervisor",
       ...(isStudent ? { department } : {}),
       ...(newPassword ? { password: newPassword } : {}),
     };
 
     // تحديث الـ context
-    setUser && setUser(updatedUser);
+    setUser!(updatedUser); // 👈 non-null assertion
 
     // تحديث localStorage
     const users: User[] = JSON.parse(localStorage.getItem("users") || "[]");
-    const updatedUsers = users.map(u => (u.id === user.id ? updatedUser : u));
+    const updatedUsers = users.map((u) =>
+      u.userId === user.userId ? updatedUser : u
+    );
     localStorage.setItem("users", JSON.stringify(updatedUsers));
 
     Swal.fire({
@@ -50,8 +54,7 @@ export default function EditProfile() {
       title: "Profile Updated",
       text: "Your profile has been updated successfully",
       confirmButtonText: "OK",
-      confirmButtonColor: "green" 
-
+      confirmButtonColor: "green",
     });
 
     setCurrentPassword("");
@@ -66,9 +69,11 @@ export default function EditProfile() {
           <div
             className="mr-3 cursor-pointer text-black hover:text-gray-700 text-xl font-bold"
             onClick={() =>
-              navigate(isStudent
-                ? "/dashboard/student/KanbanBoard"
-                : "/dashboard/supervisor")
+              navigate(
+                isStudent
+                  ? "/dashboard/student/KanbanBoard"
+                  : "/dashboard/supervisor"
+              )
             }
           >
             ←
@@ -82,7 +87,7 @@ export default function EditProfile() {
           <input
             type="text"
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             className="mt-1 block w-full px-3 py-2 border rounded-lg"
           />
         </label>
@@ -93,19 +98,19 @@ export default function EditProfile() {
           <input
             type="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             className="mt-1 block w-full px-3 py-2 border rounded-lg"
           />
         </label>
 
-        {/* Department فقط للطلاب */}
+        {/* Department للطلاب فقط */}
         {isStudent && (
           <label className="block mb-3">
             <span className="text-gray-700">Department</span>
             <input
               type="text"
               value={department}
-              onChange={e => setDepartment(e.target.value)}
+              onChange={(e) => setDepartment(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border rounded-lg"
             />
           </label>
@@ -117,7 +122,7 @@ export default function EditProfile() {
           <input
             type="password"
             value={currentPassword}
-            onChange={e => setCurrentPassword(e.target.value)}
+            onChange={(e) => setCurrentPassword(e.target.value)}
             placeholder="Enter current password"
             className="mt-1 block w-full px-3 py-2 border rounded-lg"
           />
@@ -129,7 +134,7 @@ export default function EditProfile() {
           <input
             type="password"
             value={newPassword}
-            onChange={e => setNewPassword(e.target.value)}
+            onChange={(e) => setNewPassword(e.target.value)}
             placeholder="Leave blank to keep current password"
             className="mt-1 block w-full px-3 py-2 border rounded-lg"
           />

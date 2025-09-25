@@ -1,195 +1,321 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import { Assignment, User, Feedback, Reply } from "../types/types";
+import { useAuth } from "../context/AuthContext";
 
-// ============================
-// SupervisorFeedback Component
-// إدارة الـ Feedback للمشرفين: إنشاء، تعديل، حذف، إضافة ردود
-// ============================
+interface Project {
+  id: number;
+  projectName: string;
+  supervisorId: number | null;
+  teamId: number | null;
+  teamName: string | null;
+  teamMembers?: { userId: number; name: string }[];
+}
+
+interface Reply {
+  id: number;
+  content: string;
+  date: string;
+  studentId?: number;
+  studentName?: string;
+  supervisorId?: number;
+  supervisorName?: string;
+  authorName?: string;
+}
+
+interface Feedback {
+  teamName: string;
+  projectName: string;
+  feedbackId: number;
+  content: string;
+  date: string;
+  supervisorId: number;
+  supervisorName?: string;
+  teamId: number;
+  replies?: Reply[];
+}
+
 export default function SupervisorFeedback() {
-  // ---------- State ----------
-  const [assignments, setAssignments] = useState<Assignment[]>([]); // المشاريع تحت إشراف المشرف
-  const [selectedProject, setSelectedProject] = useState<string>(""); // المشروع المحدد لإرسال feedback
-  const [message, setMessage] = useState(""); // نص feedback الحالي
-  const [feedbackList, setFeedbackList] = useState<Feedback[]>([]); // قائمة الـ feedbacks
-  const [editId, setEditId] = useState<string | null>(null); // لتعديل feedback موجود
-  const [replyText, setReplyText] = useState<{ [key: string]: string }>({}); // نص الرد لكل feedback
-  const [editReplyId, setEditReplyId] = useState<string | null>(null); // لتعديل reply موجود
+  const { user } = useAuth();
+  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
 
-  // ---------- Load Data on Mount ----------
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [selectedProject, setSelectedProject] = useState<number | "">("");
+  const [feedbackList, setFeedbackList] = useState<Feedback[]>([]);
+  const [message, setMessage] = useState("");
+  const [editFeedbackId, setEditFeedbackId] = useState<number | null>(null);
+  const [replyMessage, setReplyMessage] = useState<{ [key: number]: string }>({});
+  const [editReplyId, setEditReplyId] = useState<number | null>(null);
+  const [editReplyMessage, setEditReplyMessage] = useState<{ [key: number]: string }>({});
+  const token = user?.token || "";
+
+  // جلب المشاريع + أعضاء الفريق
   useEffect(() => {
-    const user: User | null = JSON.parse(localStorage.getItem("currentUser") || "null");
     if (!user) return;
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/Project`, {
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        const allProjects: Project[] = await res.json();
 
-    // جلب المشاريع الخاصة بالمشرف الحالي
-    const allAssignments: Assignment[] = JSON.parse(localStorage.getItem("supervisorAssignments") || "[]");
-    setAssignments(allAssignments.filter(a => a.supervisorName === user.name));
+        const myProjects = allProjects.filter(p => p.supervisorId === user.userId);
 
-    // جلب feedbacks الخاصة بالمشرف الحالي
-    const savedFeedback: Feedback[] = JSON.parse(localStorage.getItem("feedback") || "[]");
-    const filtered = savedFeedback.map(f => ({
-      ...f,
-      projectName: f.projectName || assignments.find(a => a.teamId === f.projectId)?.projectTitle || "Unknown Project",
-    }));
-    setFeedbackList(filtered.filter(f => f.supervisorId === user.id));
-  }, []);
+        const projectsWithMembers = await Promise.all(
+          myProjects.map(async p => {
+            if (!p.teamId) return p;
+            try {
+              const resMembers = await fetch(`${baseUrl}/api/Students/all`, {
+                headers: { Authorization: `Bearer ${user.token}` },
+              });
+              const studentsData: { students: { userId: number; name: string }[] } = await resMembers.json();
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              const members = studentsData.students.filter(s => true);
+              return { ...p, teamMembers: members };
+            } catch {
+              return p;
+            }
+          })
+        );
 
-  // ---------- Save Feedbacks to LocalStorage ----------
-  const saveFeedback = (updated: Feedback[]) => {
-    setFeedbackList(updated);
-    localStorage.setItem("feedback", JSON.stringify(updated));
-  };
+        setProjects(projectsWithMembers);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchProjects();
+  }, [user]);
 
-  // ---------- Submit Feedback ----------
-  const handleSubmit = () => {
-    if (!selectedProject || !message.trim()) {
-      Swal.fire("Error", "Please select a project and write feedback.", "error");
+  // جلب feedbacks + replies
+  useEffect(() => {
+    if (!selectedProject) {
+      setFeedbackList([]);
       return;
     }
+    const fetchFeedbacks = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/Feedback/Team/${selectedProject}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data: Feedback[] = await res.json();
 
-    const user: User = JSON.parse(localStorage.getItem("currentUser") || "{}");
-    const project = assignments.find(a => a.teamId === selectedProject);
+        const feedbacksWithReplies = await Promise.all(
+          data.map(async f => {
+            const project = projects.find(p => p.teamId === f.teamId);
 
-    if (editId) {
-      // تعديل feedback موجود
-      const updated = feedbackList.map(f =>
-        f.id === editId ? { ...f, message, date: new Date().toLocaleString() } : f
-      );
-      saveFeedback(updated);
-      setEditId(null);
-      Swal.fire("Updated!", "Feedback has been updated.", "success");
-    } else {
-      // إضافة feedback جديد
-      const feedback: Feedback = {
-        id: Date.now().toString(),
-        projectId: selectedProject,
-        projectName: project?.projectTitle || project?.teamName || "Unknown Project",
-        supervisorId: user.id,
-        supervisorName: user.name,
-        studentId: project?.members[0] || "",
-        message,
-        date: new Date().toLocaleString(),
-        replies: [],
-      };
-      saveFeedback([...feedbackList, feedback]);
-      Swal.fire("Sent!", "Feedback has been sent successfully.", "success");
-    }
+            const replyRes = await fetch(`${baseUrl}/api/Reply/feedback/${f.feedbackId}`, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            let replies: Reply[] = await replyRes.json();
 
-    setMessage("");
-    setSelectedProject("");
-  };
+            replies = replies.map(r => {
+              if (r.supervisorId) return { ...r, authorName: r.supervisorName || user?.name || "Supervisor" };
+              if (r.studentId) {
+                const member = project?.teamMembers?.find(m => m.userId === r.studentId);
+                return { ...r, authorName: r.studentName || member?.name || `Student #${r.studentId}` };
+              }
+              return { ...r, authorName: "Unknown" };
+            });
 
-  // ---------- Reply Functions ----------
-  const handleReply = (feedbackId: string) => {
-    const user: User = JSON.parse(localStorage.getItem("currentUser") || "{}");
-    if (!replyText[feedbackId]?.trim()) return;
-
-    const updated = feedbackList.map(f => {
-      if (f.id === feedbackId) {
-        const replies = f.replies || [];
-        if (editReplyId) {
-          // تعديل reply موجود
-          return {
-            ...f,
-            replies: replies.map(r =>
-              r.id === editReplyId ? { ...r, message: replyText[feedbackId], date: new Date().toLocaleString() } : r
-            ),
-          };
-        } else {
-          // إضافة reply جديد
-          const newReply: Reply = {
-            id: Date.now().toString(),
-            authorId: user.id,
-            authorName: user.name,
-            authorRole: "supervisor",
-            message: replyText[feedbackId],
-            date: new Date().toLocaleString(),
-          };
-          return { ...f, replies: [...replies, newReply] };
-        }
-      }
-      return f;
-    });
-
-    saveFeedback(updated);
-    setReplyText(prev => ({ ...prev, [feedbackId]: "" }));
-    setEditReplyId(null);
-  };
-
-  const handleEditReply = (feedbackId: string, replyId: string, msg: string) => {
-    setEditReplyId(replyId);
-    setReplyText(prev => ({ ...prev, [feedbackId]: msg }));
-  };
-
-  const handleDeleteReply = (feedbackId: string, replyId: string) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You can't undo this action!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-    }).then(result => {
-      if (result.isConfirmed) {
-        const updated = feedbackList.map(f =>
-          f.id === feedbackId ? { ...f, replies: f.replies?.filter(r => r.id !== replyId) } : f
+            return {
+              ...f,
+              projectName: project?.projectName || "Unknown Project",
+              teamName: project?.teamName || "Unknown Team",
+              supervisorName: user?.role === "supervisor" ? user.name : f.supervisorName || "Supervisor",
+              replies,
+            };
+          })
         );
-        saveFeedback(updated);
-        Swal.fire("Deleted!", "Reply has been deleted.", "success");
+
+        setFeedbackList(feedbacksWithReplies);
+      } catch (err) {
+        console.error(err);
       }
-    });
+    };
+    fetchFeedbacks();
+  }, [selectedProject, token, projects, user]);
+
+  // إرسال / تعديل feedback
+  const handleSubmitFeedback = async () => {
+    if (!selectedProject || !message.trim()) return;
+
+    try {
+      const res = await fetch(
+        editFeedbackId ? `${baseUrl}/api/Feedback/${editFeedbackId}` : `${baseUrl}/api/Feedback`,
+        {
+          method: editFeedbackId ? "PUT" : "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+          body: JSON.stringify({
+            content: message,
+            supervisorId: user?.userId,
+            teamId: selectedProject,
+          }),
+        }
+      );
+      const updatedFeedback: Feedback = await res.json();
+      setFeedbackList(prev =>
+        editFeedbackId ? prev.map(f => (f.feedbackId === editFeedbackId ? updatedFeedback : f)) : [updatedFeedback, ...prev]
+      );
+      setMessage("");
+      setEditFeedbackId(null);
+      Swal.fire(editFeedbackId ? "Updated!" : "Sent!", "Feedback saved successfully.", "success");
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Failed to save feedback.", "error");
+    }
   };
 
-  // ---------- Edit / Delete Feedback ----------
-  const handleEdit = (id: string, msg: string, projectId: string) => {
-    setEditId(id);
-    setMessage(msg);
-    setSelectedProject(projectId);
-  };
-
-  const handleDelete = (id: string) => {
-    Swal.fire({
+  // حذف feedback
+  const handleDeleteFeedback = async (fId: number) => {
+    const result = await Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "This feedback will be deleted!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
-    }).then(result => {
-      if (result.isConfirmed) {
-        saveFeedback(feedbackList.filter(f => f.id !== id));
-        Swal.fire("Deleted!", "Your feedback has been deleted.", "success");
-      }
     });
+    if (!result.isConfirmed) return;
+
+    try {
+      await fetch(`${baseUrl}/api/Feedback/${fId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setFeedbackList(prev => prev.filter(f => f.feedbackId !== fId));
+      Swal.fire("Deleted!", "Feedback has been deleted.", "success");
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Failed to delete feedback.", "error");
+    }
   };
 
-  // ---------- Render ----------
+  // إرسال reply
+  const handleReply = async (feedbackId: number) => {
+    const content = replyMessage[feedbackId]?.trim();
+    if (!content) return;
+
+    try {
+      await fetch(`${baseUrl}/api/Reply`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({
+          content,
+          feedbackId,
+          supervisorId: user?.role === "supervisor" ? user.userId : undefined,
+          studentId: user?.role === "student" ? user.userId : undefined,
+          supervisorName: user?.role === "supervisor" ? user.name : undefined,
+          studentName: user?.role === "student" ? user.name : undefined,
+        }),
+      });
+
+      const replyRes = await fetch(`${baseUrl}/api/Reply/feedback/${feedbackId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      let replies: Reply[] = await replyRes.json();
+
+      const project = projects.find(p => p.teamId === selectedProject);
+      replies = replies.map(r => {
+        if (r.supervisorId) return { ...r, authorName: r.supervisorName || user?.name || "Supervisor" };
+        if (r.studentId) {
+          const member = project?.teamMembers?.find(m => m.userId === r.studentId);
+          return { ...r, authorName: r.studentName || member?.name || `Student #${r.studentId}` };
+        }
+        return { ...r, authorName: "Unknown" };
+      });
+
+      setFeedbackList(prev => prev.map(f => (f.feedbackId === feedbackId ? { ...f, replies } : f)));
+      setReplyMessage(prev => ({ ...prev, [feedbackId]: "" }));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // تعديل reply
+  const handleEditReply = async (replyId: number, feedbackId: number) => {
+    const content = editReplyMessage[replyId]?.trim();
+    if (!content) return;
+
+    try {
+      await fetch(`${baseUrl}/api/Reply/${replyId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ content }),
+      });
+
+      setFeedbackList(prev =>
+        prev.map(f =>
+          f.feedbackId === feedbackId
+            ? {
+                ...f,
+                replies: f.replies?.map(r => (r.id === replyId ? { ...r, content } : r)),
+              }
+            : f
+        )
+      );
+      setEditReplyId(null);
+      setEditReplyMessage(prev => ({ ...prev, [replyId]: "" }));
+      Swal.fire("Updated!", "Reply updated successfully.", "success");
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Failed to update reply.", "error");
+    }
+  };
+
+  // حذف reply
+  const handleDeleteReply = async (replyId: number, feedbackId: number) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This reply will be deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    });
+    if (!result.isConfirmed) return;
+
+    try {
+      await fetch(`${baseUrl}/api/Reply/${replyId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setFeedbackList(prev =>
+        prev.map(f =>
+          f.feedbackId === feedbackId ? { ...f, replies: f.replies?.filter(r => r.id !== replyId) } : f
+        )
+      );
+      Swal.fire("Deleted!", "Reply has been deleted.", "success");
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Failed to delete reply.", "error");
+    }
+  };
+
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-4xl mx-auto">
+    <div className="p-6 max-w-4xl mx-auto space-y-6">
       <h1 className="text-3xl font-bold text-teal-700 text-center mb-6">💬 Supervisor Feedback</h1>
 
-      {/* Select Project + Send Button */}
       <div className="flex flex-col sm:flex-row gap-4 mb-4">
         <select
           value={selectedProject}
-          onChange={e => setSelectedProject(e.target.value)}
+          onChange={e => setSelectedProject(Number(e.target.value))}
           className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-teal-700 w-full"
         >
           <option value="">-- Select a Project --</option>
-          {assignments.map(a => (
-            <option key={a.teamId} value={a.teamId}>
-              {a.projectTitle} ({a.teamName})
+          {projects.map(p => (
+            <option key={p.id} value={p.teamId || 0}>
+              {p.projectName} {p.teamName ? `(${p.teamName})` : ""}
             </option>
           ))}
         </select>
 
         <button
-          onClick={handleSubmit}
+          onClick={handleSubmitFeedback}
           className="sm:w-1/4 p-3 bg-teal-700 text-white rounded-xl shadow hover:bg-teal-800 transition"
         >
-          {editId ? "Update Feedback" : "Send Feedback"}
+          {editFeedbackId ? "Update Feedback" : "Send Feedback"}
         </button>
       </div>
 
-      {/* Feedback Textarea */}
       <textarea
         value={message}
         onChange={e => setMessage(e.target.value)}
@@ -197,80 +323,140 @@ export default function SupervisorFeedback() {
         placeholder="Write your feedback here..."
       />
 
-      {/* Feedback List */}
       <div className="space-y-4">
         {feedbackList.length === 0 && <p className="text-gray-500">No feedback yet.</p>}
         {feedbackList.map(f => (
-          <div key={f.id} className="p-4 border rounded-lg shadow-sm bg-white flex flex-col gap-3">
-            {/* Feedback Message */}
-            <div>
-              <p className="text-gray-800 font-medium">{f.message}</p>
-              <p className="text-sm text-teal-600 font-semibold">📌 Project: {f.projectName}</p>
-              <p className="text-sm text-gray-500">Supervisor: {f.supervisorName}</p>
-              <p className="text-xs text-gray-400">{f.date}</p>
-            </div>
+          <div key={f.feedbackId} className="p-4 border rounded-lg shadow-sm bg-white flex flex-col gap-3">
+            {editFeedbackId === f.feedbackId ? (
+              <>
+                <textarea
+                  value={message}
+                  onChange={e => setMessage(e.target.value)}
+                  className="w-full p-2 border rounded-lg mb-1"
+                />
+                <div className="flex gap-2 justify-end">
+                  <button
+                    onClick={handleSubmitFeedback}
+                    className="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+                  >
+                    Save
+                  </button>
+                  <button
+                    onClick={() => {
+                      setEditFeedbackId(null);
+                      setMessage("");
+                    }}
+                    className="px-2 py-1 bg-gray-500 text-white rounded hover:bg-gray-600"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                
+                <h1 className="text-sm text-teal-600 font-semibold">📌 Project: {f.projectName} ({f.teamName})</h1>
+                <p className="text-gray-800">{f.content}</p>
+                <h6 className="text-sm text-gray-500">Supervisor: {f.supervisorName}</h6>
+                <h5 className="text-xs text-gray-400">{f.date}</h5>
 
-            {/* Edit / Delete Feedback */}
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => handleEdit(f.id, f.message, f.projectId)}
-                className="bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(f.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </div>
+                {f.supervisorId === user?.userId && (
+                  <div className="flex gap-2 mt-1 justify-end">
+                    <button
+                      onClick={() => {
+                        setEditFeedbackId(f.feedbackId);
+                        setMessage(f.content);
+                      }}
+                      className="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteFeedback(f.feedbackId)}
+                      className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
 
-            {/* Replies */}
-            <div className="space-y-2">
+            <div className="ml-4 mt-3 space-y-2">
               {f.replies?.map(r => (
-                <div key={r.id} className="p-2 bg-gray-100 border-l-4 border-teal-600 rounded">
-                  <p className="text-gray-800">
-                    <span className="font-semibold">
-                      {r.authorRole === "student" ? "👨‍🎓 Student" : "👨‍🏫 Supervisor"} {r.authorName}:
-                    </span>{" "}
-                    {r.message}
-                  </p>
-                  <p className="text-xs text-gray-400">📅 {r.date}</p>
-                  {r.authorId === JSON.parse(localStorage.getItem("currentUser") || "{}").id && (
-                    <div className="flex gap-2 mt-1 flex-wrap">
-                      <button
-                        onClick={() => handleEditReply(f.id, r.id, r.message)}
-                        className="text-blue-600 text-xs"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDeleteReply(f.id, r.id)}
-                        className="text-red-600 text-xs"
-                      >
-                        Delete
-                      </button>
-                    </div>
+                <div
+                  key={r.id}
+                  className={`flex flex-col p-4 my-2 rounded-xl max-w-[90%] relative ${
+                    r.studentId === user?.userId ? "bg-teal-200 self-end" : "bg-gray-300 self-start"
+                  } shadow-md`}
+                >
+                  {editReplyId === r.id ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editReplyMessage[r.id] || r.content}
+                        onChange={e =>
+                          setEditReplyMessage(prev => ({ ...prev, [r.id]: e.target.value }))
+                        }
+                        className="p-2 border rounded-lg mb-1 w-full"
+                      />
+                      <div className="flex gap-2 justify-end">
+                        <button
+                          onClick={() => handleEditReply(r.id, f.feedbackId)}
+                          className="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={() => setEditReplyId(null)}
+                          className="px-2 py-1 bg-gray-500 text-white rounded hover:bg-gray-600"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-gray-800">
+                        <span className="font-semibold">{r.authorName}:</span> {r.content}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">{r.date}</p>
+                      {(r.studentId === user?.userId || r.supervisorId === user?.userId) && (
+                        <div className="flex gap-2 mt-1 justify-end">
+                          <button
+                            onClick={() => setEditReplyId(r.id)}
+                            className="px-2 py-1 bg-green-900 text-white rounded hover:bg-green-600"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDeleteReply(r.id, f.feedbackId)}
+                            className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               ))}
-            </div>
 
-            {/* Reply Box */}
-            <div>
-              <textarea
-                value={replyText[f.id] || ""}
-                onChange={e => setReplyText(prev => ({ ...prev, [f.id]: e.target.value }))}
-                className="w-full p-2 border rounded-lg"
-                placeholder="Write a reply..."
-              />
-              <button
-                onClick={() => handleReply(f.id)}
-                className="mt-2 px-4 py-2 bg-teal-700 text-white rounded-lg"
-              >
-                {editReplyId ? "Update Reply" : "Send Reply"}
-              </button>
+              <div className="flex gap-2 mt-1">
+                <input
+                  type="text"
+                  placeholder="Write a reply..."
+                  value={replyMessage[f.feedbackId] || ""}
+                  onChange={e => setReplyMessage(prev => ({ ...prev, [f.feedbackId]: e.target.value }))}
+                  className="flex-1 p-2 border rounded-lg focus:ring-1 focus:ring-teal-500"
+                />
+                <button
+                  onClick={() => handleReply(f.feedbackId)}
+                  className="px-3 py-1 bg-teal-600 text-white rounded-lg hover:bg-teal-700"
+                >
+                  Reply
+                </button>
+              </div>
             </div>
           </div>
         ))}

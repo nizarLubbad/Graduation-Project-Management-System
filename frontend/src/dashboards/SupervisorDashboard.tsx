@@ -14,7 +14,7 @@ export default function SupervisorDashboard() {
   const menuItems = [
     { path: "/dashboard/supervisor/SupBoard", label: "📊 Dashboard", exact: true },
     { path: "/dashboard/supervisor/supervised-projects", label: "📁 Supervised Projects" },
-    { path: "/dashboard/supervisor/feedback", label: "💬 Feedback" },
+    { path: `/dashboard/supervisor/feedback`, label: "💬 Feedback" },
      { path: "/dashboard/supervisor/projectHistory", label: "📜 Project History" },
   ];
 

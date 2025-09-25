@@ -8,118 +8,117 @@ export default function CreateTeam() {
   const { user, login } = useAuth();
   const navigate = useNavigate();
   const [students, setStudents] = useState<User[]>([]);
-  const [selectedMembers, setSelectedMembers] = useState<string[]>([]);
+  const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
   const [teamName, setTeamName] = useState("");
+  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
 
   useEffect(() => {
-    if (!user || !user.studentId) return;
+    if (!user || !user.token) {
+      Swal.fire("Unauthorized", "Please login first.", "warning");
+      navigate("/");
+      return;
+    }
     if (user.status) navigate("/dashboard/student");
 
-    const storedUsers: User[] = JSON.parse(localStorage.getItem("users") || "[]");
-    const availableStudents = storedUsers.filter(
-      (u) => u.role === "student" && !u.status && u.studentId !== user.studentId
-    );
-    setStudents(availableStudents);
+    const fetchStudents = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/Students/all`, {
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        const raw = await res.json();
+        if (!raw.success) throw new Error("API returned success = false");
+
+        const available = raw.students.filter(
+          (s: User) => !s.status && s.userId !== user.userId
+        );
+        setStudents(available);
+      } catch {
+        Swal.fire("Error", "Failed to load students", "error");
+      }
+    };
+    fetchStudents();
   }, [user, navigate]);
 
-  const toggleMember = (studentId: string) => {
-    setSelectedMembers((prev) =>
-      prev.includes(studentId) ? prev.filter((id) => id !== studentId) : [...prev, studentId]
+  const toggleMember = (studentId: number) => {
+    setSelectedMembers(prev =>
+      prev.includes(studentId)
+        ? prev.filter(id => id !== studentId)
+        : [...prev, studentId]
     );
   };
 
-  const handleConfirm = () => {
-    if (!teamName || !user || !user.studentId) return;
+  const handleConfirm = async () => {
+    if (!teamName.trim()) {
+      Swal.fire("Warning", "Please enter a team name.", "warning");
+      return;
+    }
+    const memberIds = Array.from(new Set([user!.userId, ...selectedMembers]));
 
-    const newTeam: Team = {
-      teamId: user.studentId,
-      leaderId: user.studentId,
-      teamName,
-      members: [user.studentId, ...selectedMembers],
-    };
+    try {
+      const createRes = await fetch(`${baseUrl}/api/Teams/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+        body: JSON.stringify({ teamName: teamName.trim(), memberStudentIds: memberIds }),
+      });
+      const createdTeam: Team = await createRes.json();
 
-    const storedUsers: User[] = JSON.parse(localStorage.getItem("users") || "[]");
-    const updatedUsers = storedUsers.map(u => {
-      if (u.studentId && newTeam.members.includes(u.studentId)) {
-        return { ...u, status: true, team: { id: newTeam.teamId, name: newTeam.teamName } };
-      }
-      return u;
-    });
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
+      await fetch(`${baseUrl}/api/Teams/${createdTeam.teamId}/update-student-status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+        body: JSON.stringify({}),
+      });
 
-    const storedTeams: Team[] = JSON.parse(localStorage.getItem("teams") || "[]");
-    localStorage.setItem("teams", JSON.stringify([...storedTeams, newTeam]));
+      login({ ...user!, status: true, team: createdTeam });
 
-    login({ ...user, status: true, team: {
-      id: newTeam.teamId, name: newTeam.teamName,
-      members: []
-    } });
-
-    Swal.fire({
-      icon: "success",
-      title: "Team Created!",
-      text: `You have created your team: ${newTeam.teamName}`,
-      confirmButtonText: "Choose a Supervisor"
-    }).then(() => {
-      navigate("/booking-supervisor");
-    });
+      Swal.fire({
+        icon: "success",
+        title: "Team Created!",
+        text: `You have created your team: ${createdTeam.teamName}`,
+        confirmButtonText: "Choose a Supervisor",
+      }).then(() => navigate("/booking-supervisor"));
+    } catch (err) {
+      Swal.fire("Error", err instanceof Error ? err.message : "Something went wrong", "error");
+    }
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-3xl mx-auto bg-white shadow-lg rounded-xl">
-      <h2 className="text-xl sm:text-2xl font-bold text-teal-700 mb-4 text-center">Create Team</h2>
+    <div className="p-6 max-w-3xl mx-auto bg-white shadow-lg rounded-xl">
+      <h2 className="text-xl font-bold text-teal-700 mb-4 text-center">Create Team</h2>
+      <p className="mb-4 text-center font-semibold text-gray-700">Leader: <span className="text-teal-700">{user?.name}</span></p>
 
-      {/* إدخال اسم الفريق */}
       <input
         type="text"
         placeholder="Team Name"
         value={teamName}
-        onChange={(e) => setTeamName(e.target.value)}
-        className="w-full p-2 border rounded mb-4 text-sm sm:text-base"
+        onChange={e => setTeamName(e.target.value)}
+        className="w-full p-2 border rounded mb-4"
       />
 
-      {/* الأعضاء المحددين */}
-      <h3 className="text-base sm:text-lg font-semibold mb-2">Selected Members ({selectedMembers.length})</h3>
+      <h3 className="mb-2">Selected Members ({selectedMembers.length})</h3>
       <div className="flex flex-wrap gap-2 mb-4">
-        {selectedMembers.map((id) => {
-          const student = students.find((s) => s.studentId === id);
+        {selectedMembers.map(id => {
+          const student = students.find(s => s.userId === id);
           if (!student) return null;
-          return (
-            <span
-              key={id}
-              className="px-2 py-1 bg-teal-200 text-teal-800 rounded-full text-xs sm:text-sm"
-            >
-              {student.name}
-            </span>
-          );
+          return <span key={id} className="px-2 py-1 bg-teal-200 text-teal-800 rounded">{student.name}</span>;
         })}
       </div>
 
-      {/* قائمة الطلاب */}
-      <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {students.map((s) => (
-          <label
-            key={s.id}
-            className="flex items-center space-x-2 p-2 border rounded hover:bg-gray-50 cursor-pointer"
-          >
-            <input
-              type="checkbox"
-              checked={selectedMembers.includes(s.studentId!)}
-              onChange={() => s.studentId && toggleMember(s.studentId)}
-              className="h-4 w-4"
-            />
-            <span className="text-sm sm:text-base">{s.name} ({s.studentId})</span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+        {students.map(s => (
+          <label key={s.userId} className="flex items-center p-2 border rounded cursor-pointer hover:bg-gray-50">
+            <input type="checkbox" checked={selectedMembers.includes(s.userId)} onChange={() => toggleMember(s.userId)} className="h-4 w-4" />
+            <span className="ml-2">{s.name}</span>
           </label>
         ))}
       </div>
 
-      {/* زر التأكيد */}
-      <button
-        onClick={handleConfirm}
-        className="bg-teal-600 hover:bg-teal-700 transition text-white px-4 py-2 rounded w-full text-sm sm:text-base"
-      >
-        Confirm
-      </button>
+      <button onClick={handleConfirm} className="w-full bg-teal-600 text-white px-4 py-2 rounded">Confirm</button>
     </div>
   );
 }
