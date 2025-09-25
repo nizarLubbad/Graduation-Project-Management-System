@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import Swal from "sweetalert2";
 
 interface ProjectData {
-  id: number;
+  projectId: number;
   projectTitle: string;
   description: string;
   supervisorId?: number | null;
@@ -16,7 +16,7 @@ interface TeamData {
   teamId: number;
   teamName: string;
   memberStudentIds: number[];
-  project?: ProjectData | null; // يمكن يكون undefined
+  project?: ProjectData | null;
   supervisorName?: string | null;
   supervisorId?: number | null;
 }
@@ -32,17 +32,28 @@ export default function StudentBoard() {
   const [teamMembers, setTeamMembers] = useState<Student[]>([]);
   const baseUrl = "https://backendteam-001-site1.qtempurl.com";
 
+  // دالة مساعدة لجلب حالة المشروع
+  const fetchProject = async (projectId: number) => {
+    const res = await fetch(`${baseUrl}/api/Project/${projectId}`, {
+      headers: { Authorization: `Bearer ${user?.token}` },
+    });
+    if (!res.ok) throw new Error("Failed to fetch project");
+    const projectData: ProjectData = await res.json();
+    return projectData;
+  };
+
+  // جلب بيانات الفريق + المشروع + أعضاء الفريق
   const fetchTeamData = async () => {
     if (!user?.team?.teamId) return;
 
     try {
+      // 1️⃣ جلب بيانات الفريق
       const resTeam = await fetch(`${baseUrl}/api/Teams/${user.team.teamId}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       const teamData: TeamData = await resTeam.json();
-      console.log("🔎 Team Data:", teamData);
 
-      // جلب اسم المشرف إذا موجود
+      // 2️⃣ جلب اسم المشرف إذا موجود
       if (teamData.supervisorId) {
         try {
           const resSupervisor = await fetch(`${baseUrl}/api/Auth/${teamData.supervisorId}`, {
@@ -55,9 +66,15 @@ export default function StudentBoard() {
         }
       }
 
+      // 3️⃣ جلب المشروع الكامل إذا موجود
+      if (teamData.project?.projectId) {
+        const projectData = await fetchProject(teamData.project.projectId);
+        teamData.project = { ...teamData.project, ...projectData };
+      }
+
       setTeam(teamData);
 
-      // جلب أعضاء الفريق
+      // 4️⃣ جلب أعضاء الفريق
       const resStudents = await fetch(`${baseUrl}/api/Students/all`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
@@ -79,40 +96,25 @@ export default function StudentBoard() {
 
   if (!user) return <p>Loading user...</p>;
   if (!team) return <p>Loading project...</p>;
-  if (!team.project) return <p>No project assigned yet!</p>; // تحقق صارم
+  if (!team.project) return <p>No project assigned yet!</p>;
 
   const { project } = team;
 
+  // تبديل حالة المشروع
   const toggleProjectComplete = async () => {
-    if (!project?.id) {
-      Swal.fire("Error", "Project ID is missing!", "error");
-      return;
-    }
-
-    console.log("🚀 Toggling project:", project);
+    if (!project?.projectId) return;
 
     try {
-      const res = await fetch(`${baseUrl}/api/Project/${project.id}/complete`, {
+      // 1️⃣ تحديث الحالة على السيرفر
+      await fetch(`${baseUrl}/api/Project/${project.projectId}/complete`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${user.token}` },
       });
 
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`Failed to update project (status: ${res.status}, message: ${text})`);
-      }
+      // 2️⃣ جلب المشروع الكامل بعد التحديث
+      const updatedProject = await fetchProject(project.projectId);
 
-      const updatedRes = await fetch(`${baseUrl}/api/Project/${project.id}`, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      });
-
-      if (!updatedRes.ok) {
-        throw new Error("Failed to fetch updated project");
-      }
-
-      const updatedProject: ProjectData = await updatedRes.json();
-      console.log("✅ Updated Project:", updatedProject);
-
+      // 3️⃣ تحديث الـ UI مع دمج كل الحقول
       setTeam(prev => prev ? { ...prev, project: updatedProject } : null);
 
       Swal.fire({
@@ -145,7 +147,7 @@ export default function StudentBoard() {
           </button>
 
           <p className="text-2xl font-semibold mb-4">
-            Project Name: <span className="font-normal">{project.projectTitle}</span>
+            Project Name: <span className="font-normal">{project.projectTitle ?? "Untitled"}</span>
           </p>
           {project.description && (
             <p className="text-lg text-gray-700 mb-4">

@@ -13,7 +13,6 @@ export default function StudentKanbanWrapper() {
     );
   }
 
-  // تحويل teamId إلى string لأنه prop معرف كـ string
   const teamId = String(user.team.teamId);
 
   return <KanbanBoard teamId={teamId} />;

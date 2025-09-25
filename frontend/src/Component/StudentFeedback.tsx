@@ -236,9 +236,10 @@ export default function StudentFeedback() {
         {feedbackList.map(f => (
           <div key={f.feedbackId} className="p-4 border rounded-lg shadow-sm bg-white flex flex-col gap-3">
          
-            <h1 className="text-sm text-teal-600 font-semibold">   <p className="text-gray-800">{f.content}</p>
+            <h1 className="text-sm text-teal-600 font-semibold">   
               📌 Project: {f.projectName} ({f.teamName})
             </h1>
+            <p className="text-gray-800">{f.content}</p>
             <h3 className="text-sm text-gray-500">Supervisor: {f.supervisorName}</h3>
             <h5 className="text-xs text-gray-400">{f.date}</h5>
 

@@ -8,7 +8,7 @@ export default function EditProfile() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
-  // hooks فوق عشان ESLint
+
   const [name, setName] = useState(user?.name ?? "");
   const [email, setEmail] = useState(user?.email ?? "");
   const [department, setDepartment] = useState(user?.department ?? "");
@@ -40,7 +40,7 @@ export default function EditProfile() {
     };
 
     // تحديث الـ context
-    setUser!(updatedUser); // 👈 non-null assertion
+    setUser!(updatedUser); 
 
     // تحديث localStorage
     const users: User[] = JSON.parse(localStorage.getItem("users") || "[]");

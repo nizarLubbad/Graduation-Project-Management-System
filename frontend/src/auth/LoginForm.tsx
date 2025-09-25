@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -17,19 +17,21 @@ export default function LoginForm({ onSwitch }: { onSwitch: () => void }) {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
+  
     try {
+      // تسجيل الدخول
       const res = await fetch(`${baseUrl}/api/Auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Login failed");
-
+  
+      // تحديد الدور بشكل موحد
       const normalizedRole = data.role?.toLowerCase() === "supervisor" ? "supervisor" : "student";
-
+  
       let user: User = {
         userId: data.userId,
         name: data.name,
@@ -39,25 +41,28 @@ export default function LoginForm({ onSwitch }: { onSwitch: () => void }) {
         status: data.status ?? false,
         token: data.token,
       };
-
-      // 🔹 جلب الفريق الحالي إذا موجود
+  
+      // 🔹 جلب الفريق الحالي إذا كان الطالب
       if (normalizedRole === "student") {
         try {
-          const teamRes = await fetch(`${baseUrl}/api/Teams/members`, {
+          const allTeamsRes = await fetch(`${baseUrl}/api/Teams`, {
             headers: { Authorization: `Bearer ${user.token}` },
           });
-          if (teamRes.ok) {
-            const allStudents: User[] = await teamRes.json();
-            const myTeam = allStudents.find(s => s.userId === user.userId)?.team;
+          if (allTeamsRes.ok) {
+            const allTeams = await allTeamsRes.json();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const myTeam = allTeams.find((team: any) =>
+              team.memberStudentIds.includes(user.userId)
+            );
             if (myTeam) user = { ...user, team: myTeam, status: true };
           }
         } catch (err) {
           console.error("Failed to fetch team after login", err);
         }
       }
-
+  
       login(user);
-
+  
       // توجيه حسب الدور
       if (normalizedRole === "student") navigate("/dashboard/student");
       else navigate("/dashboard/supervisor");
@@ -66,6 +71,7 @@ export default function LoginForm({ onSwitch }: { onSwitch: () => void }) {
       else setError("Something went wrong");
     }
   };
+  
 
   return (
     <form onSubmit={handleLogin} className="bg-gray-50 shadow-xl rounded-2xl p-6 w-full max-w-md mx-auto">
