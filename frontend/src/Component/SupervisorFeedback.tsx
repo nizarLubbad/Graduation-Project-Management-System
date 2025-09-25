@@ -70,7 +70,7 @@ export default function SupervisorFeedback() {
               });
               const studentsData: { students: { userId: number; name: string }[] } = await resMembers.json();
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              const members = studentsData.students.filter(s => true);
+              const members = studentsData.students.filter(_ => true);
               return { ...p, teamMembers: members };
             } catch {
               return p;

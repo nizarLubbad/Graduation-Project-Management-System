@@ -210,7 +210,7 @@ export default function StudentFeedback() {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleDeleteReply = async (replyId: number, feedbackId: number) => {
+  const handleDeleteReply = async (replyId: number) => {
     Swal.fire({
       title: "Are you sure?",
       text: "This action cannot be undone!",
@@ -279,7 +279,7 @@ export default function StudentFeedback() {
                     >
                       Edit
                     </button>
-                    <button onClick={() => handleDeleteReply(r.id, f.feedbackId)} className="text-xs text-red-600">
+                    <button onClick={() => handleDeleteReply(r.id)} className="text-xs text-red-600">
                       Delete
                     </button>
                   </div>

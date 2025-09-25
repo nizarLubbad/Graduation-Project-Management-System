@@ -156,7 +156,7 @@ export function KanbanBoard({ teamId }: KanbanProps) {
   };
 
   // --- حذف مهمة ---
-  const deleteTask = async (colId: string, taskId: string) => {
+  const deleteTask = async (taskId: string) => {
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -293,7 +293,7 @@ export function KanbanBoard({ teamId }: KanbanProps) {
                               {!isSupervisor && (
                                 <div className="flex gap-2 mt-2">
                                   <Button size="sm" variant="ghost" onClick={() => setEditingTask(task)}>Edit</Button>
-                                  <Button size="sm" variant="ghost" onClick={() => deleteTask(col.id, task.id)}>Delete</Button>
+                                  <Button size="sm" variant="ghost" onClick={() => deleteTask(task.id)}>Delete</Button>
                                 </div>
                               )}
                             </>
