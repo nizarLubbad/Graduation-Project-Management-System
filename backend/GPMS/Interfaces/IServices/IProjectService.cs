@@ -12,7 +12,7 @@ namespace GPMS.Interfaces
         Task<IEnumerable<ProjectResponseDto>> GetAllAsync();
         Task<ProjectResponseDto?> GetByIdAsync(int projectId);
 
-        Task<ProjectResponseDto> CreateAsync(CreateProjectDto dto);
+        Task<ProjectResponseDto?> CreateAsync(CreateProjectDto dto);
 
         Task<ProjectResponseDto?> UpdateAsync(int projectId, UpdateProjectDto dto);
 

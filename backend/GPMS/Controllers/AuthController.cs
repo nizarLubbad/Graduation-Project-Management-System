@@ -1,5 +1,6 @@
 ﻿using GPMS.DTOS.Auth;
 using GPMS.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -33,6 +34,7 @@ namespace GPMS.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
 
         [HttpPost("register/supervisor")]
         public async Task<IActionResult> RegisterSupervisor([FromBody] RegisterSupervisorDto dto)
@@ -69,6 +71,90 @@ namespace GPMS.Controllers
                 _logger.LogError(ex, "Unexpected error during login for email {Email}", dto.Email);
 
                 return BadRequest(new { message = ex.Message });
+            }
+        }
+        [HttpGet("getUsers")]
+
+        public async Task<IActionResult> GetUsers()
+        {
+            try
+            {
+                var users = await _authService.GetAllUsersAsync();
+
+                return Ok(new
+                {
+                    success = true,
+                    message = "Users retrieved successfully",
+                    count = users.Count(),
+                    users = users
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving users");
+                return BadRequest(new
+                {
+                    success = false,
+                    message = "Error retrieving users: " + ex.Message
+                });
+            }
+        }
+        [HttpGet("status/{userId:long}")]
+        public async Task<ActionResult<bool?>> GetUserStatus(long userId)
+        {
+            try
+            {
+                var status = await _authService.GetUserStatusAsync(userId);
+                if (status == null)
+                {
+                    return NotFound("User or student details not found.");
+                }
+
+                return Ok(status);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while retrieving user status.");
+            }
+        }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUserById(long userId)
+        {
+            try
+            {
+                var user = await _authService.GetUserByIdAsync(userId);
+                if (user == null)
+                {
+                    return NotFound(new { message = "User not found" });
+                }
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting user with ID {UserId}", userId);
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpDelete("delete-all-users")]
+        public async Task<IActionResult> DeleteAllUsers()
+        {
+            try
+            {
+                _logger.LogInformation("Admin user requested to delete all users");
+
+                var deletedCount = await _authService.DeleteAllUsersAsync();
+
+                return Ok(new
+                {
+                    Message = "All users deleted successfully",
+                    DeletedRecords = deletedCount,
+                    Timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting all users");
+                return BadRequest(new { Error = ex.Message });
             }
         }
     }

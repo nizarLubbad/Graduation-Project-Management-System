@@ -1,25 +1,28 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GPMS.Models
 {
     public class User
     {
+        
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)] 
         public long UserId { get; set; }
-            
-        //[Required, MaxLength(100)]
-        //public string Name { get; set; } = string.Empty;
 
-        [Required, EmailAddress]
-        public string Email { get; set; } = string.Empty;
+        [Required, EmailAddress, MaxLength(100)]
+        public string Email { get; set; } = null!;
 
         [Required]
-        public string PasswordHash { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = null!;
 
-        [Required]
-        public string Role { get; set; } = string.Empty; // "Student" or "Supervisor"
+        [Required, MaxLength(50)]
+        public string Role { get; set; } = null!; // "Student" or "Supervisor"
 
-        public string Name { get; set; }
+        [Required, MaxLength(100)]
+        public string Name { get; set; } = null!;
+
+        // Navigation properties
         public Student? Student { get; set; }
         public Supervisor? Supervisor { get; set; }
     }

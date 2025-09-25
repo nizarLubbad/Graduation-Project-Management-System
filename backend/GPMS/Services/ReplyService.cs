@@ -5,38 +5,7 @@ using GPMS.Models;
 
 namespace GPMS.Services
 {
-    //public class ReplyService : IReplyService
-    //{
-    //    private readonly IReplyRepository _replyRepository;
-    //    private readonly IMapper _mapper;
-
-    //    public ReplyService(IReplyRepository replyRepository,IMapper mapper)
-    //    {
-    //        _replyRepository = replyRepository;
-    //        _mapper = mapper;
-
-
-    //    }
-
-    //    public async Task<Reply> AddReplyAsync(CreateReplyDto dto)
-    //    {
-    //        var reply = new Reply
-    //        {
-    //            Content = dto.Content,
-    //            FeedbackId = dto.FeedbackId,
-    //            StudentId = dto.StudentId,
-    //            SupervisorId = dto.SupervisorId,
-    //            Date = DateTime.Now
-    //        };
-
-    //        return await _replyRepository.AddAsync(reply);
-    //    }
-
-    //    public async Task<IEnumerable<Reply>> GetByFeedbackIdAsync(long feedbackId)
-    //    {
-    //        return await _replyRepository.GetByFeedbackIdAsync(feedbackId);
-    //    }
-    //}
+    
     public class ReplyService : IReplyService
     {
         private readonly IReplyRepository _replyRepository;
@@ -55,7 +24,7 @@ namespace GPMS.Services
                 Content = dto.Content,
                 FeedbackId = dto.FeedbackId,
                 StudentId = dto.StudentId,
-                SupervisorId = dto.SupervisorId,
+                SupervisorId= dto.SupervisorId,
                 Date = DateTime.Now
             };
 

@@ -5,46 +5,7 @@ using AutoMapper;
 
 namespace GPMS.Services
 {
-    //public class LinkService : ILinkService
-    //{
-    //    private readonly ILinkRepository _linkRepository;
-    //    private readonly IMapper _mapper;
-
-    //public LinkService(ILinkRepository linkRepository,IMapper mapper)
-    //{
-    //    _linkRepository = linkRepository;
-    //    _mapper = mapper;
-    //}
-
-    //public async Task<LinkDto> CreateAsync(LinkDto dto)
-    //{
-    //    var link = new Link
-    //    {
-    //        Url = dto.Url,
-    //        Title = dto.Title,
-    //        TeamId = dto.TeamId,
-    //        StudentId = dto.StudentId,
-    //        Date = DateTime.Now
-    //    };
-
-    //    return await _linkRepository.AddAsync(link);
-    //}
-
-    //public async Task<IEnumerable<Link>> GetByTeamIdAsync(long teamId)
-    //{
-    //    return await _linkRepository.GetByTeamIdAsync(teamId);
-    //}
-
-    //public async Task<Link?> GetByIdAsync(long id)
-    //{
-    //    return await _linkRepository.GetByIdAsync(id);
-    //}
-
-    //public async Task<bool> DeleteAsync(long id)
-    //{
-    //    return await _linkRepository.DeleteAsync(id);
-    //}
-
+    
     public class LinkService : ILinkService
     {
         private readonly ILinkRepository _linkRepository;
@@ -63,7 +24,7 @@ namespace GPMS.Services
             {
                 Url = dto.Url,
                 Title = dto.Title,
-                TeamId = dto.TeamId,
+                //TeamId = dto.TeamId,
                 StudentId = dto.StudentId,
                 Date = DateTime.Now
             };
@@ -94,7 +55,7 @@ namespace GPMS.Services
             link.Url = dto.Url;
             link.Title = dto.Title;
             link.StudentId = dto.StudentId;
-            link.TeamId = dto.TeamId;
+            //link.TeamId = dto.TeamId;
 
             var updated = await _linkRepository.UpdateAsync(link);
             return _mapper.Map<LinkDto>(updated);

@@ -18,13 +18,14 @@ namespace GPMS.Models
         public bool IsCompleted { get; set; } = false;
 
         // Supervisor relation (Many Projects -> One Supervisor)
-        [Required]
-        public long SupervisorId { get; set; }
-        [ForeignKey("SupervisorId")]
-        public Supervisor Supervisor { get; set; } = null!;
+        //[Required]
+        //[ForeignKey("Supervisor")]
+        //public long SupervisorId { get; set; }
+        
+        //public Supervisor Supervisor { get; set; } = null!;
 
         // One Project -> Many Students
-        public ICollection<Student> Students { get; set; } = new List<Student>();
+        //public ICollection<Student> Students { get; set; } = new List<Student>();
         //one to one with team
         
         [ForeignKey("Team")]

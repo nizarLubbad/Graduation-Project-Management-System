@@ -2,11 +2,11 @@
 {
     public class SupervisorDto
     {
-        public long SupervisorId { get; set; }
+        public long SupervisorId { get; set; }       // المفتاح الأساسي
         public string Name { get; set; }
         public string Email { get; set; }
-        //public string Department { get; set; }
         public int TeamCount { get; set; }
-       
+        public int MaxTeams { get; set; }
+
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Repositories
 {
-    public class ReplyRepository : BaseRepository<Reply>, IReplyRepository
+    public class ReplyRepository : BaseRepository<Reply, long>, IReplyRepository
     {
         private readonly AppDbContext _contextr;
 

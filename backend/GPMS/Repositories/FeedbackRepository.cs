@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Repositories
 {
-    public class FeedbackRepository : BaseRepository<Feedback>, IFeedbackRepository
+    public class FeedbackRepository : BaseRepository<Feedback, long>, IFeedbackRepository
     {
         private readonly AppDbContext _contextf;
 

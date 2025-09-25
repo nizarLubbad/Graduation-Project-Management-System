@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GPMS.Repositories
 {
-    public class StudentRepository : BaseRepository<Student>, IStudentRepository
+    public class StudentRepository : BaseRepository<Student, long>, IStudentRepository
     {
         private readonly AppDbContext _contextR;
         public StudentRepository(AppDbContext context) : base(context)
@@ -14,7 +14,7 @@ namespace GPMS.Repositories
 
         public async Task<string?> GetByEmailAsync(string email)
         {
-            var studentName = await _contextR.Students
+            var studentName = await _contextR.Users
                .Where(s => s.Email == email)
                .Select(s => s.Name)
                .FirstOrDefaultAsync();
@@ -24,8 +24,8 @@ namespace GPMS.Repositories
 
         public async Task<string?> GetStudentNameAsync(long studentId)
         {
-            var studentName = await _contextR.Students
-                .Where(s => s.StudentId == studentId)
+            var studentName = await _contextR.Users
+                .Where(s => s.UserId == studentId)
                 .Select(s => s.Name)
                 .FirstOrDefaultAsync();
 
@@ -34,7 +34,7 @@ namespace GPMS.Repositories
 
         public async Task<bool> ExistsByEmailAsync(string email)
         {
-            return await _contextR.Students.AnyAsync(s => s.Email == email);
+            return await _contextR.Users.AnyAsync(s => s.Email == email);
         }
 
         //public async Task SaveChangesAsync()
@@ -47,5 +47,14 @@ namespace GPMS.Repositories
                 .Include(s => s.User)
                 .FirstOrDefaultAsync(s => s.UserId == userId);
         }
+
+        public IQueryable<Student> GetAll()
+        {
+            return _context.Students
+                .Include(s => s.User)
+                .Include(s => s.Team)
+                .AsQueryable();
+        }
+
     }
 }

@@ -1,16 +1,23 @@
-﻿namespace GPMS.DTOS.Team
+﻿
+using GPMS.DTOS.Project;
+
+namespace GPMS.DTOS.Team
 {
     public class TeamDto
     {
         public long TeamId { get; set; }      // equals creator StudentId
-        public string TeamName { get; set; }
-        public bool TeamStatus { get; set; }
+        public string? TeamName { get; set; }
+        //public bool TeamStatus { get; set; }
         public DateTime CreatedDate { get; set; }
 
         // info
-        public string CreatorName { get; set; }
+        //public string CreatorName { get; set; }
         public int MemberCount { get; set; }
-        public string ProjectTitle { get; set; }
-        public string SupervisorName { get; set; }
+        public string? ProjectTitle { get; set; }
+        public string? SupervisorName { get; set; }
+        public long SupervisorId { get; set; }
+
+        public List<long>? MemberStudentIds { get; internal set; }
+        public CreateProjectDto Project { get; internal set; }
     }
 }

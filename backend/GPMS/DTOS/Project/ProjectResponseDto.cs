@@ -18,10 +18,10 @@
         public string Description { get; set; } = null!;
         public bool IsCompleted { get; set; } = false;
 
-        public long SupervisorId { get; set; }
-        public string SupervisorName { get; set; } = null!;
+        public long? SupervisorId { get; set; }
+        public string? SupervisorName { get; set; } = null!;
 
         public long TeamId { get; set; }
-        public string TeamName { get; set; } = null!;
+        public string? TeamName { get; set; } = null!;
     }
 }

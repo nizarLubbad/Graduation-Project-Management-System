@@ -1,0 +1,157 @@
+2025-09-24 19:00:37.164 +03:00 [INF] Starting GPMS application...
+2025-09-24 19:00:37.935 +03:00 [INF] Environment: Development
+2025-09-24 19:00:37.942 +03:00 [INF] Application Name: GPMS
+2025-09-24 19:00:37.943 +03:00 [INF] Content Root Path: C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS
+2025-09-24 19:00:38.642 +03:00 [INF] JWT Configuration - Issuer: https://backendteam-001-site1.qtempurl.com/, Audience: https://backendteam-001-site1.qtempurl.com/
+2025-09-24 19:00:39.064 +03:00 [INF] GPMS application started successfully in Development mode
+2025-09-24 19:00:39.149 +03:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-24 19:00:39.466 +03:00 [INF] Now listening on: http://localhost:5193
+2025-09-24 19:00:39.550 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-24 19:00:39.681 +03:00 [INF] Hosting environment: Development
+2025-09-24 19:00:39.691 +03:00 [INF] Content root path: C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS
+2025-09-24 19:00:40.178 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/swagger - null null
+2025-09-24 19:00:40.719 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/swagger - 301 0 null 555.8328ms
+2025-09-24 19:00:40.734 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/swagger/index.html - null null
+2025-09-24 19:00:40.918 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/swagger/index.html - 200 null text/html;charset=utf-8 183.5071ms
+2025-09-24 19:00:40.960 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/swagger/swagger-ui.css - null null
+2025-09-24 19:00:40.977 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-24 19:00:40.977 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/swagger/swagger-ui-bundle.js - null null
+2025-09-24 19:00:40.977 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/swagger/swagger-ui-standalone-preset.js - null null
+2025-09-24 19:00:41.053 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/_framework/aspnetcore-browser-refresh.js - 200 16493 application/javascript; charset=utf-8 76.0456ms
+2025-09-24 19:00:41.025 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-09-24 19:00:41.124 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/_vs/browserLink - null null
+2025-09-24 19:00:41.113 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-09-24 19:00:41.159 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/swagger/swagger-ui.css - 200 152034 text/css 199.0339ms
+2025-09-24 19:00:41.190 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/swagger/swagger-ui-standalone-preset.js - 200 230280 text/javascript 212.9662ms
+2025-09-24 19:00:41.159 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-09-24 19:00:41.215 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/swagger/swagger-ui-bundle.js - 200 1456926 text/javascript 238.3399ms
+2025-09-24 19:00:41.247 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/_vs/browserLink - 200 null text/javascript; charset=UTF-8 122.7077ms
+2025-09-24 19:00:41.438 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/swagger/v1/swagger.json - null null
+2025-09-24 19:00:41.506 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 67.779ms
+2025-09-24 19:00:41.506 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/swagger/favicon-32x32.png - null null
+2025-09-24 19:00:41.524 +03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-09-24 19:00:41.528 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/swagger/favicon-32x32.png - 200 628 image/png 21.8785ms
+2025-09-24 19:01:12.656 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5193/api/Auth/login - application/json 57
+2025-09-24 19:01:12.668 +03:00 [INF] CORS policy execution successful.
+2025-09-24 19:01:12.747 +03:00 [INF] Request: POST /api/Auth/login
+2025-09-24 19:01:12.752 +03:00 [INF] Executing endpoint 'GPMS.Controllers.AuthController.Login (GPMS)'
+2025-09-24 19:01:12.790 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(GPMS.DTOS.Auth.LoginDto) on controller GPMS.Controllers.AuthController (GPMS).
+2025-09-24 19:01:13.587 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-09-24 19:01:15.374 +03:00 [INF] Executed DbCommand (164ms) [Parameters=[@__email_0='io@example.com' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[Email], [u].[Name], [u].[PasswordHash], [u].[Role], [s].[UserId], [s].[Department], [s].[KanbanTaskId], [s].[Status], [s].[TeamId], [s0].[UserId], [s0].[Department], [s0].[MaxTeams], [s0].[TeamCount]
+FROM [Users] AS [u]
+LEFT JOIN [Students] AS [s] ON [u].[UserId] = [s].[UserId]
+LEFT JOIN [Supervisors] AS [s0] ON [u].[UserId] = [s0].[UserId]
+WHERE [u].[Email] = @__email_0
+2025-09-24 19:01:15.636 +03:00 [INF] Executing OkObjectResult, writing value of type 'GPMS.DTOS.Auth.LoginResponseDto'.
+2025-09-24 19:01:15.664 +03:00 [INF] Executed action GPMS.Controllers.AuthController.Login (GPMS) in 2864.8205ms
+2025-09-24 19:01:15.669 +03:00 [INF] Executed endpoint 'GPMS.Controllers.AuthController.Login (GPMS)'
+2025-09-24 19:01:15.672 +03:00 [INF] Response: 200 in 2926ms
+2025-09-24 19:01:15.690 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5193/api/Auth/login - 200 null application/json; charset=utf-8 3033.9566ms
+2025-09-24 19:01:39.452 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/api/Teams/members - null null
+2025-09-24 19:01:39.496 +03:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenMalformedException: IDX14100: JWT is not well formed, there are no dots (.).
+The token needs to be in JWS or JWE Compact Serialization Format. (JWS): 'EncodedHeader.EndcodedPayload.EncodedSignature'. (JWE): 'EncodedProtectedHeader.EncodedEncryptedKey.EncodedInitializationVector.EncodedCiphertext.EncodedAuthenticationTag'.
+ ---> System.MissingMethodException: Method not found: 'Byte[] Microsoft.IdentityModel.Tokens.Base64UrlEncoder.UnsafeDecode(System.ReadOnlyMemory`1<Char>)'.
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken.ReadToken(String encodedJson)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebToken..ctor(String jwtEncodedString)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ReadToken(String token, TokenValidationParameters validationParameters)
+   --- End of inner exception stack trace ---
+2025-09-24 19:01:39.545 +03:00 [WRN] JWT Authentication Failed: IDX14100: JWT is not well formed, there are no dots (.).
+The token needs to be in JWS or JWE Compact Serialization Format. (JWS): 'EncodedHeader.EndcodedPayload.EncodedSignature'. (JWE): 'EncodedProtectedHeader.EncodedEncryptedKey.EncodedInitializationVector.EncodedCiphertext.EncodedAuthenticationTag'.
+2025-09-24 19:01:39.546 +03:00 [INF] Bearer was not authenticated. Failure message: IDX14100: JWT is not well formed, there are no dots (.).
+The token needs to be in JWS or JWE Compact Serialization Format. (JWS): 'EncodedHeader.EndcodedPayload.EncodedSignature'. (JWE): 'EncodedProtectedHeader.EncodedEncryptedKey.EncodedInitializationVector.EncodedCiphertext.EncodedAuthenticationTag'.
+2025-09-24 19:01:39.550 +03:00 [INF] Bearer was not authenticated. Failure message: IDX14100: JWT is not well formed, there are no dots (.).
+The token needs to be in JWS or JWE Compact Serialization Format. (JWS): 'EncodedHeader.EndcodedPayload.EncodedSignature'. (JWE): 'EncodedProtectedHeader.EncodedEncryptedKey.EncodedInitializationVector.EncodedCiphertext.EncodedAuthenticationTag'.
+2025-09-24 19:01:39.557 +03:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Student)
+2025-09-24 19:01:39.565 +03:00 [WRN] JWT Challenge: invalid_token, 
+2025-09-24 19:01:39.576 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-09-24 19:01:39.580 +03:00 [WRN] 401 Unauthorized - Path: /api/Teams/members, Method: GET, User: Anonymous, Headers: Accept: text/plain; Connection: keep-alive; Host: localhost:5193; User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0; Accept-Encoding: gzip, deflate, br, zstd; Accept-Language: en-US,en;q=0.9; Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OCIsImVtYWlsIjoiaW9AZXhhbXBsZS5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTdHVkZW50IiwidW5pcXVlX25hbWUiOiJpbyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiOTgiLCJleHAiOjE3NTg3MzE0NzUsImlzcyI6Imh0dHBzOi8vYmFja2VuZHRlYW0tMDAxLXNpdGUxLnF0ZW1wdXJsLmNvbS8iLCJhdWQiOiJodHRwczovL2JhY2tlbmR0ZWFtLTAwMS1zaXRlMS5xdGVtcHVybC5jb20vIn0.BNE40_AlIpgr4r3OCmbl9jkHk9fOHc3FX1haoBCuDz8; Referer: http://localhost:5193/swagger/index.html; sec-ch-ua-platform: "Windows"; sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Microsoft Edge";v="140"; sec-ch-ua-mobile: ?0; Sec-Fetch-Site: same-origin; Sec-Fetch-Mode: cors; Sec-Fetch-Dest: empty
+2025-09-24 19:01:39.582 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/api/Teams/members - 401 0 null 130.3728ms
+2025-09-24 19:01:46.332 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5193/.well-known/appspecific/com.chrome.devtools.json - null null
+2025-09-24 19:01:46.339 +03:00 [INF] Request: GET /.well-known/appspecific/com.chrome.devtools.json
+2025-09-24 19:01:46.341 +03:00 [INF] Response: 404 in 2ms
+2025-09-24 19:01:46.343 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5193/.well-known/appspecific/com.chrome.devtools.json - 404 0 null 11.2725ms
+2025-09-24 19:01:46.351 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5193/.well-known/appspecific/com.chrome.devtools.json, Response status code: 404
+2025-09-24 19:27:34.783 +03:00 [INF] Starting GPMS application...
+2025-09-24 19:27:35.996 +03:00 [INF] Environment: Development
+2025-09-24 19:27:36.005 +03:00 [INF] Application Name: GPMS
+2025-09-24 19:27:36.011 +03:00 [INF] Content Root Path: C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS
+2025-09-24 19:27:36.847 +03:00 [INF] JWT Configuration - Issuer: https://backendteam-001-site1.qtempurl.com/, Audience: https://backendteam-001-site1.qtempurl.com/
+2025-09-24 19:27:37.910 +03:00 [INF] GPMS application started successfully in Development mode
+2025-09-24 19:27:38.109 +03:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-24 19:27:38.861 +03:00 [INF] Now listening on: https://localhost:7215
+2025-09-24 19:27:38.885 +03:00 [INF] Now listening on: http://localhost:5193
+2025-09-24 19:27:39.023 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-24 19:27:39.046 +03:00 [INF] Hosting environment: Development
+2025-09-24 19:27:39.049 +03:00 [INF] Content root path: C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS
+2025-09-24 19:27:40.296 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/swagger/index.html - null null
+2025-09-24 19:27:41.074 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/swagger/index.html - 200 null text/html;charset=utf-8 789.9859ms
+2025-09-24 19:27:41.095 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-24 19:27:41.096 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/_vs/browserLink - null null
+2025-09-24 19:27:41.108 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/_framework/aspnetcore-browser-refresh.js - 200 16493 application/javascript; charset=utf-8 13.1587ms
+2025-09-24 19:27:41.369 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/_vs/browserLink - 200 null text/javascript; charset=UTF-8 272.3194ms
+2025-09-24 19:27:41.427 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/swagger/v1/swagger.json - null null
+2025-09-24 19:27:41.475 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 48.6289ms
+2025-09-24 19:27:57.702 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/api/Teams/65 - null null
+2025-09-24 19:27:57.783 +03:00 [INF] Request: GET /api/Teams/65
+2025-09-24 19:27:57.787 +03:00 [INF] Executing endpoint 'GPMS.Controllers.TeamsController.GetTeamById (GPMS)'
+2025-09-24 19:27:57.824 +03:00 [INF] Route matched with {action = "GetTeamById", controller = "Teams"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[GPMS.DTOS.Team.TeamDto]] GetTeamById(Int64) on controller GPMS.Controllers.TeamsController (GPMS).
+2025-09-24 19:27:58.804 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-09-24 19:28:01.017 +03:00 [INF] Executed DbCommand (143ms) [Parameters=[@__teamId_0='65'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[TeamId], [t0].[CreatedDate], [t0].[SupervisorId], [t0].[TeamName], [t0].[UserId], [t0].[Id], [s0].[UserId], [s0].[Department], [s0].[KanbanTaskId], [s0].[Status], [s0].[TeamId], [t0].[Department], [t0].[MaxTeams], [t0].[TeamCount], [t0].[Description], [t0].[IsCompleted], [t0].[ProjectTitle], [t0].[TeamId0]
+FROM (
+    SELECT TOP(1) [t].[TeamId], [t].[CreatedDate], [t].[SupervisorId], [t].[TeamName], [s].[UserId], [s].[Department], [s].[MaxTeams], [s].[TeamCount], [p].[Id], [p].[Description], [p].[IsCompleted], [p].[ProjectTitle], [p].[TeamId] AS [TeamId0]
+    FROM [Teams] AS [t]
+    LEFT JOIN [Supervisors] AS [s] ON [t].[SupervisorId] = [s].[UserId]
+    LEFT JOIN [Projects] AS [p] ON [t].[TeamId] = [p].[TeamId]
+    WHERE [t].[TeamId] = @__teamId_0
+) AS [t0]
+LEFT JOIN [Students] AS [s0] ON [t0].[TeamId] = [s0].[TeamId]
+ORDER BY [t0].[TeamId], [t0].[UserId], [t0].[Id]
+2025-09-24 19:28:01.096 +03:00 [INF] Executing OkObjectResult, writing value of type 'GPMS.DTOS.Team.TeamDto'.
+2025-09-24 19:28:01.126 +03:00 [INF] Executed action GPMS.Controllers.TeamsController.GetTeamById (GPMS) in 3295.8225ms
+2025-09-24 19:28:01.128 +03:00 [INF] Executed endpoint 'GPMS.Controllers.TeamsController.GetTeamById (GPMS)'
+2025-09-24 19:28:01.131 +03:00 [INF] Response: 200 in 3349ms
+2025-09-24 19:28:01.141 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/api/Teams/65 - 200 null application/json; charset=utf-8 3440.535ms
+2025-09-24 19:34:01.000 +03:00 [INF] Starting GPMS application...
+2025-09-24 19:34:02.478 +03:00 [INF] Environment: Development
+2025-09-24 19:34:02.485 +03:00 [INF] Application Name: GPMS
+2025-09-24 19:34:02.487 +03:00 [INF] Content Root Path: C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS
+2025-09-24 19:34:03.292 +03:00 [INF] JWT Configuration - Issuer: https://backendteam-001-site1.qtempurl.com/, Audience: https://backendteam-001-site1.qtempurl.com/
+2025-09-24 19:34:03.745 +03:00 [INF] GPMS application started successfully in Development mode
+2025-09-24 19:34:03.873 +03:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-24 19:34:04.280 +03:00 [INF] Now listening on: https://localhost:7215
+2025-09-24 19:34:04.285 +03:00 [INF] Now listening on: http://localhost:5193
+2025-09-24 19:34:04.359 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-24 19:34:04.362 +03:00 [INF] Hosting environment: Development
+2025-09-24 19:34:04.367 +03:00 [INF] Content root path: C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS
+2025-09-24 19:34:05.035 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/swagger/index.html - null null
+2025-09-24 19:34:05.455 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/swagger/index.html - 200 null text/html;charset=utf-8 439.4727ms
+2025-09-24 19:34:05.461 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-24 19:34:05.461 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/_vs/browserLink - null null
+2025-09-24 19:34:05.555 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/_framework/aspnetcore-browser-refresh.js - 200 16493 application/javascript; charset=utf-8 93.8286ms
+2025-09-24 19:34:05.792 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/_vs/browserLink - 200 null text/javascript; charset=UTF-8 330.7957ms
+2025-09-24 19:34:05.862 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/swagger/v1/swagger.json - null null
+2025-09-24 19:34:05.941 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 79.8859ms
+2025-09-24 19:35:39.500 +03:00 [INF] Starting GPMS application...
+2025-09-24 19:35:40.031 +03:00 [INF] Environment: Development
+2025-09-24 19:35:40.118 +03:00 [INF] Application Name: GPMS
+2025-09-24 19:35:40.425 +03:00 [INF] Content Root Path: C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS
+2025-09-24 19:35:41.197 +03:00 [INF] JWT Configuration - Issuer: https://backendteam-001-site1.qtempurl.com/, Audience: https://backendteam-001-site1.qtempurl.com/
+2025-09-24 19:35:41.523 +03:00 [INF] GPMS application started successfully in Development mode
+2025-09-24 19:35:41.604 +03:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-24 19:35:42.020 +03:00 [INF] Now listening on: https://localhost:7215
+2025-09-24 19:35:42.024 +03:00 [INF] Now listening on: http://localhost:5193
+2025-09-24 19:35:42.127 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-24 19:35:42.226 +03:00 [INF] Hosting environment: Development
+2025-09-24 19:35:42.302 +03:00 [INF] Content root path: C:\Users\User\OneDrive\Desktop\Graduation-Project-Management-System\backend\GPMS
+2025-09-24 19:35:42.734 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/swagger/index.html - null null
+2025-09-24 19:35:43.041 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/swagger/index.html - 200 null text/html;charset=utf-8 316.0668ms
+2025-09-24 19:35:43.056 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/_vs/browserLink - null null
+2025-09-24 19:35:43.056 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-24 19:35:43.082 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/_framework/aspnetcore-browser-refresh.js - 200 16493 application/javascript; charset=utf-8 26.2996ms
+2025-09-24 19:35:43.118 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/_vs/browserLink - 200 null text/javascript; charset=UTF-8 61.6986ms
+2025-09-24 19:35:43.180 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7215/swagger/v1/swagger.json - null null
+2025-09-24 19:35:43.286 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7215/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 106.7225ms
