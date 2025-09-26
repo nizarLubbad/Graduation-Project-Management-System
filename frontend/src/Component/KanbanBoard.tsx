@@ -20,27 +20,34 @@ interface KanbanProps {
   teamId: string;
 }
 
-// الأعمدة تبقى strings لكن نستخدم map للـ status من API
 const initialData: Column[] = [
   { id: "ToDo", title: "To Do", color: "bg-gray-100", tasks: [] },
   { id: "Doing", title: "In Progress", color: "bg-blue-100", tasks: [] },
   { id: "Done", title: "Done", color: "bg-green-100", tasks: [] },
 ];
 
+// تحويل status رقم ↔︎ string
 const statusMap: { [key: number]: string } = {
   1: "ToDo",
   2: "Doing",
   3: "Done",
 };
-const priorityMap: { [key: number]: "low" | "medium" | "high" } = {
-  1: "low",
-  2: "medium",
-  3: "high",
+const statusNumberMap: { [key: string]: number } = {
+  ToDo: 1,
+  Doing: 2,
+  Done: 3,
 };
+
+// تحويل priority رقم ↔︎ string
 const priorityNumberMap: { [key: string]: number } = {
   low: 1,
   medium: 2,
   high: 3,
+};
+const priorityMapReverse: { [key: number]: "low" | "medium" | "high" } = {
+  1: "low",
+  2: "medium",
+  3: "high",
 };
 
 export function KanbanBoard({ teamId }: KanbanProps) {
@@ -59,22 +66,17 @@ export function KanbanBoard({ teamId }: KanbanProps) {
   useEffect(() => {
     const fetchTeamMembers = async () => {
       if (!user?.team?.memberStudentIds) return;
-
       try {
         const res = await api.get("/api/Students/all");
-
         const membersData = user.team.memberStudentIds.map((id: number) => {
           const member = res.data.students.find((s: any) => s.userId === id);
-
           return { id, name: member?.name || `Unknown (${id})` };
         });
-
         setTeamMembersData(membersData);
       } catch (err) {
         console.error("❌ Error fetching team members:", err);
       }
     };
-
     fetchTeamMembers();
   }, [user?.team?.memberStudentIds]);
 
@@ -83,6 +85,7 @@ export function KanbanBoard({ teamId }: KanbanProps) {
     try {
       const res = await api.get(`/api/KanbanTask/team/${teamId}`);
       const tasks = res.data;
+
       const updated = initialData.map((col) => {
         const colTasks = tasks
           .filter((t: any) => statusMap[t.status] === col.id)
@@ -90,13 +93,11 @@ export function KanbanBoard({ teamId }: KanbanProps) {
             id: t.id.toString(),
             title: t.title,
             description: t.description,
-            priority: priorityMap[t.priority] || "medium",
-
+            priority: priorityMapReverse[t.priority] || "medium",
             dueDate: t.dueDate ? t.dueDate.split("T")[0] : "",
             status: statusMap[t.status],
             assignees: t.assignedStudentNames || [],
           }));
-
         return { ...col, tasks: colTasks };
       });
 
@@ -110,7 +111,7 @@ export function KanbanBoard({ teamId }: KanbanProps) {
     fetchTasks();
   }, [teamId]);
 
-  // --- إضافة مهمة مع تحديث مباشر للعمود ---
+  // --- إضافة مهمة ---
   const addTask = async (colId: string) => {
     if (!newTask[colId]?.title) return;
 
@@ -119,21 +120,21 @@ export function KanbanBoard({ teamId }: KanbanProps) {
         ? `${newTask[colId]?.dueDate}T00:00:00Z`
         : null;
 
-      // إرسال المهمة للـAPI
       const res = await api.post("/api/KanbanTask", {
         title: newTask[colId]?.title,
         description: newTask[colId]?.description,
         teamId: Number(teamId),
         dueDate: formattedDueDate,
         priority: priorityNumberMap[newTask[colId]?.priority || "medium"],
+        status: statusNumberMap[colId], // ✅ أرسل status الصحيح
+        assignedStudentIds: [],
         assignedStudentNames: newTask[colId]?.assignees || [],
       });
 
-      // إنشاء كائن المهمة الجديدة مباشرة للعرض
+      // تحديث واجهة المستخدم مباشرة
       const newTaskObj: Task = {
         id: res.data.id.toString(),
         title: newTask[colId]?.title || "Untitled Task",
-
         description: newTask[colId]?.description || "",
         priority: newTask[colId]?.priority || "medium",
         dueDate: newTask[colId]?.dueDate || "",
@@ -141,17 +142,14 @@ export function KanbanBoard({ teamId }: KanbanProps) {
         assignees: newTask[colId]?.assignees || [],
       };
 
-      // تحديث العمود مباشرة بدون انتظار fetchTasks()
       setColumns((prev) =>
         prev.map((col) =>
           col.id === colId ? { ...col, tasks: [...col.tasks, newTaskObj] } : col
         )
       );
 
-      // إعادة تعيين النموذج
       setNewTask({ ...newTask, [colId]: {} });
       setShowForm({ ...showForm, [colId]: false });
-
       Swal.fire("Added!", "Task has been added.", "success");
     } catch (err) {
       console.error("❌ Error adding task:", err);
@@ -174,11 +172,13 @@ export function KanbanBoard({ teamId }: KanbanProps) {
         dueDate: formattedDueDate,
         priority: priorityNumberMap[editingTask.priority || "medium"],
         teamId: Number(teamId),
+        assignedStudentIds: [],
         assignedStudentNames: editingTask.assignees,
+        status: statusNumberMap[editingTask.status || "ToDo"], // ✅ حفظ status
       });
 
       setEditingTask(null);
-      fetchTasks();
+      await fetchTasks(); // 🔑 تأكيد التحديث
     } catch (error) {
       Swal.fire("Error", "Failed to save task.", "error");
     }
@@ -240,24 +240,17 @@ export function KanbanBoard({ teamId }: KanbanProps) {
     setColumns(newColumns);
 
     try {
-      // تحويل اسم العمود إلى رقم مباشرة لإرسال الـ status
-      const statusNumberMap: { [key: string]: number } = {
-        ToDo: 1,
-        Doing: 2,
-        Done: 3,
-      };
       const newStatus = statusNumberMap[destination.droppableId];
-
       await api.patch("/api/KanbanTask/status", {
         taskId: Number(task.id),
-        status: newStatus, // نرسل الرقم مباشرة
+        status: newStatus,
       });
+      await fetchTasks(); // 🔑 تأكيد التحديث
     } catch (err) {
       Swal.fire("Error", "Failed to move task.", "error");
     }
   };
 
-  // --- ألوان الأولوية ---
   const getPriorityColor = (priority: "low" | "medium" | "high") => {
     if (priority === "high") return "bg-red-200 text-red-800";
     if (priority === "medium") return "bg-green-200 text-green-800";
