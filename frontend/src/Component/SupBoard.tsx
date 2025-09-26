@@ -38,7 +38,7 @@ export default function SupBoard() {
   const [inputValue, setInputValue] = useState<number>(0);
   const [bookedTeams, setBookedTeams] = useState<number>(0);
 
-  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
+  const baseUrl = import.meta.env.VITE_API_URL
 
   useEffect(() => {
     const fetchData = async () => {

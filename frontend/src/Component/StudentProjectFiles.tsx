@@ -17,7 +17,7 @@ export default function StudentProjectFiles() {
   const [loading, setLoading] = useState(false);
   const [teamMembers, setTeamMembers] = useState<Student[]>([]);
 
-  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   // =========================
   // 🔹 Fetch all team members

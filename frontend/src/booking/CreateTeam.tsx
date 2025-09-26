@@ -10,7 +10,7 @@ export default function CreateTeam() {
   const [students, setStudents] = useState<User[]>([]);
   const [selectedMembers, setSelectedMembers] = useState<number[]>([]);
   const [teamName, setTeamName] = useState("");
-  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (!user || !user.token) {

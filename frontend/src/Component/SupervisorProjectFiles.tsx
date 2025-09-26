@@ -30,7 +30,7 @@ interface Student {
 
 export default function SupervisorProjectFiles() {
   const { user } = useAuth();
-  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
+  const baseUrl =import.meta.env.VITE_API_URL
 
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<number | "">("");

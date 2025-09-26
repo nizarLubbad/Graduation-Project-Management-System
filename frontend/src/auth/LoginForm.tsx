@@ -12,7 +12,7 @@ export default function LoginForm({ onSwitch }: { onSwitch: () => void }) {
 
   const navigate = useNavigate();
   const { login } = useAuth();
-  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

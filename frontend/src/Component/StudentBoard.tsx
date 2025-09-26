@@ -30,7 +30,7 @@ export default function StudentBoard() {
   const { user } = useAuth();
   const [team, setTeam] = useState<TeamData | null>(null);
   const [teamMembers, setTeamMembers] = useState<Student[]>([]);
-  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
+  const baseUrl = import.meta.env.VITE_API_URL
 
   // دالة مساعدة لجلب حالة المشروع
   const fetchProject = async (projectId: number) => {

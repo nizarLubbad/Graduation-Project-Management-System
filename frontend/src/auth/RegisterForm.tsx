@@ -10,13 +10,13 @@ export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState<"student" | "supervisor">("student");
-  const [userId, setUserId] = useState<number>(0);
+  const [userId, setUserId] = useState<number>();
   const [error, setError] = useState("");
   const [, setUsers] = useState<User[]>([]);
 
   const navigate = useNavigate();
   const { login } = useAuth();
-  const baseUrl = "https://backendteam-001-site1.qtempurl.com";
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -182,13 +182,14 @@ export default function RegisterForm({ onSwitch }: { onSwitch: () => void }) {
         required
         className="w-full p-3 border rounded-lg mb-2"
       />
-      <input
-        type="text"
-        placeholder="User ID"
-        value={userId}
-        onChange={e => setUserId(Number(e.target.value))}
-        className="w-full p-3 border rounded-lg mb-2"
-      />
+  <input
+  type="number"
+  placeholder="Enter your User ID"
+  value={userId ?? ""}
+  onChange={e => setUserId(Number(e.target.value))}
+  className="w-full p-3 border rounded-lg mb-2"
+/>
+
       <select
         value={role}
         onChange={e => setRole(e.target.value as "student" | "supervisor")}
