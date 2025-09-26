@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// src/components/EditProfile.tsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext";
+import type { User } from "../types/types";
 
-
-export default function EditProfile() {
+export default function EditProfile(): JSX.Element | null {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
@@ -16,31 +18,40 @@ export default function EditProfile() {
 
   if (!user) return null;
 
-  const isStudent = user.role.toLowerCase() === "student";
-  const API_URL = import.meta.env.VITE_API_URL;
+  const isStudent = user.role?.toLowerCase() === "student";
+  const API_URL = import.meta.env.VITE_API_URL || "";
 
   const handleSave = async () => {
     try {
-      // تحقق من كلمة السر الحالية فقط إذا تم إدخال كلمة جديدة
-      if (newPassword && currentPassword !== user.password) {
+      // إذا المستخدم يريد يغيّر الباسورد لازم يدخل الباسورد الحالي
+      if (newPassword && !currentPassword) {
         Swal.fire({
           icon: "error",
-          title: "Wrong Password",
-          text: "The current password is incorrect.",
+          title: "Current password required",
+          text: "Please enter your current password to change it.",
         });
         return;
       }
 
-      // إنشاء payload كامل مع القيم الحالية لأي حقل لم يتم تغييره
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const payload: any = {
-        name: name || user.name,
-        email: email || user.email,
-        password: newPassword || user.password,
+      // بناء payload — تأكد ما نرسل undefined
+      const payload: Record<string, any> = {
+        name: name.trim() || user.name,
+        email: email.trim() || user.email,
       };
-      if (isStudent) payload.department = department || user.department;
 
-      console.log("Payload to send:", payload);
+      if (isStudent) payload.department = department.trim() || user.department;
+
+      if (newPassword) {
+        // نرسل الباسورد الجديد و currentPassword للتحقق على السيرفر
+        payload.password = newPassword;
+        payload.currentPassword = currentPassword;
+      } else if (user.password) {
+        // لو مخزون محلياً ضمن user نرسله حتى لا يفقد السيرفر قيمة الباسورد
+        // (لو ما مخزون فلن نرسل password لتجنّب إرسال undefined)
+        payload.password = user.password;
+      }
+
+      console.log("📤 Payload to send:", payload);
 
       const endpoint = isStudent
         ? `${API_URL}/api/Students/${user.userId}`
@@ -50,35 +61,58 @@ export default function EditProfile() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
+          ...(user.token ? { Authorization: `Bearer ${user.token}` } : {}),
         },
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
-      console.log("📥 Response from API:", data);
+      // حاول نقرأ JSON لكن تعامل مع حالة عدم وجود body
+      let data: any = null;
+      try {
+        data = await res.json();
+      } catch (e) {
+        // ممكن لا يكون هناك JSON في الاستجابة — نسمح بذلك
+      console.log("⚠️ No JSON body in response", e);
+      
+      }
+      console.log("📥 Response from API:", res.status, data);
 
-      if (!res.ok) throw new Error(data.message || "Failed to update profile");
+      if (!res.ok) {
+        // استخرج رسالة مفيدة من الـ response إذا كانت موجودة
+        const serverMsg =
+          data?.message ||
+          (data && typeof data === "object" ? JSON.stringify(data) : null) ||
+          `${res.status} ${res.statusText}`;
+        throw new Error(serverMsg);
+      }
 
-      // تحديث البيانات في الـ context
-      setUser!({ ...user, ...payload });
+      // حدّث الـ Context بدون حفظ currentPassword
+      const updatedUser: User = {
+        ...user,
+        name: payload.name,
+        email: payload.email,
+        password: payload.password ?? user.password,
+        ...(isStudent ? { department: payload.department } : {}),
+      } as User;
+
+      setUser?.(updatedUser);
 
       Swal.fire({
         icon: "success",
         title: "Profile Updated",
         text: "Your profile has been updated successfully",
-        confirmButtonColor: "green",
       });
 
+      // مسح حقول الباسورد
       setCurrentPassword("");
       setNewPassword("");
     } catch (err) {
+      console.error("❌ Error updating profile:", err);
       Swal.fire({
         icon: "error",
         title: "Update Failed",
-        text: "Something went wrong while updating profile.",
+        text: err instanceof Error ? err.message : "Something went wrong while updating profile.",
       });
-      console.error("❌ Error updating profile:", err);
     }
   };
 
@@ -89,11 +123,7 @@ export default function EditProfile() {
           <div
             className="mr-3 cursor-pointer text-black hover:text-gray-700 text-xl font-bold"
             onClick={() =>
-              navigate(
-                isStudent
-                  ? "/dashboard/student/KanbanBoard"
-                  : "/dashboard/supervisor"
-              )
+              navigate(isStudent ? "/dashboard/student/KanbanBoard" : "/dashboard/supervisor")
             }
           >
             ←
@@ -139,7 +169,7 @@ export default function EditProfile() {
             type="password"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
-            placeholder="Enter current password"
+            placeholder="Enter current password (required to change password)"
             className="mt-1 block w-full px-3 py-2 border rounded-lg"
           />
         </label>
