@@ -123,22 +123,28 @@ export default function StudentBoard() {
       <div className="w-full max-w-3xl text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-6">🎓 My Project</h1>
 
-        <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-10 text-left">
-          {/* ✅ العنوان + زر التبديل */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-            <p className="text-2xl font-semibold">
-              Project Name:{" "}
-              <span className="font-normal break-words">
-                {project.projectTitle ?? "Untitled"}
-              </span>
-            </p>
-            <button
-              onClick={toggleProjectComplete}
-              className="w-full md:w-auto bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition"
-            >
-              {project.isCompleted ? "Mark Incomplete" : "Mark Complete"}
-            </button>
-          </div>
+        <div className="relative bg-white rounded-3xl shadow-2xl p-6 md:p-10 text-left">
+          {/* 🔹 زر بحجم صغير على الموبايل */}
+          <button
+            onClick={toggleProjectComplete}
+            className="
+              absolute top-4 right-4
+              bg-black text-white
+              px-2 py-1 text-sm          /* حجم صغير للجوال */
+              md:px-4 md:py-2 md:text-base /* يرجع أكبر على شاشات أكبر */
+              rounded-lg hover:bg-gray-800
+              transition
+            "
+          >
+            {project.isCompleted ? "Mark Incomplete" : "Mark Complete"}
+          </button>
+
+          <p className="text-2xl font-semibold mb-4">
+            Project Name:{" "}
+            <span className="font-normal break-words">
+              {project.projectTitle ?? "Untitled"}
+            </span>
+          </p>
 
           {project.description && (
             <p className="text-lg text-gray-700 mb-4 break-words">
