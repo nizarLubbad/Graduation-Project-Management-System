@@ -124,13 +124,13 @@ export default function StudentBoard() {
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-6">🎓 My Project</h1>
 
         <div className="relative bg-white rounded-3xl shadow-2xl p-6 md:p-10 text-left">
-          {/* 🔹 زر بحجم صغير على الموبايل */}
+          {/* 🔹 زر بحجم صغير على الجوال */}
           <button
             onClick={toggleProjectComplete}
             className="
               absolute top-4 right-4
               bg-black text-white
-              px-2 py-1 text-sm          /* حجم صغير للجوال */
+              px-2 py-1 text-sm           /* حجم صغير للجوال */
               md:px-4 md:py-2 md:text-base /* يرجع أكبر على شاشات أكبر */
               rounded-lg hover:bg-gray-800
               transition
@@ -139,7 +139,8 @@ export default function StudentBoard() {
             {project.isCompleted ? "Mark Incomplete" : "Mark Complete"}
           </button>
 
-          <p className="text-2xl font-semibold mb-4">
+          {/* 🔹 نضيف padding-top للجوال لدفع العنوان لتحت بعيداً عن الزر */}
+          <p className="pt-12 md:pt-0 text-2xl font-semibold mb-4">
             Project Name:{" "}
             <span className="font-normal break-words">
               {project.projectTitle ?? "Untitled"}
@@ -153,7 +154,8 @@ export default function StudentBoard() {
           )}
 
           <p className="text-lg text-gray-700 mb-2">
-            Supervisor: <span className="font-normal">{team.supervisorName ?? "Not assigned"}</span>
+            Supervisor:{" "}
+            <span className="font-normal">{team.supervisorName ?? "Not assigned"}</span>
           </p>
           <p className="text-lg text-gray-700 mb-2">
             Team Members:{" "}
