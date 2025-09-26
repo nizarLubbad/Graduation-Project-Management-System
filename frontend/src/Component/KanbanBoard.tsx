@@ -260,8 +260,8 @@ export function KanbanBoard({ teamId }: KanbanProps) {
   // --- ألوان الأولوية ---
   const getPriorityColor = (priority: "low" | "medium" | "high") => {
     if (priority === "high") return "bg-red-200 text-red-800";
-    if (priority === "medium") return "bg-yellow-200 text-yellow-800";
-    return "bg-green-200 text-green-800";
+    if (priority === "medium") return "bg-green-200 text-green-800";
+    return "bg-blue-200 text-blue-800";
   };
 
   return (

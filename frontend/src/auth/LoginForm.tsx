@@ -64,8 +64,8 @@ export default function LoginForm({ onSwitch }: { onSwitch: () => void }) {
       login(user);
   
       // توجيه حسب الدور
-      if (normalizedRole === "student") navigate("/dashboard/student");
-      else navigate("/dashboard/supervisor");
+      if (normalizedRole === "student") navigate("/dashboard/student/KanbanBoard");
+      else navigate("/dashboard/supervisor/SupBoard");
     } catch (err) {
       if (err instanceof Error) setError(err.message);
       else setError("Something went wrong");

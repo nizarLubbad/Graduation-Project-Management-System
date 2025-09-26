@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// src/components/EditProfile.tsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -23,32 +22,57 @@ export default function EditProfile(): JSX.Element | null {
 
   const handleSave = async () => {
     try {
-      // إذا المستخدم يريد يغيّر الباسورد لازم يدخل الباسورد الحالي
-      if (newPassword && !currentPassword) {
+      // تحقق من أي تغييرات
+      const isChangingInfo =
+        name.trim() !== user.name ||
+        email.trim() !== user.email ||
+        (isStudent && department.trim() !== user.department);
+      const isChangingPassword = !!newPassword;
+
+      // إذا لم يغيّر شيء → إظهار تنبيه
+      if (!isChangingInfo && !isChangingPassword) {
         Swal.fire({
-          icon: "error",
-          title: "Current password required",
-          text: "Please enter your current password to change it.",
+          icon: "info",
+          title: "No changes",
+          text: "You didn't make any changes to save.",
         });
         return;
       }
 
-      // بناء payload — تأكد ما نرسل undefined
+      // لو يريد تغيير كلمة السر → لازم يدخل الحالي
+      if (isChangingPassword && !currentPassword) {
+        Swal.fire({
+          icon: "error",
+          title: "Current password required",
+          text: "Please enter your current password to change your password.",
+        });
+        return;
+      }
+
+      // لو يريد تعديل الاسم/الإيميل/القسم فقط → لازم يدخل كلمة السر الحالية
+      if (!isChangingPassword && isChangingInfo && !currentPassword) {
+        Swal.fire({
+          icon: "error",
+          title: "Current password required",
+          text: "Please enter your current password to change profile info.",
+        });
+        return;
+      }
+
+      // بناء الـ payload
       const payload: Record<string, any> = {
         name: name.trim() || user.name,
         email: email.trim() || user.email,
       };
-
       if (isStudent) payload.department = department.trim() || user.department;
 
-      if (newPassword) {
-        // نرسل الباسورد الجديد و currentPassword للتحقق على السيرفر
+      if (isChangingPassword) {
         payload.password = newPassword;
         payload.currentPassword = currentPassword;
-      } else if (user.password) {
-        // لو مخزون محلياً ضمن user نرسله حتى لا يفقد السيرفر قيمة الباسورد
-        // (لو ما مخزون فلن نرسل password لتجنّب إرسال undefined)
-        payload.password = user.password;
+      } else if (isChangingInfo) {
+        // تغيير الاسم/الإيميل فقط → نرسل كلمة السر الحالية كسطر Password
+        payload.password = currentPassword;
+        payload.currentPassword = currentPassword;
       }
 
       console.log("📤 Payload to send:", payload);
@@ -66,19 +90,16 @@ export default function EditProfile(): JSX.Element | null {
         body: JSON.stringify(payload),
       });
 
-      // حاول نقرأ JSON لكن تعامل مع حالة عدم وجود body
       let data: any = null;
       try {
         data = await res.json();
       } catch (e) {
-        // ممكن لا يكون هناك JSON في الاستجابة — نسمح بذلك
-      console.log("⚠️ No JSON body in response", e);
-      
+        console.log("⚠️ No JSON body in response", e);
       }
+
       console.log("📥 Response from API:", res.status, data);
 
       if (!res.ok) {
-        // استخرج رسالة مفيدة من الـ response إذا كانت موجودة
         const serverMsg =
           data?.message ||
           (data && typeof data === "object" ? JSON.stringify(data) : null) ||
@@ -86,12 +107,12 @@ export default function EditProfile(): JSX.Element | null {
         throw new Error(serverMsg);
       }
 
-      // حدّث الـ Context بدون حفظ currentPassword
+      // تحديث الـ context
       const updatedUser: User = {
         ...user,
         name: payload.name,
         email: payload.email,
-        password: payload.password ?? user.password,
+        password: isChangingPassword ? payload.password : user.password,
         ...(isStudent ? { department: payload.department } : {}),
       } as User;
 
@@ -123,7 +144,7 @@ export default function EditProfile(): JSX.Element | null {
           <div
             className="mr-3 cursor-pointer text-black hover:text-gray-700 text-xl font-bold"
             onClick={() =>
-              navigate(isStudent ? "/dashboard/student/KanbanBoard" : "/dashboard/supervisor")
+              navigate(isStudent ? "/dashboard/student/KanbanBoard" : "/dashboard/supervisor/SupBoard")
             }
           >
             ←
@@ -169,7 +190,7 @@ export default function EditProfile(): JSX.Element | null {
             type="password"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
-            placeholder="Enter current password (required to change password)"
+            placeholder="Enter current password if changing anything"
             className="mt-1 block w-full px-3 py-2 border rounded-lg"
           />
         </label>
