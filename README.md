@@ -315,24 +315,6 @@ GET        /api/Link/team/{teamId}
 GET        /api/Link/student/{studentId}
 ```
 
-### Task Management (Kanban)
-```http
-GET    /api/tasks                     # Get tasks
-GET    /api/tasks/{id}                # Get specific task
-POST   /api/tasks                     # Create task
-PUT    /api/tasks/{id}                # Update task
-DELETE /api/tasks/{id}                # Delete task
-```
-
-### Feedback System
-```http
-GET    /api/feedback                  # Get feedback
-POST   /api/feedback                  # Submit feedback
-PUT    /api/feedback/{id}             # Update feedback
-GET    /api/feedback/{id}/replies     # Get feedback replies
-POST   /api/feedback/{id}/replies     # Add reply
-```
-
 *Access Swagger UI at [Swagger UI](https://backendteam-001-site1.qtempurl.com/swagger/index.html) when the API is running for detailed documentation.*
 
 ## 🗄 Database Schema
